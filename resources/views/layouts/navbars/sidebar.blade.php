@@ -24,86 +24,27 @@
                     <li class="{{ $activePage == 'users' ? ' active' : '' }}">
                         <a href="{{route('users.index')}}">Lista de usuarios</a>
                     </li>
-                    <li>
-                        <a href="app-file-manager.html">File Manager</a>
-                    </li>
-                    <li>
-                        <a href="app-mail.html">Mail</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="javascript:void(0);">
-                            <span>Projects</span>
-                            <span class="arrow">
-                                <i class="arrow-icon"></i>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="app-project-list.html">Project List</a>
-                            </li>
-                            <li>
-                                <a href="app-project-details.html">Project Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="javascript:void(0);">
-                            <span>E-commerce</span>
-                            <span class="arrow">
-                                <i class="arrow-icon"></i>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="app-e-commerce-order-list.html">Orders List</a>
-                            </li>
-                            <li>
-                                <a href="app-e-commerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="app-e-commerce-products-list.html">Products List</a>
-                            </li>
-                            <li>
-                                <a href="app-e-commerce-products-edit.html">Products Edit</a>
-                            </li>
-                        </ul>
+                    <li class="{{ $activePage == 'userCreate' ? ' active' : '' }}">
+                        <a href="{{route('users.create')}}">Agregar usuario</a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
-                        <i class="anticon anticon-build"></i>
+                        <i class="anticon anticon-medicine-box"></i>
                     </span>
-                    <span class="title">UI Elements</span>
+                    <span class="title">Inventario</span>
                     <span class="arrow">
                         <i class="arrow-icon"></i>
                     </span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="avatar.html">Avatar</a>
+                    <li class="{{$activePage == 'inventory' ? 'active' : ''}}">
+                        <a href="{{route('medicines.index')}}">Lista de inventario</a>
                     </li>
-                    <li>
-                        <a href="alert.html">Alert</a>
-                    </li>
-                    <li>
-                        <a href="badge.html">Badge</a>
-                    </li>
-                    <li>
-                        <a href="buttons.html">Buttons</a>
-                    </li>
-                    <li>
-                        <a href="cards.html">Cards</a>
-                    </li>
-                    <li>
-                        <a href="icons.html">Icons</a>
-                    </li>
-                    <li>
-                        <a href="lists.html">Lists</a>
-                    </li>
-                    <li>
-                        <a href="typography.html">Typography</a>
+                    <li class="{{$activePage == 'newProduct' ? 'active' : ''}}">
+                        <a href="{{route('medicines.create')}}">Agregar producto</a>
                     </li>
                 </ul>
             </li>
@@ -295,3 +236,58 @@
     </div>
 </div>
 <!-- Side Nav END -->
+<div class="modal modal-right fade quick-view" id="quick-view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-between align-items-center">
+                <h5 class="modal-title">Theme Config</h5>
+            </div>
+            <div class="modal-body scrollable">
+                <div class="m-b-30">
+                    <h5 class="m-b-0">Header Color</h5>
+                    <p>Config header background color</p>
+                    <div class="theme-configurator d-flex m-t-10">
+                        <div class="radio">
+                            <input id="header-default" name="header-theme" type="radio" checked value="default">
+                            <label for="header-default"></label>
+                        </div>
+                        <div class="radio">
+                            <input id="header-primary" name="header-theme" type="radio" value="primary">
+                            <label for="header-primary"></label>
+                        </div>
+                        <div class="radio">
+                            <input id="header-success" name="header-theme" type="radio" value="success">
+                            <label for="header-success"></label>
+                        </div>
+                        <div class="radio">
+                            <input id="header-secondary" name="header-theme" type="radio" value="secondary">
+                            <label for="header-secondary"></label>
+                        </div>
+                        <div class="radio">
+                            <input id="header-danger" name="header-theme" type="radio" value="danger">
+                            <label for="header-danger"></label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <h5 class="m-b-0">Side Nav Dark</h5>
+                    <p>Change Side Nav to dark</p>
+                    <div class="switch d-inline">
+                        <input type="checkbox" name="side-nav-theme-toogle" id="side-nav-theme-toogle">
+                        <label for="side-nav-theme-toogle"></label>
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <h5 class="m-b-0">Folded Menu</h5>
+                    <p>Toggle Folded Menu</p>
+                    <div class="switch d-inline">
+                        <input type="checkbox" name="side-nav-fold-toogle" id="side-nav-fold-toogle">
+                        <label for="side-nav-fold-toogle"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

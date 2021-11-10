@@ -11,6 +11,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/logo/favicon.png">
     <!-- CSS Files -->
+    @livewireStyles
     <link href="{{asset('dashboard/css/app.min.css')}}" rel="stylesheet">
      @yield('css')
 </head>
@@ -25,7 +26,6 @@
         </div>
     </div>
     @endauth
-
     <!-- Core Vendors JS -->
       <script src="{{asset('dashboard/js/vendors.min.js')}}"></script>
     <!-- Core JS -->
@@ -33,5 +33,6 @@
     <!-- Sweet alert -->
     @include('sweetalert::alert')
     @yield('js')
+    @livewireScripts
 </body>
 </html>

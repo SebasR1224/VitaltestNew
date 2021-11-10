@@ -40,6 +40,20 @@ class LaboratorioController extends Controller
 
     }
 
+    public function store(Request $request){
 
+        if($request->ajax()){
+            $laboratory = new Laboratorio();
+            $laboratory->nombreLaboratorio = $request->nombreLaboratorio;
+            $laboratory->save();
+
+            $list = Laboratorio::orderBy('id', 'DESC')->get();
+
+            return response()->json([
+                'listLaboratory' =>$list
+            ]);
+        }
+
+    }
 
 }

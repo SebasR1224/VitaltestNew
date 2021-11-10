@@ -3,14 +3,21 @@
 @section('content')
 <div class="page-container">
     <div class="main-content">
-        <div class="page-header">
-            <h2 class="header-title">Detalles</h2>
-            <div class="header-sub-title">
-                <nav class="breadcrumb breadcrumb-dash">
-                    <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                    <a class="breadcrumb-item" href="#">Usuarios</a>
-                    <span class="breadcrumb-item active">Vista previa</span>
-                </nav>
+        <div class="page-header no-gutters">
+            <div class="row justify-content-between align-items-md-center">
+                <div class="col-md-6">
+                    <h2 class="header-title">Detalles</h2>
+                    <div class="header-sub-title">
+                        <nav class="breadcrumb breadcrumb-dash">
+                            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                            <a class="breadcrumb-item" href="#">Usuarios</a>
+                            <span class="breadcrumb-item active">Vista previa</span>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="{{route('users.index')}}" class="btn btn-default m-r-5" id="btnEnviar"><i class="fas fa-door-open m-r-5"></i>Volver</a>
+                </div>
             </div>
         </div>
         <div class="container">
@@ -30,7 +37,7 @@
                                 <div class="col-md-6">
                                     <div class="media align-items-center">
                                         <div class="avatar avatar-image  m-h-10 m-r-15" style="height: 80px; width: 80px">
-                                            <img src="{{$datos->image}}" alt="">
+                                            <img src="{{Auth::user()->image ? Auth::user()->image : asset('dashboard/images/others/img-4.jpg') }}" alt="">
                                         </div>
                                         <div class="m-l-20 m-r-20">
                                             <h5 class="m-b-5 font-size-18">{{$user->username}}</h5>

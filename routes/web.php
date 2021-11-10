@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\MedicinesCommerce;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,7 @@ Route::get('/users/profile/{id}', [App\Http\Controllers\UserController::class, '
 Route::post('/profiles' , [App\Http\Controllers\ProfileController::class, 'create'])->name('profile.create');
 Route::put('/profiles/{id}' , [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 Route::post('/users/updatePassword' , [App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('update.password');
-Route::post('/profileImage/{profile?}' , [App\Http\Controllers\ProfileController::class, 'newImage'])->name('new.image');
+Route::post('/profileImage/{id}' , [App\Http\Controllers\UserController::class, 'newImage'])->name('new.image');
 
 //rutas recomendaciones
 //partes del cuerpo
@@ -60,11 +61,11 @@ Route::put('/recomendaciones/{id}' , [App\Http\Controllers\RecomendacionControll
 
 //laboratorio
 Route::get('/laboratorios', [App\Http\Controllers\LaboratorioController::class, 'index'])->name('laboratorios.index');
-Route::post('/laboratorios', [App\Http\Controllers\LaboratorioController::class, 'save'])->name('laboratorio.save');
+Route::post('/laboratorios', [App\Http\Controllers\LaboratorioController::class, 'store'])->name('laboratory.create');
 
 //categoria
 Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categorias.index');
-Route::post('/categorias', [App\Http\Controllers\CategoriaController::class, 'save'])->name('categoria.save');
+Route::post('/categorias', [App\Http\Controllers\CategoriaController::class, 'store'])->name('category.create');
 
 //Permisos
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
@@ -73,10 +74,12 @@ Route::resource('permissions', App\Http\Controllers\PermissionController::class)
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 
 //medicamentos
-Route::resource('medicamentos', App\Http\Controllers\MedicamentoController::class);
+Route::resource('medicines', App\Http\Controllers\MedicamentoController::class);
+
+Route::put('medicines/{medicamento}/price', [App\Http\Controllers\MedicamentoController::class, 'updatePrice']) ->name('price.update');
 
 //commerce
-Route::get('/commerce', [App\Http\Controllers\MedicamentoController::class, 'commerce'])->name('medicamento.commerce');
+Route::get('/commerce', MedicinesCommerce::class)->name('medicines.commerce');
 
 //Formulario de contacto
 Route::post('contactanos', [App\Http\Controllers\ContactanosController::class, 'send'])->name('contactanos.send');

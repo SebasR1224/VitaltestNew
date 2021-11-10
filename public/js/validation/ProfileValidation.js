@@ -5,11 +5,14 @@ $("#numDocumento").on("keyup", function(){
         $('#errorLaravelDocument').remove();
     });
 });
-$('.datepicker-input').datepicker();
+$('.datepicker-input').datepicker({
+    language: 'es'
+});
 // Validar campos para completar el perfil
 jQuery.validator.addMethod("alphanumeric",
            function(value, element) {
-                   return /^[A-Za-z\d=#$%@_ -]+$/.test(value);
+               var pattern = /^[A-Za-z]*$/
+                   return this.optional(element) || pattern.test(value);
            },
 );
 // {{-- Enviar foto cuando cambie --}}
@@ -76,17 +79,17 @@ $( "#validation-complete" ).validate({
         nombre: {
             required: '<p class="text-danger">El campo es obligatorio.</p>',
             maxlength:'<p class="text-danger">No ingrese más de 50 caracteres.</p>',
-            alphanumeric:'<p class="text-danger">No se permiten los caracteres especiales.</p>'
+            alphanumeric:'<p class="text-danger">Introduzca un nombre valido.</p>'
         },
         apellido1: {
             required: '<p class="text-danger">El campo es obligatorio.</p>',
             maxlength:'<p class="text-danger">No ingrese más de 50 caracteres.</p>',
-            alphanumeric:'<p class="text-danger">No se permiten los caracteres especiales.</p>'
+            alphanumeric:'<p class="text-danger">Introduzca un apellido valido </p>'
         },
         apellido2: {
             required: '<p class="text-danger">El campo es obligatorio.</p>',
             maxlength:'<p class="text-danger">No ingrese más de 50 caracteres.</p>',
-            alphanumeric:'<p class="text-danger">No se permiten los caracteres especiales.</p>'
+            alphanumeric:'<p class="text-danger">Introduzca un apellido valido </p>'
         },
         tipoDocumento: {
             required: '<p class="text-danger">El campo es obligatorio.</p>'

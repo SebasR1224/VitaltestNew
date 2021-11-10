@@ -9,8 +9,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -47,7 +49,11 @@ class UserController extends Controller
                 $password
             )
         );
-        return redirect()->route('users.index')->with('messageUser', 'Usuario creado con exito');
+        alert()->success('Aviso','<p class="font-weight-light">Usuario creado con exito</p>')
+        ->toHtml()
+        ->showConfirmButton('<i class="anticon anticon-like text-white"></i> OK', '#3f87f5')
+        ->autoClose(9000);
+        return redirect()->route('users.index');
     }
 
     public function edit(Request $request, $id)
@@ -76,7 +82,11 @@ class UserController extends Controller
         $user->update($data);
         $roles = $request->input('roles');
         $user->syncRoles($roles);
-        return redirect()->route('users.index')->with('messageUser', 'Usuario actualizado correctamente');
+        alert()->success('Aviso','<p class="font-weight-light">Actualizacion completada con exito</p>')
+        ->toHtml()
+        ->showConfirmButton('<i class="anticon anticon-like text-white"></i> OK', '#00c9a7')
+        ->autoClose(9000);
+        return redirect()->route('users.index');
     }
 
     //detalles de usuarios
@@ -104,7 +114,22 @@ class UserController extends Controller
             $status = 1;
         }
         $values = array('status' => $status);
-        DB::table('users')->where('id',$id)->update($values);
-        return redirect()->route('users.index')->with('message_status', 'Estado actualizado');
+        User::where('id', $id)->update($values);
+        alert()->success('<p class="font-weight-bold">Estado actualizado</p>', '<p class="font-weight-light">Exitosamente</p>')
+        ->toHtml()
+        ->autoClose(1000)->toToast();
+        return redirect()->route('users.index');
+    }
+
+    public function newImage(Request $request, $id){
+        $user = User::findOrFail($id);
+        $image=$request->file('image')->getClientOriginalName();
+        $url_image = $request->file('image')->storeAs('public/folder_profiles/'. auth()->id(), $image);
+        $url = Storage::url($url_image);
+        if($user->image != ''){
+            unlink(public_path($user->image));
+        }
+        User::where('id' , $id)->update(['image' => $url]);
+        return redirect()->back();
     }
 }

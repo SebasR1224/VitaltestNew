@@ -6,35 +6,29 @@
 @section('content')
     <div class="page-container">
         <div class="main-content">
-            <div class="page-header">
-                <h2 class="header-title">Lista ordenada</h2>
+            <div class="page-header no-gutters">
+                <h2 class="header-title">Lista de usuarios</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                        <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
                         <span class="breadcrumb-item active">Usuarios</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    @if (session('messageUser'))
-                        <script>
-                                swal("Aviso","{!! Session::get('messageUser') !!}" , "success", {
-                                button: "Ok",
-                            })
-                        </script>
-                    @endif
-                    <h3 class="text-success">Lista de usuarios</h3>
+
                     <div class="row m-b-30">
-                        <div class="col-lg-12 text-right">
-                            <a href="{{route('users.create')}}" class="btn btn-success">
+                        <h3 class=" col-lg-6 text-success">Comunidad vitaltest</h3>
+                        <div class="col-lg-6 text-right">
+                            <a href="{{route('users.create')}}" class="btn btn-primary">
                                 <i class="anticon anticon-user-add m-r-5"></i>
                                 <span>Nuevo usuario</span>
                             </a>
                         </div>
                     </div>
-                    <div class="m-t-25">
-                        <table id="data-table" class="table">
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-hover e-commerce-table">
                             <thead>
                                 <tr>
                                     <th>Código</th>
@@ -50,7 +44,7 @@
                                 @foreach ($users as $user )
                                     <tr>
                                         <td>
-                                            {{$user->id}}
+                                            #{{$user->id}}
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -137,47 +131,8 @@
             })
         });
     </script>
-
-    {{-- Mensajes de session (confirmacion) --}}
-    @if (session('message_status'))
-    <script>
-        Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        text: "{!! Session::get('message_status') !!}",
-        showConfirmButton: false,
-        timer: 1300
-        })
-    </script>
-    @endif
-
      {{-- Datatabla js --}}
      <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
      <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
-     <script>
-         $('#data-table').DataTable({
-             responsive:true,
-             autoWidth: false,
-            "language": {
-            "lengthMenu": "Mostrar"+
-                          `<select class=" custom-select custom-select-sm form-control form-control-sm">
-                              <option value = "10">10</option>
-                              <option value = "25">25</option>
-                              <option value = "50">50</option>
-                              <option value = "100">100</option>
-                              <option value = "-1">Todos</option>
-                          </select>` +
-                          "registros por página",
-            "zeroRecords": "No se encontraron registros",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No hay registros disponibles",
-            "infoFiltered": "(Filtrado de _MAX_ registros totales)",
-            'search': 'Buscar:',
-            'paginate': {
-                        'next': 'Siguiente',
-                        'previous': 'Anterior'
-                    }
-            }
-         });
-     </script>
+    <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
 @endsection

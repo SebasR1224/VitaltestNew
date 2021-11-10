@@ -2,8 +2,10 @@
 
 namespace App\Actions\Fortify;
 
+use App\Mail\RegisterUserMailable;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -37,6 +39,14 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        Mail::to($input['email'])->send(
+                new RegisterUserMailable(
+                    $input['username'],
+                $input['password'],
+                $input['email']
+                )
+        );
 
         $user->assignRole('Cliente');
         return $user;

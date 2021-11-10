@@ -7,6 +7,7 @@ use App\Models\Laboratorio;
 use App\Models\Medicamento;
 use App\Models\Recomendacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MedicamentoController extends Controller
 {
@@ -17,15 +18,11 @@ class MedicamentoController extends Controller
      */
     public function index()
     {
-        $lists = Medicamento::paginate(8);
-        return view('medicamentos.index', compact('lists'));
+        $medicines = Medicamento::all();
+        return view('medicines.index', compact('medicines'));
     }
 
-    public function commerce()
-    {
-        $medicamentos = Medicamento::paginate(8);
-        return view('medicamentos.commerce', compact('medicamentos'));
-    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,10 +32,9 @@ class MedicamentoController extends Controller
     public function create()
     {
         $medicamento = new Medicamento();
-        $laboratorios = Laboratorio::orderBy('nombreLaboratorio')->get();
-        $categorias = Categoria::orderBy('nombreCategoria')->get();
-
-        return view('medicamentos.create', compact('medicamento', 'laboratorios', 'categorias'));
+        $laboratories = Laboratorio::orderBy('id', 'DESC')->pluck('nombreLaboratorio' , 'id');
+        $categories = Categoria::orderBy('id', 'DESC')->pluck('nombreCategoria' , 'id');
+        return view('medicines.create', compact('medicamento', 'laboratories', 'categories'));
     }
 
     /**
@@ -49,16 +45,26 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombreMedicamento' => 'required|max:200',
+            'categoria_id' => 'required',
+            'laboratorio_id' => 'required',
+            'precioNormal' => 'required',
+            'licencia' => 'required|max:200',
+            'fichaTecnica' => 'max:60000',
+            'avisoLegal' => 'max:60000',
+            'imagen' => 'required|image|max:2048'
+        ]);
+
         $medicamento = $request->all();
 
-        if($imagen = $request->file('imagen')){
-            $rutaGuardarImg = 'imagen/';
-            $imagenMedicamento = date('YmdHis'). "." .$imagen->getClientOriginalExtension();
-            $imagen->move($rutaGuardarImg, $imagenMedicamento);
-            $medicamento['imagen'] = "$imagenMedicamento";
+        if($request->hasFile('imagen')){
+            $medicamento['imagen'] = $request->file('imagen')->getClientOriginalName();
+            $url_image = $request->file('imagen')->storeAs('public/folder_medicines/'. $request->input('categoria_id'), $medicamento['imagen']);
+            $medicamento['imagen']  = Storage::url($url_image);
         }
         Medicamento::create($medicamento);
-        return redirect()->route('medicamentos.index')->with('messageMedicamento_add', 'Informacion ingresada con exito');
+        return redirect()->route('medicines.index');
     }
     /**
      * Display the specified resource.
@@ -66,9 +72,10 @@ class MedicamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Medicamento $medicamento)
+    public function show($id)
     {
-        return view('medicamentos.show', compact('medicamento'));
+        $medicamento = Medicamento::findOrfail($id);
+        return view('medicines.show', compact('medicamento'));
     }
 
     /**
@@ -77,11 +84,12 @@ class MedicamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medicamento $medicamento)
+    public function edit($id)
     {
-        $laboratorios = Laboratorio::orderBy('nombreLaboratorio')->get();
-        $categorias = Categoria::orderBy('nombreCategoria')->get();
-        return view('medicamentos.edit', compact('medicamento', 'laboratorios', 'categorias'));
+        $medicamento = Medicamento::findOrfail($id);
+        $laboratories = Laboratorio::orderBy('id', 'DESC')->pluck('nombreLaboratorio' , 'id');
+        $categories = Categoria::orderBy('id', 'DESC')->pluck('nombreCategoria' , 'id');
+        return view('medicines.edit', compact('medicamento', 'laboratories', 'categories'));
     }
 
     /**
@@ -91,19 +99,48 @@ class MedicamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medicamento $medicamento)
+    public function update(Request $request, $id)
     {
-        $medica = $request->all();
-        if($imagen = $request->file('imagen')){
-            $rutaGuardarImg = 'imagen/';
-            $imagenMedicamento = date('YmdHis'). "." .$imagen->getClientOriginalExtension();
-            $imagen->move($rutaGuardarImg, $imagenMedicamento);
-            $medica['imagen'] = "$imagenMedicamento";
-        }else{
-            unset($medica['imagen']);
+        $medicamento = Medicamento::findOrfail($id);
+        $request->validate([
+            'nombreMedicamento' => 'required|max:200',
+            'categoria_id' => 'required',
+            'laboratorio_id' => 'required',
+            'precioNormal' => 'required',
+            'licencia' => 'required|max:200',
+            'fichaTecnica' => 'max:60000',
+            'avisoLegal' => 'max:60000',
+            'imagen' => 'image|max:2048'
+        ]);
+
+        $medicamento->update($request->only([
+            'nombreMedicamento',
+            'categoria_id',
+            'laboratorio_id',
+            'precioNormal',
+            'descuento',
+            'precioDescuento',
+            'licencia',
+            'fichaTecnica',
+            'avisoLegal'
+        ]));
+
+        if($request->hasFile('imagen')){
+            $medicamento['imagen'] = $request->file('imagen')->getClientOriginalName();
+            $url_image = $request->file('imagen')->storeAs('public/folder_medicines/'. $request->input('categoria_id'), $medicamento['imagen']);
+            $medicamento['imagen']  = Storage::url($url_image);
+
+            $medicamento->update(['imagen' => $medicamento['imagen']]);
         }
-        $medicamento->update($medica);
-        return redirect()->route('medicamentos.index')->with('messageMedicamento_add', 'Informacion editada con exito');
+
+        return redirect()->route('medicines.index');
+    }
+
+
+    public function updatePrice(Request $request, Medicamento $medicamento){
+        $medicines = $request->only('precioNormal', 'descuento', 'precioDescuento');
+        Medicamento::where('id', $medicamento->id)->update($medicines);
+        return redirect()->route('medicines.index');
     }
 
     /**

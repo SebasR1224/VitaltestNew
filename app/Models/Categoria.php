@@ -11,4 +11,6 @@ class Categoria extends Model
     public function medicamentos(){
         return $this->hasMany(Medicamento::class);
     }
+
+    protected $guarded = [];
 }

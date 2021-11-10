@@ -16,10 +16,14 @@ class CreateMedicamentosTable extends Migration
         Schema::create('medicamentos', function (Blueprint $table) {
             $table->id();
             $table->string('nombreMedicamento');
-            $table->double('precioNormal' , 10,2);
-            $table->integer('descuento');
-            $table->string('estado', 30 );
+            $table->double('precioNormal');
+            $table->double('descuento')->nullable();
+            $table->double('precioDescuento')->nullable();
+            $table->unsignedBigInteger('status')->default(1);
             $table->string('imagen')->nullable();
+            $table->text('licencia');
+            $table->text('avisoLegal')->nullable();
+            $table->text('fichaTecnica')->nullable();
             $table->unsignedBigInteger('laboratorio_id')->nullable();
             $table->unsignedBigInteger('categoria_id')->nullable();
 

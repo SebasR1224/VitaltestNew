@@ -23,7 +23,6 @@ class CreateProfilesTable extends Migration
             $table->string('numDocumento', 30)->unique();
             $table->string('fechaNacimiento', 30);
             $table->string('direccion', 50);
-            $table->string('image')->nullable();
 
             $table->unsignedBigInteger('user_id')->unique();
 

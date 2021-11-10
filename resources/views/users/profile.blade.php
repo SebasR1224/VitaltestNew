@@ -24,9 +24,9 @@
                                 <div class="text-center text-sm-left ">
                                     <div style="width: 140px; height:140px">
                                         <label class="avatar avatar-image" style="width: 140px; height:140px" for="customFile">
-                                            <img src="{{$datos->image ? $datos->image : asset('dashboard/images/others/thumb-4.jpg') }}" alt="">
+                                            <img src="{{Auth::user()->image ? Auth::user()->image : asset('dashboard/images/others/img-4.jpg') }}" alt="">
                                         </label>
-                                        <form action="{{route('new.image', $datos->id )}}" id="photoForm" method="POST" enctype="multipart/form-data">
+                                        <form action="{{route('new.image', Auth::user()->id )}}" id="photoForm" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="custom-file">
                                                 <input type="file" name="image" class="custom-file-input" id="customFile">

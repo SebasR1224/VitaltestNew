@@ -85,15 +85,4 @@ class ProfileController extends Controller
         }
         return redirect()->back();
     }
-
-    public function newImage(Request $request, Profile $profile){
-        $image=$request->file('image')->getClientOriginalName();
-        $url_image = $request->file('image')->storeAs('public/folder_profiles/'. auth()->id(), $image);
-        $url = Storage::url($url_image);
-        if($profile->image != ''){
-            unlink(public_path($profile->image));
-        }
-        $profile->update(['image' => $url]);
-        return redirect()->back();
-    }
 }

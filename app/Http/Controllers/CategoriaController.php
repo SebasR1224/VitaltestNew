@@ -34,4 +34,17 @@ class CategoriaController extends Controller
         return redirect()->back()->with('messageCategoria_add' , $messageCategoria_add);
 
     }
+
+    public function store(Request $request){
+        if($request->ajax()){
+            $category = new Categoria();
+            $category->nombreCategoria = $request->nombreCategoria;
+            $category->save();
+            $list = Categoria::orderBy('id', 'DESC')->get();
+            return response()->json([
+                'listCategory' =>$list
+            ]);
+        }
+    }
+
 }
