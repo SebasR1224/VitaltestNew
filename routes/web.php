@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\MedicinesCommerce;
+use App\Http\Livewire\MedicinesCommerceCategory;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,8 @@ Route::put('medicines/{medicamento}/price', [App\Http\Controllers\MedicamentoCon
 
 //commerce
 Route::get('/commerce', MedicinesCommerce::class)->name('medicines.commerce');
+Route::get('/commerce/{category}', MedicinesCommerceCategory::class)->name('commerce.category');
+Route::get('commerce/show/{medicamento}', [App\Http\Controllers\MedicamentoController::class, 'showCommerce']) ->name('commerce-show');
 
 //Formulario de contacto
 Route::post('contactanos', [App\Http\Controllers\ContactanosController::class, 'send'])->name('contactanos.send');

@@ -10,6 +10,7 @@
                                     <i class="anticon anticon-appstore"></i> Categorias
                                 </button>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item nav-link active" href="{{ route('medicines.commerce') }}">Volver a ofertas</a>
                                     @foreach ($categories as $category)
                                         <a class="dropdown-item text-success" href="{{route('commerce.category', $category->id)}}">{{$category->nombreCategoria}}</a>
                                     @endforeach
@@ -22,7 +23,7 @@
                     <div class="text-md-right m-v-10">
                         <div class="input-affix m-v-10">
                             <i class="prefix-icon anticon anticon-search opacity-04"></i>
-                            <input wire:model="search" type="text" class="form-control" placeholder="Buscar medicamento en oferta">
+                            <input wire:model="search" type="text" class="form-control" placeholder="Buscar medicamento.">
                         </div>
                     </div>
                 </div>
@@ -40,7 +41,7 @@
                                     <h1 class="text-desc badge badge-danger" style="font-size:15px">{{$medicamento->descuento}}%</h1>
                                 @endif
                             </div>
-                            <div class="card-body">
+                                <div class="card-body">
                                 <p class="text-muted text-uppercase font-italic short-text"><small>{{$medicamento->laboratorio->nombreLaboratorio}}</small></p>
                                 <h4 class="text-success h4 short-text">{{$medicamento->nombreMedicamento}}</h4>
                                 <div class="d-block align-items-center justify-content-between">
@@ -58,9 +59,9 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                    <div>
-                                        <a href="{{route('commerce-show', $medicamento->id)}}" class="btn btn-block btn-success"><i class="far fa-check-circle"></i> VER DETALLES</a>
-                                    </div>
+                                <div>
+                                    <a href="{{route('commerce-show', $medicamento->id)}}" class="btn btn-block btn-success"><i class="far fa-check-circle"></i> VER DETALLES</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,7 +80,7 @@
         @else
         <div class="m-t-30">
             <div class="pagination justify-content-center">
-                El producto « {{$search}} » no se encuentra en oferta.
+                El producto « {{$search}} » no se encuentra en esta categoria.
             </div>
         </div>
         @endif

@@ -14,10 +14,13 @@ class MedicinesCommerce extends Component
     {
         return view('livewire.medicines-commerce',
         [
-            'laboratories' => Laboratorio::orderBy('id', 'DESC')->pluck('nombreLaboratorio' , 'id'),
-            'categories' => Categoria::orderBy('id', 'DESC')->pluck('nombreCategoria' , 'id'),
-            'medicamentos' => Medicamento::where('nombreMedicamento', 'LIKE', "%{$this->search}%")
-            ->paginate(50)
-        ])->extends('layouts.main', ['activePage' =>'users'])->section('content');
+            'laboratories' => Laboratorio::all()->sortByDesc("id"),
+            'categories' => Categoria::all()->sortByDesc("id"),
+            'medicamentos' => Medicamento::where('precioDescuento', '!=', '')
+            ->where('nombreMedicamento', 'LIKE', "%{$this->search}%")
+            ->orderBy('descuento', 'desc')
+            ->paginate(4)
+        ])->extends('layouts.main', ['activePage' =>'commerce'])
+        ->section('content');
     }
 }

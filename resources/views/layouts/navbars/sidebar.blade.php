@@ -48,6 +48,14 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ $activePage == 'commerce' ? ' active' : '' }}" >
+                <a class="dropdown" href="{{ route('medicines.commerce') }}">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-shop"></i>
+                    </span>
+                    <span class="title">Tienda</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">

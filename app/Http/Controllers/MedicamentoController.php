@@ -143,6 +143,14 @@ class MedicamentoController extends Controller
         return redirect()->route('medicines.index');
     }
 
+    public function showCommerce(Medicamento $medicamento)
+    {
+        $medicamento = Medicamento::findOrfail($medicamento->id);
+        $categories = Medicamento::all()->where('categoria_id', $medicamento->categoria_id)
+        ->where('id', '!=', $medicamento->id);
+        return view('medicines.showCommerce', compact('medicamento', 'categories'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
