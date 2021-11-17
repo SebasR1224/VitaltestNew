@@ -56,6 +56,14 @@
                     <span class="title">Tienda</span>
                 </a>
             </li>
+            <li class="nav-item dropdown {{ $activePage == 'chat' ? ' active' : '' }}" >
+                <a class="dropdown" href="{{ route('chat.index') }}">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-shop"></i>
+                    </span>
+                    <span class="title">Chat</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">

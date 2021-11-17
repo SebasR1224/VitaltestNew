@@ -15,18 +15,25 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-body">
-                <div class="row m-b-30">
-                    <div class="col-lg-8">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-8 p-10">
                         <h3 class="h3 text-primary">Inventario de productos</h3>
                     </div>
-                    <div class="col-lg-4 text-right">
+                    <div class="col-lg-4 p-5 text-right">
                         <a href="{{route('medicines.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar nuevo producto">
                             <i class="anticon anticon-plus-circle m-r-5"></i>
                             <span>Agregar producto</span>
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="card-body">
+                    <div class="text-center mb-3">
+                            <button class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Cargar medicamentos desde un archivo excel"><i class="anticon anticon-file-excel m-r-5"></i>Excel</button>
+                            <button class="btn btn-tone btn-primary" data-toggle="tooltip" data-placement="top" title="Imprimir inventartio en archivo .pdf" ><i class="anticon anticon-file-pdf m-r-5"></i>Imprimir</button>
+                    </div>
+
                 <div class="table-responsive">
                     <table id="data-table" class="table table-hover e-commerce-table">
                         <thead>
@@ -37,7 +44,6 @@
                                 <th>Precio</th>
                                 <th>Descuento</th>
                                 <th>Oferta</th>
-                                <th>Laboratorio</th>
                                 <th>Estado</th>
                                 <th></th>
                             </tr>
@@ -57,21 +63,21 @@
                                     <td>{{$medicine->categoria->nombreCategoria}}</td>
                                     <td>
                                         <span class="text-success">$</span>
-                                        {{$medicine->precioNormal}}
+                                        {{number_format($medicine->precioNormal, 2)}}
+
                                     </td>
-                                    @if ($medicine->descuento)
-                                        <td>
+                                    <td>
+                                        @if ($medicine->descuento)
                                             {{$medicine->descuento}}
-                                            <span class="text-success">%</span>
-                                        </td>
-                                        <td>
+                                            <span class="text-primary">%</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($medicine->precioDescuento)
                                             <span class="text-success">$</span>
-                                            {{$medicine->precioDescuento}}
-                                        </td>
-                                    @else
-                                        <td class="text-center text-primary" colspan="2">Sin descuento</td>
-                                    @endif
-                                    <td>{{$medicine->laboratorio->nombreLaboratorio}}</td>
+                                            {{number_format($medicine->precioDescuento, 2)}}
+                                        @endif
+                                    </td>
                                     <td>
                                         @if ($medicine->status == 1)
                                         <div class="d-flex align-items-center">
@@ -103,18 +109,18 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                                <h5 class="modal-title p text-success font-weight-light" >$ Editar precio</h5>
                                                 <button type="button" class="close" data-dismiss="modal">
                                                     <i class="anticon anticon-close"></i>
                                                 </button>
                                             </div>
-                                            <form action="{{route('price.update', $medicine->id)}}" method="POST">
+                                            <form id="form-medicines" action="{{route('price.update', $medicine->id)}}" method="POST">
                                             @csrf
                                             @method('PUT')
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for="precioNormal" class="col-form-label control-label"><span class="h6">Precio normal:</span></label>
-                                                        <input type="text" class="form-control" id="precioNormal" name="precioNormal"  placeholder="Precio normal" autofocus value="{{@old('precioNormal', $medicine->precioNormal)}}" autocomplete="off">
+                                                        <input type="text" class="form-control" id="precioNormal"  name="precioNormal"  placeholder="Precio normal" autofocus value="{{@old('precioNormal', $medicine->precioNormal)}}" autocomplete="off">
                                                         @error('precioNormal')<span class="text-danger">{{$message}}</span>@enderror
                                                     </div>
                                                     <div class="form-group">
@@ -130,7 +136,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                                    <button type="submit" class="btn btn-success">Guardar cambios</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -146,7 +152,6 @@
                                 <th>Precio</th>
                                 <th>Descuento</th>
                                 <th>Oferta</th>
-                                <th>Laboratorio</th>
                                 <th>Estado</th>
                                 <th></th>
                             </tr>
@@ -159,7 +164,10 @@
 </div>
 @endsection
 @section('js')
+    <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+    <script src="{{asset('js/validation/indexMedicinesValidation.js')}}"></script>
 @endsection

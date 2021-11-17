@@ -45,12 +45,12 @@
                                 <h4 class="text-success h4 short-text">{{$medicamento->nombreMedicamento}}</h4>
                                 <div class="d-block align-items-center justify-content-between">
                                     @if ($medicamento->precioDescuento)
-                                        <h4 class="text-danger font-weight-bold h4">${{$medicamento->precioDescuento}}(Oferta)</h4>
+                                        <h4 class="text-danger font-weight-bold h4">${{number_format($medicamento->precioDescuento, 2)}}(Oferta)</h4>
                                         <div>
-                                            <p><del>${{$medicamento->precioNormal}}</del>(Normal)</p>
+                                            <p><del>${{number_format($medicamento->precioNormal, 2)}}</del>(Normal)</p>
                                         </div>
                                     @else
-                                        <h4 class="text-dark h4">${{$medicamento->precioNormal}}(Normal)</h4>
+                                        <h4 class="text-dark h4">${{number_format($medicamento->precioNormal, 2)}}(Normal)</h4>
                                         <div>
                                             <p class="invisible">vacio</p>
                                         </div>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Cache;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,4 +47,9 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne(Profile::class);
     }
+
+    public function isOnline()
+{
+    return Cache::has('user-is-online-' . $this->id);
+}
 }

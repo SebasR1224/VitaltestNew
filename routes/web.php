@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ListInventory;
 use App\Http\Livewire\MedicinesCommerce;
 use App\Http\Livewire\MedicinesCommerceCategory;
 use Illuminate\Auth\Events\Validated;
@@ -81,8 +82,11 @@ Route::put('medicines/{medicamento}/price', [App\Http\Controllers\MedicamentoCon
 
 //commerce
 Route::get('/commerce', MedicinesCommerce::class)->name('medicines.commerce');
+
+
 Route::get('/commerce/{category}', MedicinesCommerceCategory::class)->name('commerce.category');
 Route::get('commerce/show/{medicamento}', [App\Http\Controllers\MedicamentoController::class, 'showCommerce']) ->name('commerce-show');
+
 
 //Formulario de contacto
 Route::post('contactanos', [App\Http\Controllers\ContactanosController::class, 'send'])->name('contactanos.send');
@@ -93,6 +97,10 @@ route::get('search/username', [App\Http\Controllers\ValidateUniqueData::class, '
 route::get('search/email', [App\Http\Controllers\ValidateUniqueData::class, 'searchEmail'])->name('search.email');
 route::get('search/usernameEdit/{id}', [App\Http\Controllers\ValidateUniqueData::class, 'searchUserNameEdit'])->name('search.usernameEdit');
 route::get('search/emailEdit/{id}', [App\Http\Controllers\ValidateUniqueData::class, 'searchEmailEdit'])->name('search.emailEdit');
+
+//chat
+route::get('chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
+
 
 
 

@@ -1,7 +1,4 @@
 @extends('layouts.main', ['activePage' =>'inventory'])
-@section('css')
-
-@endsection
 @section('content')
 <div class="page-container">
     <div class="main-content">

@@ -112,7 +112,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Precio:</td>
-                                            <td class="text-success font-weight-semibold">$ {{$medicamento->precioNormal}}</td>
+                                            <td class="text-success font-weight-semibold">$ {{number_format($medicamento->precioNormal, 2)}}</td>
                                         </tr>
                                         @if ($medicamento->precioDescuento)
                                             <tr>
@@ -121,7 +121,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Oferta:</td>
-                                                <td class="text-danger">$ {{$medicamento->precioDescuento}}</td>
+                                                <td class="text-danger">$ {{number_format($medicamento->precioDescuento, 2)}}</td>
                                             </tr>
                                         @endif
                                         <tr>

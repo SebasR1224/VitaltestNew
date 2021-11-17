@@ -36,14 +36,14 @@
                             <h4 class="m-b-10 text-success m-t-5 m-b-15">{{$medicamento->nombreMedicamento}}</h4>
                             @if ($medicamento->precioDescuento)
                             <div class="d-flex align-items-center ">
-                                <h1 class="h1 font-weight-bold text-danger">${{$medicamento->precioDescuento}} (Oferta)</h1>
+                                <h1 class="h1 font-weight-bold text-danger">${{number_format($medicamento->precioDescuento, 2)}} (Oferta)</h1>
                             </div>
                             <div class="d-flex align-items-center m-t-5 m-b-15">
-                                <h3 class="h3 text-muted"><del>${{$medicamento->precioNormal}}</del>(Normal)</h3>
+                                <h3 class="h3 text-muted"><del>${{number_format($medicamento->precioNormal, 2)}}</del>(Normal)</h3>
                             </div>
                             @else
                             <div class="d-flex align-items-center m-t-5 m-b-15">
-                                <h1 class="h1 text-dark">${{$medicamento->precioNormal}} (Normal)</h1>
+                                <h1 class="h1 text-dark">${{number_format($medicamento->precioNormal, 2)}} (Normal)</h1>
                             </div>
                             @endif
                             <hr>
@@ -116,12 +116,12 @@
                                     <h4 class="text-success h4 short-text">{{$category->nombreMedicamento}}</h4>
                                     <div class="d-block align-items-center justify-content-between">
                                         @if ($category->precioDescuento)
-                                            <h4 class="text-danger font-weight-bold h4">${{$category->precioDescuento}}(Oferta)</h4>
+                                            <h4 class="text-danger font-weight-bold h4">${{number_format($category->precioDescuento, 2)}}(Oferta)</h4>
                                             <div>
-                                                <p><del>${{$category->precioNormal}}</del>(Normal)</p>
+                                                <p><del>${{number_format($category->precioNormal, 2)}}</del>(Normal)</p>
                                             </div>
                                         @else
-                                            <h4 class="text-dark h4">${{$category->precioNormal}}(Normal)</h4>
+                                            <h4 class="text-dark h4">${{number_format($category->precioNormal, 2)}}(Normal)</h4>
                                             <div>
                                                 <p class="invisible">vacio</p>
                                             </div>

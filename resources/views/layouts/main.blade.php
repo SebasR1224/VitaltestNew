@@ -12,8 +12,10 @@
     <link rel="shortcut icon" href="assets/images/logo/favicon.png">
     <!-- CSS Files -->
     @livewireStyles
+    @livewireScripts
     <link href="{{asset('dashboard/css/app.min.css')}}" rel="stylesheet">
      @yield('css')
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 <body>
     @auth()
@@ -33,6 +35,5 @@
     <!-- Sweet alert -->
     @include('sweetalert::alert')
     @yield('js')
-    @livewireScripts
 </body>
 </html>
