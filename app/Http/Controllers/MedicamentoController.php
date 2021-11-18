@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MedicinesExport;
 use App\Models\Categoria;
 use App\Models\Laboratorio;
 use App\Models\Medicamento;
-use App\Models\Recomendacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class MedicamentoController extends Controller
 {
@@ -149,6 +152,24 @@ class MedicamentoController extends Controller
         $categories = Medicamento::all()->where('categoria_id', $medicamento->categoria_id)
         ->where('id', '!=', $medicamento->id);
         return view('medicines.showCommerce', compact('medicamento', 'categories'));
+    }
+
+    public function exportpdf(Request $request){
+        $status = $request->input('status');
+        $nombreMedicamento = 'nombreMedicamento';
+        $oferta = $request->input('oferta');
+        $medicines = Medicamento::where('status', '=', $status)->$oferta('descuento')->get();
+        $count = $medicines->count();
+        $pdf = PDF::loadView('exports.medicines', compact('medicines'));
+        if($count > 0){
+            return $pdf->download('medicines-list.pdf');
+        }else{
+            return $pdf->stream('medicines-list.pdf');
+        }
+    }
+
+    public function exportExcel(){
+        return Excel::download(new MedicinesExport, 'medicines-list.xlsx');
     }
 
     /**

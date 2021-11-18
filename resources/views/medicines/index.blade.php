@@ -21,6 +21,10 @@
                         <h3 class="h3 text-primary">Inventario de productos</h3>
                     </div>
                     <div class="col-lg-4 p-5 text-right">
+                        <a href="" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
+                            <i class="anticon anticon-file-excel m-r-5"></i>
+                            <span>Excel</span>
+                        </a>
                         <a href="{{route('medicines.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar nuevo producto">
                             <i class="anticon anticon-plus-circle m-r-5"></i>
                             <span>Agregar producto</span>
@@ -28,10 +32,61 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalPdf">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <i class="anticon anticon-close"></i>
+                            </button>
+                        </div>
+                        <form action="{{route('export-pdf')}}" method="get">
+                            <div class="modal-body">
+                                <p class="p-15 h5 font-italic font-weight-light text-dark">Generar reporte cuando los productos esten:</p>
+                                <div class="row container-fluid">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="radio">
+                                                <input id="activo" name="status" value="1" type="radio" checked="">
+                                                <label for="activo">En stock</label>
+                                            </div>
+                                            <div class="radio">
+                                                <input id="agotado" name="status" value="0" type="radio">
+                                                <label for="agotado">Agotado</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group float-right">
+                                            <div class="radio">
+                                                <input id="oferta" name="oferta" value="whereNotNull" type="radio" checked="">
+                                                <label for="oferta">Con descuento</label>
+                                            </div>
+                                            <div class="radio">
+                                                <input id="sinOferta" name="oferta" value="whereNull" type="radio">
+                                                <label for="sinOferta">Sin Descuento</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary"> <i class="anticon anticon-download m-r-5"></i> Descargar PDF</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                     <div class="text-center mb-3">
-                            <button class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Cargar medicamentos desde un archivo excel"><i class="anticon anticon-file-excel m-r-5"></i>Excel</button>
-                            <button class="btn btn-tone btn-primary" data-toggle="tooltip" data-placement="top" title="Imprimir inventartio en archivo .pdf" ><i class="anticon anticon-file-pdf m-r-5"></i>Imprimir</button>
+                            <a href="{{route('export-excel')}}" class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Imprimir inventario en Excel"><i class="anticon anticon-file-excel m-r-5"></i>Imprimir Excel</a>
+                            <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Imprimir inventario en PDF">
+                            <button type="button" class="btn btn-tone btn-primary" data-toggle="modal" data-target="#modalPdf">
+                                <i class="anticon anticon-file-pdf m-r-5"></i>Imprimir PDF
+                            </button>
+                            </span>
                     </div>
 
                 <div class="table-responsive">

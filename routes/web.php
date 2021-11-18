@@ -77,7 +77,8 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 
 //medicamentos
 Route::resource('medicines', App\Http\Controllers\MedicamentoController::class);
-
+Route::get('/medicine/export/pdf',[App\Http\Controllers\MedicamentoController::class, 'exportPdf'])->name('export-pdf');
+Route::get('/medicine/export/excel',[App\Http\Controllers\MedicamentoController::class, 'exportExcel'])->name('export-excel');
 Route::put('medicines/{medicamento}/price', [App\Http\Controllers\MedicamentoController::class, 'updatePrice']) ->name('price.update');
 
 //commerce
