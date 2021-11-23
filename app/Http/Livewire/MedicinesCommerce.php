@@ -16,10 +16,10 @@ class MedicinesCommerce extends Component
         [
             'laboratories' => Laboratorio::all()->sortByDesc("id"),
             'categories' => Categoria::all()->sortByDesc("id"),
-            'medicamentos' => Medicamento::where('precioDescuento', '!=', '')
+            'medicamentos' => Medicamento::where('status', '!=', '0')->where('precioDescuento', '!=', '')
             ->where('nombreMedicamento', 'LIKE', "%{$this->search}%")
             ->orderBy('descuento', 'desc')
-            ->paginate(4)
+            ->paginate(50)
         ])->extends('layouts.main', ['activePage' =>'commerce'])
         ->section('content');
     }

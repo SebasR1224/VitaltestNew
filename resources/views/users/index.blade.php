@@ -79,12 +79,12 @@
                                                 </div>
                                             </form>
                                         </td>
-                                        <td class="text-right">
-                                            <a href="{{route('users.edit', ['id'=>$user->id])}}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
-                                                <i class="anticon anticon-edit"></i>
-                                            </a>
+                                        <td class="text-center">
                                             <a href="{{route('users.show', ['id'=> $user->id]) }}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" >
                                                 <i class="anticon anticon-eye"></i>
+                                            </a>
+                                            <a href="{{route('users.edit', ['id'=>$user->id])}}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                                <i class="anticon anticon-edit"></i>
                                             </a>
                                         </td>
                                     </tr>

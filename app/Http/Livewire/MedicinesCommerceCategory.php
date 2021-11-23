@@ -24,7 +24,7 @@ class MedicinesCommerceCategory extends Component
         return view('livewire.medicines-commerce-category', [
             'laboratories' => Laboratorio::all()->sortByDesc("id"),
             'categories' => Categoria::all()->sortByDesc("id"),
-            'medicamentos' => Medicamento::where('categoria_id', $this->category)
+            'medicamentos' => Medicamento::where('status', '!=', '0')->where('categoria_id', $this->category)
             ->Where('nombreMedicamento', 'LIKE', "%{$this->search}%")
             ->orderBy('descuento', 'desc')
             ->paginate(4)

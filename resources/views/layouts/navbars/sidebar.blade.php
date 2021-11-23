@@ -22,11 +22,16 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{ $activePage == 'users' ? ' active' : '' }}">
-                        <a href="{{route('users.index')}}">Lista de usuarios</a>
+                        <a href="{{route('users.index')}}">Lista de Usuarios</a>
                     </li>
                     <li class="{{ $activePage == 'userCreate' ? ' active' : '' }}">
-                        <a href="{{route('users.create')}}">Agregar usuario</a>
+                        <a href="{{route('users.create')}}">Agregar Usuario</a>
                     </li>
+                    @if ($activePage == 'editUsers')
+                    <li class="{{$activePage == 'editUsers' ? 'active' : ''}}">
+                        <a href="">Editar Usuario</a>
+                    </li>
+                    @endif
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -41,11 +46,45 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="{{$activePage == 'inventory' ? 'active' : ''}}">
-                        <a href="{{route('medicines.index')}}">Lista de inventario</a>
+                        <a href="{{route('medicines.index')}}">Lista de Inventario</a>
                     </li>
                     <li class="{{$activePage == 'newProduct' ? 'active' : ''}}">
-                        <a href="{{route('medicines.create')}}">Agregar producto</a>
+                        <a href="{{route('medicines.create')}}">Agregar Producto</a>
                     </li>
+                    @if ($activePage == 'editMedicines')
+                    <li class="{{$activePage == 'editMedicines' ? 'active' : ''}}">
+                        <a href="">Editar Producto</a>
+                    </li>
+                    @endif
+                    @if ($activePage == 'showMedicines')
+                    <li class="{{$activePage == 'showMedicines' ? 'active' : ''}}">
+                        <a href="">Detalles del Producto</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-file-done"></i>
+                    </span>
+                    <span class="title">Recomendaciones</span>
+                    <span class="arrow">
+                        <i class="arrow-icon"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{$activePage == 'recommendation' ? 'active' : ''}}">
+                        <a href="{{route('recomendacion.index')}}">Lista de Recomendaciones</a>
+                    </li>
+                    <li class="{{$activePage == 'newProduct' ? 'active' : ''}}">
+                        <a href="{{route('medicines.create')}}">Agregar Recomendación</a>
+                    </li>
+                    @if ($activePage == 'editMedicines')
+                    <li class="{{$activePage == 'editMedicines' ? 'active' : ''}}">
+                        <a href="">Editar Recomendación</a>
+                    </li>
+                    @endif
                 </ul>
             </li>
             <li class="nav-item dropdown {{ $activePage == 'commerce' ? ' active' : '' }}" >
@@ -59,7 +98,7 @@
             <li class="nav-item dropdown {{ $activePage == 'chat' ? ' active' : '' }}" >
                 <a class="dropdown" href="{{ route('chat.index') }}">
                     <span class="icon-holder">
-                        <i class="anticon anticon-shop"></i>
+                        <i class="anticon anticon-message"></i>
                     </span>
                     <span class="title">Chat</span>
                 </a>

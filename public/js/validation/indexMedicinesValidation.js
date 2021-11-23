@@ -65,10 +65,6 @@ inputDescuento.onchange = () => {
 
 
 
-
-
-
-
 $("#precioNormal").mask(
     'PN',
     {translation:
@@ -101,23 +97,38 @@ function(value, element) {
 },
 );
 
+$('#modalPrice').on('show.bs.modal', function(event){
+    clearValidationErrors();
+    var button = $(event.relatedTarget)
+    var id = button.data('id')
+    var precio = button.data('precio')
+    var descuento = button.data('descuento')
+    var oferta = button.data('oferta')
+    action = $('#form-update-price').attr('data-action').slice(0, -1)
+    action+= id;
+    $('#form-update-price').attr('action', action)
+    $('#precioNormal').val(precio)
+    $('#descuento').val(descuento)
+    $('#precioDescuento').val(oferta)
 
+    if(oferta == ""){
+    $('#disabled').removeClass('text-muted')
+    $('#disabled').addClass('text-primary')
+    $('#disabled').html('Medicamento sin descuento')
+    }else{
+        $('#disabled').html(oferta)
+    }
 
-$( "#form-medicines" ).validate({
+    var modal = $(this)
+    modal.find('.modal-title').text('$ Editar precio con codigo #' + id )
+})
+
+var validator = $( "#form-update-price" ).validate({
     ignore: ':hidden:not(:checkbox)',
     errorElement: 'label',
     errorClass: 'is-invalid',
     rules: {
-        nombreMedicamento: {
-            required: true,
-            maxlength: 200,
-        },
-        categoria_id: {
-            required: true
-        },
-        laboratorio_id: {
-            required: true
-        },
+
         precioNormal:{
             required:true,
             doubletwo: true,
@@ -125,19 +136,6 @@ $( "#form-medicines" ).validate({
         },
         descuento:{
             doubletwo: true
-        },
-        licencia:{
-            required: true,
-            maxlength: 200,
-        },
-        fichaTecnica:{
-            maxlength: 60000
-        },
-        avisoLegal:{
-            maxlength: 60000
-        },
-        imagen:{
-            imagen: true
         }
     },
     messages:
@@ -154,31 +152,24 @@ $( "#form-medicines" ).validate({
         },
         precioNormal: {
             required:'<p class="col-md-12 text-danger">El campo es obligatorio.</p>',
-            doubletwo: '<p class="text-danger">Redondeé la cifra a dos decimales.</p>',
             number: '<p class="text-danger">Por favor ingrese un número valido.</p>',
+            doubletwo: '<p class="text-danger">Redondeé la cifra a dos decimales.</p>',
             minlength: '<p class="text-danger">Asegurese de que el precio esté completo.</p>'
         },
         descuento:{
             number: '<p class="text-danger">Por favor ingrese un número valido.</p>',
             doubletwo: '<p class="text-danger">Redondeé la cifra a dos decimales.</p>',
-
-        },
-        licencia:{
-            required:'<p class="text-danger">El campo es obligatorio.</p>',
-            maxlength:'<p class="text-danger">No ingrese más de 200 caracteres.</p>'
-        },
-        fichaTecnica: {
-            maxlength:'<p class="text-danger">Limite de texto excedido</p>'
-        },
-        avisoLegal: {
-            maxlength:'<p class="text-danger">Limite de texto excedido</p>'
-        },
-        imagen: {
-            imagen: '<p class="text-danger">El archivo seleccionado no es de tipo imagen.</p>'
         }
     }
 
 });
 
+
+
+function clearValidationErrors() {
+    validator.resetForm();
+    $("#precioNormal").removeClass("is-invalid");
+    $("#descuento").removeClass("is-invalid");
+}
 
 

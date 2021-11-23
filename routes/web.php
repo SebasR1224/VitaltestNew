@@ -3,6 +3,7 @@
 use App\Http\Livewire\ListInventory;
 use App\Http\Livewire\MedicinesCommerce;
 use App\Http\Livewire\MedicinesCommerceCategory;
+use App\Http\Livewire\ShowMedicines;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +49,6 @@ Route::post('/recomendaciones/partes', [App\Http\Controllers\ParteController::cl
 //sintomas
 Route::get('/recomendaciones/sintomas', [App\Http\Controllers\SintomaController::class, 'show'])->name('sintomas.show');
 Route::post('/recomendaciones/sintomas', [App\Http\Controllers\SintomaController::class, 'save'])->name('sintoma.save');
-// Route::delete('/recomendaciones/sintomas/{id}',  [App\Http\Controllers\SintomaController::class, 'destroy'])->name('sintoma.delete');
 
 
 //recomendaciones
@@ -58,7 +58,7 @@ Route::get('/recomendaciones', [App\Http\Controllers\RecomendacionController::cl
 Route::get('/recomendaciones/detalles/{id}', [App\Http\Controllers\RecomendacionController::class, 'show'])->name('recomendacion.show');
 Route::get('/recomendaciones/{id}/edit', [App\Http\Controllers\RecomendacionController::class, 'edit'])->name('recomendacion.edit');
 Route::put('/recomendaciones/{id}' , [App\Http\Controllers\RecomendacionController::class, 'update'])->name('recomendacion.update');
-// Route::get('/search/partes',  [App\Http\Controllers\SearchController::class, 'partes'])->name('search.partes');
+
 
 
 //laboratorio
@@ -79,7 +79,9 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('medicines', App\Http\Controllers\MedicamentoController::class);
 Route::get('/medicine/export/pdf',[App\Http\Controllers\MedicamentoController::class, 'exportPdf'])->name('export-pdf');
 Route::get('/medicine/export/excel',[App\Http\Controllers\MedicamentoController::class, 'exportExcel'])->name('export-excel');
-Route::put('medicines/{medicamento}/price', [App\Http\Controllers\MedicamentoController::class, 'updatePrice']) ->name('price.update');
+Route::post('/medicines/import',[App\Http\Controllers\MedicamentoController::class, 'importExcel'])->name('import-excel');
+Route::put('medicines/price/{medicamento}', [App\Http\Controllers\MedicamentoController::class, 'updatePrice']) ->name('price.update');
+Route::put('medicines-status/{medicamento}', [App\Http\Controllers\MedicamentoController::class, 'updateStatus']) ->name('price.status');
 
 //commerce
 Route::get('/commerce', MedicinesCommerce::class)->name('medicines.commerce');

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'inventory'])
+@extends('layouts.main', ['activePage' =>'editMedicines'])
 @section('content')
 <div class="page-container">
     <div class="main-content">

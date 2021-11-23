@@ -17,7 +17,6 @@ class CreateRecomendacionsTable extends Migration
             $table->id();
             $table->string('nombreRecomendacion');
             $table->unsignedBigInteger('parte_id')->nullable();
-            $table->unsignedBigInteger('sintoma_id')->nullable();
             $table->string('dosis');
             $table->string('frecuencia');
             $table->string('tiempo');
@@ -34,9 +33,7 @@ class CreateRecomendacionsTable extends Migration
             ->onDelete('set null')
             ->onUpdate('cascade');
 
-            $table->foreign('sintoma_id')->references('id')->on('sintomas')
-            ->onDelete('set null')
-            ->onUpdate('cascade');
+
 
             $table->foreign('imc_id')->references('id')->on('imcs')
             ->onDelete('set null')

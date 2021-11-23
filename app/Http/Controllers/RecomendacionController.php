@@ -14,8 +14,8 @@ use Illuminate\Http\Request;
 class RecomendacionController extends Controller
 {
     public function index(){
-        $lists = Recomendacion::paginate(8);
-        return view('recomendacion.index', compact('lists'));
+        $recommendations = Recomendacion::all();
+        return view('recommendation.index', compact('recommendations'));
     }
 
     //detalles de recomendacion

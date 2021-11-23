@@ -6,7 +6,7 @@
 <div class="page-container">
     <div class="main-content">
         <div class="page-header">
-            <h2 class="header-title">Lista de inventario</h2>
+            <h2 class="header-title">Lista de Inventario</h2>
             <div class="header-sub-title">
                 <nav class="breadcrumb breadcrumb-dash">
                     <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
@@ -18,16 +18,17 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-8 p-10">
-                        <h3 class="h3 text-primary">Inventario de productos</h3>
+                        <h3 class="h3 text-primary font-weight-light">Inventario de Productos</h3>
                     </div>
                     <div class="col-lg-4 p-5 text-right">
-                        <a href="" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
-                            <i class="anticon anticon-file-excel m-r-5"></i>
-                            <span>Excel</span>
-                        </a>
+                        <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
+                            <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
+                                <i class="anticon anticon-file-excel m-r-5"></i> Excel
+                            </button>
+                        </span>
                         <a href="{{route('medicines.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar nuevo producto">
                             <i class="anticon anticon-plus-circle m-r-5"></i>
-                            <span>Agregar producto</span>
+                            <span>Agregar Producto</span>
                         </a>
                     </div>
                 </div>
@@ -79,13 +80,40 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="modalExcel">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                <i class="anticon anticon-close"></i>
+                            </button>
+                        </div>
+                        <form action="{{route('import-excel')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <p class="container-fluid h5 font-weight-light text-dark">Seleccionar un archivo:</p>
+                                <div class="container-fluid">
+                                    <div class="custom-file">
+                                        <input type="file" name="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label text-success" for="customFile">Archivo excel « .xlsx »</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-success"> <i class="anticon anticon-download m-r-5"></i>Importar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                     <div class="text-center mb-3">
                             <a href="{{route('export-excel')}}" class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Imprimir inventario en Excel"><i class="anticon anticon-file-excel m-r-5"></i>Imprimir Excel</a>
                             <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Imprimir inventario en PDF">
-                            <button type="button" class="btn btn-tone btn-primary" data-toggle="modal" data-target="#modalPdf">
-                                <i class="anticon anticon-file-pdf m-r-5"></i>Imprimir PDF
-                            </button>
+                                <button type="button" class="btn btn-tone btn-primary" data-toggle="modal" data-target="#modalPdf">
+                                    <i class="anticon anticon-file-pdf m-r-5"></i>Imprimir PDF
+                                </button>
                             </span>
                     </div>
 
@@ -94,7 +122,7 @@
                         <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Nombre de medicamento</th>
+                                <th>Nombre de Medicamento</th>
                                 <th>Categoria</th>
                                 <th>Precio</th>
                                 <th>Descuento</th>
@@ -134,69 +162,42 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($medicine->status == 1)
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-success badge-dot m-r-10"></div>
-                                            <div>En Stock</div>
-                                        </div>
-                                        @else
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge badge-danger badge-dot m-r-10"></div>
-                                            <div>Agotado</div>
-                                        </div>
-                                        @endif
+                                        <form class="form-update-status" action="{{route('price.status', $medicine->id)}}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="d-flex align-items-center">
+                                                @if ($medicine->status == 1)
+                                                <div class="badge badge-success badge-dot m-r-10"></div>
+                                                <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado del producto.">
+                                                    <button  class="btn btn-sm btn-default ">
+                                                        <div>En Stock</div>
+                                                    </button>
+                                                </span>
+                                                @else
+                                                <div class="badge badge-danger badge-dot m-r-10"></div>
+                                                <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado del producto.">
+                                                    <button   class="btn btn-sm btn-default ">
+                                                        <div>Agotado</div>
+                                                    </button>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </form>
                                     </td>
-                                    <td class="text-right">
-                                        <span class="d-inline-block" data-placement="left" data-toggle="tooltip" title="Editar el precio del producto">
-                                            <a type="button" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="modal" data-target="#modalPrice{{$medicine->id}}">
-                                                <i class="anticon anticon-dollar"></i>
-                                            </a>
-                                        </span>
+                                    <td class="text-center">
+                                        <a href="{{route('medicines.show', $medicine->id) }}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa del producto">
+                                            <i class="anticon anticon-info-circle"></i>
+                                        </a>
                                         <a href="{{route('medicines.edit', $medicine->id )}}"  class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar este producto">
                                             <i class="anticon anticon-edit"></i>
                                         </a>
-                                        <a href="{{route('medicines.show', $medicine->id) }}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Vista detallada del producto">
-                                            <i class="anticon anticon-eye"></i>
-                                        </a>
+                                        <span class="d-inline-block" data-placement="left" data-toggle="tooltip" title="Editar el precio del producto">
+                                            <a type="button" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="modal" data-id="{{$medicine->id}}" data-precio="{{$medicine->precioNormal}}" data-descuento="{{$medicine->descuento}}" data-oferta="{{$medicine->precioDescuento}}" data-target="#modalPrice">
+                                                <i class="anticon anticon-dollar"></i>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
-                                <div class="modal fade" id="modalPrice{{$medicine->id}}">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title p text-success font-weight-light" >$ Editar precio</h5>
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    <i class="anticon anticon-close"></i>
-                                                </button>
-                                            </div>
-                                            <form id="form-medicines" action="{{route('price.update', $medicine->id)}}" method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="precioNormal" class="col-form-label control-label"><span class="h6">Precio normal:</span></label>
-                                                        <input type="text" class="form-control" id="precioNormal"  name="precioNormal"  placeholder="Precio normal" autofocus value="{{@old('precioNormal', $medicine->precioNormal)}}" autocomplete="off">
-                                                        @error('precioNormal')<span class="text-danger">{{$message}}</span>@enderror
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="descuento" class="col-form-label control-label"><span class="h6">Descuento:</span></label>
-                                                        <input type="text" class="form-control" id="descuento" name="descuento"  placeholder="Descuento" value="{{@old('descuento', $medicine->descuento)}}" autocomplete="off">
-                                                        @error('descuento')<span class="text-danger">{{$message}}</span>@enderror
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="precioDescuento" class="col-form-label control-label"><span class="h6">Precio con descuento:</span></label>
-                                                        <input type="hidden" class="form-control" id="precioDescuento" name="precioDescuento">
-                                                        <div class="form-control text-muted" disabled id="disabled">Precio con descuento</div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success">Guardar cambios</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -217,12 +218,70 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalPrice">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title p text-success font-weight-light" ></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <form id="form-update-price" action="{{route('price.update', 1)}}" data-action="{{route('price.update', 1)}}" method="POST">
+            @csrf
+            @method('PUT')
+                <div class="modal-body" id="modal-body">
+                    <div class="form-group">
+                        <label for="precioNormal" class="col-form-label control-label"><span class="h6">Precio normal:</span></label>
+                        <input type="number" class="form-control" id="precioNormal"  name="precioNormal"  placeholder="Precio normal" autofocus  autocomplete="off">
+                        @error('precioNormal')<span class="text-danger">{{$message}}</span>@enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="descuento" class="col-form-label control-label"><span class="h6">Descuento:</span></label>
+                        <input type="number" class="form-control" id="descuento" name="descuento"  placeholder="Descuento"  autocomplete="off">
+                        @error('descuento')<span class="text-danger">{{$message}}</span>@enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="precioDescuento" class="col-form-label control-label"><span class="h6">Precio con descuento:</span></label>
+                        <input type="hidden" class="form-control" id="precioDescuento" name="precioDescuento" value="{{@old('precioDescuento', $medicamento->precioDescuento)}}">
+                        <div class="form-control" disabled id="disabled"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('.form-update-status').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Está seguro?',
+            text: 'Este producto cambiará de estado',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3f87f5',
+            cancelButtonColor: '#de4436',
+            confirmButtonText: '<i class="anticon anticon-like"></i> Cambiar',
+            cancelButtonText: '<i class="anticon anticon-dislike"></i> Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+               this.submit();
+            }
+            })
+        });
+    </script>
     <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
     <script src="{{asset('js/validation/indexMedicinesValidation.js')}}"></script>
+
 @endsection
