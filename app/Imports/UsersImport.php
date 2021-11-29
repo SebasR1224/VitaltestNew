@@ -39,8 +39,9 @@ class UsersImport implements ToModel, WithHeadingRow, SkipsOnError, WithValidati
     public function rules(): array
     {
         return [
-               '*.username' => ['requided','unique:users,username'],
-               '*.email' => ['requided','email', 'unique:users,email'],
+               '*.username' => ['required','unique:users,username'],
+               '*.email' => ['required','email', 'unique:users,email'],
+               '*.password' => ['required']
         ];
     }
 

@@ -120,32 +120,7 @@
                             @endforeach
                         </div>
                     @endif
-                    @if (session()->has('failures'))
-                      <table class="table table-danger">
-                            <tr>
-                                <th>Fila</th>
-                                <th>Atributo</th>
-                                <th>Errors</th>
-                                <th>Valor</th>
-                            </tr>
-                            @foreach (session()->get('failures') as $validation)
-                                <tr>
-                                    <td>{{$validation->row()}}</td>
-                                    <td>{{$validation->attribute()}}</td>
-                                    <td>
-                                        <ul>
-                                            @foreach ($validation->errors() as $e)
-                                                <li>{{$e}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
-                                    <td>
-                                       {{$validation->values()[$validation->attribute()]}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                      </table>
-                    @endif
+
                     <div class="text-center mb-3">
                         <a href="{{route('export-users-excel')}}" class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Imprimir lista de usuarios en Excel"><i class="anticon anticon-file-excel m-r-5"></i>Imprimir Excel</a>
                         <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Imprimir lista de usuarios en PDF">
@@ -234,6 +209,47 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bd-example-modal-lg" id="modalErrors">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h4">Error al cargar estos datos:</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="anticon anticon-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if (session()->has('failures'))
+                      <table class="table table-danger">
+                            <tr>
+                                <th>Fila</th>
+                                <th>Atributo</th>
+                                <th>Errors</th>
+                                <th>Valor</th>
+                            </tr>
+                            @foreach (session()->get('failures') as $validation)
+                                <tr>
+                                    <td>{{$validation->row()}}</td>
+                                    <td>{{$validation->attribute()}}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach ($validation->errors() as $e)
+                                                <li>{{$e}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                    <td>
+                                       {{$validation->values()[$validation->attribute()]}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                      </table>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('js')
 
@@ -262,4 +278,10 @@
      <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
      <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
+
+    @if (session()->has('failures'))
+     <script>
+          $("#modalErrors").modal("show");
+     </script>
+    @endif
 @endsection
