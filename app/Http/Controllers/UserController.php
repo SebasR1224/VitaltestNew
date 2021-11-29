@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Http\Requests\UserCreateRequest;
+use App\Imports\UsersImport;
 use App\Mail\UserCreateMailable;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
-use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade as PDF;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class UserController extends Controller
 {
@@ -130,6 +133,33 @@ class UserController extends Controller
             unlink(public_path($user->image));
         }
         User::where('id' , $id)->update(['image' => $url]);
+        return redirect()->back();
+    }
+
+    public function exportUsersPdf(Request $request){
+        $status = $request->input('status');
+        $roles = $request->input('roles');
+        $users = User::whereHas("roles", function($q) use($roles){$q->where("id", $roles);})->where('status', $status)->get();
+        $count = $users->count();
+        $pdf = PDF::loadView('exports.users', compact('users'));
+
+        if($count > 0){
+            return $pdf->download('users-list.pdf');
+        }else{
+            return $pdf->stream('users-list.pdf');
+        }
+    }
+    public function exportUsersExcel(){
+        return Excel::download(new UsersExport, 'user-list.xlsx');
+    }
+
+    public function importUsersExcel(Request $request){
+        $file = $request->file('file');
+        $import = new UsersImport;
+        $import->import($file);
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
         return redirect()->back();
     }
 }

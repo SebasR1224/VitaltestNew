@@ -33,6 +33,10 @@ Route::get('/users/{id}/edit', [App\Http\Controllers\UserController::class, 'edi
 Route::put('/users/{id}' , [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 Route::post('status-update/{id}', [App\Http\Controllers\UserController::class, 'statusUser'])->name('update.status');
 
+Route::get('/user/export/pdf',[App\Http\Controllers\UserController::class, 'exportUsersPdf'])->name('export-users-pdf');
+Route::get('/user/export/excel',[App\Http\Controllers\UserController::class, 'exportUsersExcel'])->name('export-users-excel');
+Route::post('/user/import',[App\Http\Controllers\UserController::class, 'importUsersExcel'])->name('import-users-excel');
+
 //profile
 Route::get('/users/profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('users.profile');
 Route::post('/profiles' , [App\Http\Controllers\ProfileController::class, 'create'])->name('profile.create');
