@@ -28,7 +28,7 @@
                         </li>
                         @empty
                         <div class="text-center">
-                            El producto « {{$search}} » no se encuentra.
+                            El producto « {{$search}} » no se encuentra registrado.
                         </div>
                         @endforelse
                     </ul>

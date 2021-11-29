@@ -1,16 +1,17 @@
 @extends('layouts.main', ['activePage' =>'editMedicines'])
+<link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
 @section('content')
 <div class="page-container">
     <div class="main-content">
         <div class="page-header no-gutters">
             <div class="row justify-content-between align-items-md-center">
                 <div class="col-md-6">
-                    <h2 class="header-title">Editar productos</h2>
+                    <h2 class="header-title">Editar Producto</h2>
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
-                            <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                            <a class="breadcrumb-item" href="/medicines"><i class="anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
-                            <span class="breadcrumb-item active">Editar producto</span>
+                            <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
+                            <a class="breadcrumb-item" href="/medicines"><i class="text-success anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
+                            <span class="breadcrumb-item active">Editar Producto</span>
                         </nav>
                     </div>
                 </div>
@@ -26,11 +27,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title text-success">
-                            Actualizar información del producto
+                            Actualizar Información del Producto
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="font-weight-light">Complete todos los campos para editar la información del producto<span class="p-2">« <i class="anticon anticon-medicine-box"></i> {{$medicamento->nombreMedicamento}}</span>»</p>
+                        <p class="font-weight-light">Actualice los campos para editar la información del producto<span class="p-2">« <i class="anticon anticon-medicine-box"></i> {{$medicamento->nombreMedicamento}}</span>»</p>
                         <div class="m-t-25">
                             <div class="form-group row">
                                 <div class="col-md-4">
@@ -39,34 +40,24 @@
                                     @error('nombreMedicamento')<span class="text-danger">{{$message}}</span>@enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="formGroupExampleInput"><span class="h6">Categoria:</span></label>
-                                    <div class="input-group mb-3">
-                                        <select name="categoria_id" id="categoria_id" class="custom-select">
-                                            <option value="">Seleccione...</option>
-                                            @foreach ($categories as $id => $category)
-                                                <option value="{{$id}}" {{$id == $medicamento->categoria_id ? "selected" : ""}} >{{$category}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('categoria_id')<span class="text-danger">{{$message}}</span>@enderror
-                                        <div class="input-group-append ">
-                                            <button type="button" data-toggle="modal" data-target="#category-modal" class="input-group-text btn btn-primary">Otro</button>
-                                        </div>
-                                    </div>
+                                    <label for="categoria_id"><span class="h6">Categoria:</span></label>
+                                    <select name="categoria_id" id="categoria_id" class="select2">
+                                        <option></option>
+                                        @foreach ($categories as $id => $category)
+                                            <option value="{{$id}}" {{$id == $medicamento->categoria_id ? "selected" : ""}} >{{$category}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('categoria_id')<span class="text-danger">{{$message}}</span>@enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="formGroupExampleInput"><span class="h6">Laboratorio:</span></label>
-                                    <div class="input-group mb-3">
-                                        <select name="laboratorio_id" id="laboratorio_id" class="custom-select">
-                                            <option class="text-muted" value="">Seleccione...</option>
-                                            @foreach ($laboratories as $id => $laboratory)
-                                                <option value="{{$id}}" {{$id == $medicamento->laboratorio_id ? "selected" : ""}} >{{$laboratory}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('laboratorio_id')<span class="text-danger">{{$message}}</span>@enderror
-                                        <div class="input-group-append">
-                                            <button type="button" data-toggle="modal" data-target="#laboratory-modal" class="input-group-text btn btn-primary">Otro</button>
-                                        </div>
-                                    </div>
+                                    <label for="laboratorio_id"><span class="h6">Laboratorio:</span></label>
+                                    <select name="laboratorio_id" id="laboratorio_id" class="select2">
+                                        <option></option>
+                                        @foreach ($laboratories as $id => $laboratory)
+                                            <option value="{{$id}}" {{$id == $medicamento->laboratorio_id ? "selected" : ""}} >{{$laboratory}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('laboratorio_id')<span class="text-danger">{{$message}}</span>@enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -215,7 +206,34 @@
 </div>
 @endsection
 @section('js')
+<script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
 <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
 <script src="{{asset('js/validation/editMedicinesValidation.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+     $('#categoria_id').select2({
+        placeholder: "Seleccione...",
+        formatNoMatches: function () {
+        return "Sin resultado <a href='#' onclick='alertCategory()'>Click</a> para agregar categoria";
+        }
+    });
+
+    $('#laboratorio_id').select2({
+        placeholder: "Seleccione...",
+        formatNoMatches: function () {
+        return "Sin resultado  <a href='#' onclick='alertLaboratory()'>Click</a> para agregar laboratorio";
+        }
+    });
+
+    function alertLaboratory(){
+        $("#laboratory-modal").modal("show");
+    }
+
+    function alertCategory(){
+        $("#category-modal").modal("show");
+    }
+</script>
 @endsection

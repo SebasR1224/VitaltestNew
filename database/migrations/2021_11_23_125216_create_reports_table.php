@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParteCuerposTable extends Migration
+class CreateReportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateParteCuerposTable extends Migration
      */
     public function up()
     {
-        Schema::create('parte_cuerpos', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->string('nombreParte');
+            $table->string('name');
+            $table->string('url');
+            $table->string('type');
+            $table->string('module');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateParteCuerposTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('parte_cuerpos');
+        Schema::dropIfExists('reports');
     }
 }

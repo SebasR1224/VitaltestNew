@@ -20,47 +20,50 @@ class RecomendacionController extends Controller
 
     //detalles de recomendacion
     public function show($id){
-        $recomendacion = Recomendacion::find($id);
-        return view('recomendacion.show' , compact('recomendacion'));
+        $recommendation = Recomendacion::find($id);
+        return view('recommendation.show' , compact('recommendation'));
     }
 
     //CRUD recomendacion
 
     function create(){
-        $recomendacion = new Recomendacion();
-        $partes = ParteCuerpo::orderBy('nombreParte')->get();
-        $sintomas = Sintoma::orderBy('nombreSintoma')->get();
-        $imcs = Imc::orderBy('nombreImc')->get();
+        $recommendation = new Recomendacion();
+        $parts = ParteCuerpo::orderBy('id', 'DESC')->pluck('nombreParte', 'id');
+        $symptoms = Sintoma::orderBy('id', 'DESC')->pluck('nombreSintoma', 'id');
+        $imcs = Imc::orderBy('id', 'DESC')->pluck('nombreImc', 'id');
 
-        $enfermedades = Enfermedad::all()->pluck('nombreEnfermedad','id');
-        $medicamentos = Medicamento::all()->pluck('nombreMedicamento', 'id');
-        return view('recomendacion.create', compact('recomendacion', 'partes', 'sintomas', 'imcs', 'enfermedades', 'medicamentos'));
+        $diseases = Enfermedad::orderBy('id', 'DESC')->get();
+        $medicines = Medicamento::orderBy('id', 'DESC')->get();
+        return view('recommendation.create', compact('recommendation', 'parts', 'symptoms', 'imcs', 'diseases', 'medicines'));
     }
-
     public function edit(Request $request, $id)
     {
-        $partes = ParteCuerpo::orderBy('nombreParte')->get();
-        $sintomas = Sintoma::orderBy('nombreSintoma')->get();
-        $imcs = Imc::orderBy('nombreImc')->get();
+        $parts = ParteCuerpo::orderBy('id', 'DESC')->pluck('nombreParte', 'id');
+        $symptoms = Sintoma::orderBy('id', 'DESC')->pluck('nombreSintoma', 'id');
+        $imcs = Imc::orderBy('id', 'DESC')->pluck('nombreImc', 'id');
 
-        $enfermedades = Enfermedad::all()->pluck('nombreEnfermedad','id');
-        $medicamentos = Medicamento::all()->pluck('nombreMedicamento', 'id');
-        $recomendacion = Recomendacion::findOrFail($id);
-        return view('recomendacion.edit',  compact('recomendacion', 'partes', 'sintomas', 'imcs', 'enfermedades', 'medicamentos'));
+        $diseases = Enfermedad::orderBy('id', 'DESC')->get();
+        $medicines = Medicamento::orderBy('id', 'DESC')->get();
+        $recommendation = Recomendacion::findOrFail($id);
+        return view('recommendation.edit',  compact('recommendation', 'parts', 'symptoms', 'imcs', 'diseases', 'medicines'));
     }
 
 
     public function store(CreateRecomendacionRequest $request){
-        $recomendacion = Recomendacion::create($request->only('nombreRecomendacion', 'parte_id', 'sintoma_id',
-                                                              'dosis', 'frecuencia', 'tiempo', 'intensidadMin',
-                                                              'intensidadMax','edadMin', 'edadMax', 'imc_id',
-                                                              'informacionAdicional', 'estado'));
+        $recomendacion = Recomendacion::create($request->only('nombreRecomendacion', 'parte_id',
+                                                              'dosis', 'frecuencia', 'tiempo', 'intensidad',
+                                                               'edadMin', 'edadMax', 'imc_id',
+                                                              'informacionAdicional'));
+        $sintomas = $request->input('sintomas', []);
+        $recomendacion->sintomas()->sync($sintomas);
+
+
         $enfermedades = $request->input('enfermedades', []);
         $recomendacion->enfermedades()->sync($enfermedades);
 
         $medicamentos = $request->input('medicamentos', []);
         $recomendacion->medicamentos()->sync($medicamentos);
-        return redirect()->route('recomendacion.show', $recomendacion->id )->with('messageRecomendacion_add', 'Informacion ingresada con exito');
+        return redirect()->route('recomendacion.index', $recomendacion->id )->with('messageRecomendacion_add', 'Informacion ingresada con exito');
     }
 
 
@@ -70,31 +73,33 @@ class RecomendacionController extends Controller
 
         $request->validate(
             [
-          'nombreRecomendacion' =>['required', 'min:6', 'max:255', 'unique:recomendacions,nombreRecomendacion,'.$id],
-          'parte_id' =>'required',
-          'sintoma_id' =>'required',
-          'dosis' => ['required', 'min:6', 'max:255'],
-          'frecuencia' => ['required', 'min:6', 'max:255'],
-          'tiempo' => ['required', 'min:6', 'max:255'],
-          'intensidadMin' => ['required', 'max:2'],
-          'intensidadMax' => 'required', 'max:2',
-          'edadMin' => ['required', 'max:2'],
-          'edadMax' => ['required', 'max:2'],
-          'informacionAdicional'=> 'max:255'
+                'nombreRecomendacion' =>['required', 'max:255'],
+                'parte_id' =>'required',
+                'dosis' => ['required', 'min:6', 'max:255'],
+                'frecuencia' => ['required', 'min:6', 'max:255'],
+                'tiempo' => ['required', 'min:6', 'max:255'],
+                'intensidad' => ['required'],
+                'edadMin' => ['required'],
+                'edadMax' => ['required'],
+                'informacionAdicional'=> 'max:60000'
             ]
         );
         $recomendacion=Recomendacion::findOrfail($id);
-        $dataRecome = $request->only('nombreRecomendacion', 'parte_id', 'sintoma_id',
-                                     'dosis', 'frecuencia', 'tiempo', 'intensidadMin',
-                                     'intensidadMax','edadMin', 'edadMax', 'imc_id',
-                                     'informacionAdicional', 'estado');
+        $dataRecome = $request->only('nombreRecomendacion', 'parte_id',
+                                     'dosis', 'frecuencia', 'tiempo',
+                                     'intensidad','edadMin', 'edadMax', 'imc_id',
+                                     'informacionAdicional');
 
         $recomendacion->update($dataRecome);
+
+        $sintomas = $request->input('sintomas', []);
+        $recomendacion->sintomas()->sync($sintomas);
+
         $enfermedades = $request->input('enfermedades', []);
         $recomendacion->enfermedades()->sync($enfermedades);
 
         $medicamentos = $request->input('medicamentos', []);
         $recomendacion->medicamentos()->sync($medicamentos);
-        return redirect()->route('recomendacion.show', $recomendacion->id)->with('messageRecomendacion_add', 'Se han actualizado los campos');
+        return redirect()->route('recomendacion.index');
     }
 }

@@ -4,12 +4,12 @@
         <div class="main-content">
             <div class="page-header no-gutters has-tab">
                 <div class="justify-content-between align-items-md-center">
-                    <h2 class="header-title">Detalles de producto</h2>
+                    <h2 class="header-title">Detalles del Producto</h2>
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
-                            <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                            <a class="breadcrumb-item" href="/medicines"><i class="anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
-                            <span class="breadcrumb-item active">Información Detallada</span>
+                            <a href="/home" class="breadcrumb-item"><i class="text-success  anticon anticon-home m-r-5"></i>Inicio</a>
+                            <a class="breadcrumb-item" href="/medicines"><i class="text-success anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
+                            <span class="breadcrumb-item active">Detalles del Producto</span>
                         </nav>
                     </div>
                 </div>

@@ -6,11 +6,11 @@
 @section('content')
     <div class="page-container">
         <div class="main-content">
-            <div class="page-header no-gutters">
+            <div class="page-header">
                 <h2 class="header-title">Lista de usuarios</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                        <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
                         <span class="breadcrumb-item active">Usuarios</span>
                     </nav>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="card-body">
 
                     <div class="row m-b-30">
-                        <h3 class=" col-lg-6 text-success">Comunidad vitaltest</h3>
+                        <h3 class=" col-lg-6 text-success">Comunidad Vitaltest</h3>
                         <div class="col-lg-6 text-right">
                             <a href="{{route('users.create')}}" class="btn btn-primary">
                                 <i class="anticon anticon-user-add m-r-5"></i>
@@ -80,10 +80,10 @@
                                             </form>
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{route('users.show', ['id'=> $user->id]) }}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" >
+                                            <a style="font-size: 17px" href="{{route('users.show', ['id'=> $user->id]) }}" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" >
                                                 <i class="anticon anticon-eye"></i>
                                             </a>
-                                            <a href="{{route('users.edit', ['id'=>$user->id])}}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                                            <a style="font-size: 17px" href="{{route('users.edit', ['id'=>$user->id])}}" class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right">
                                                 <i class="anticon anticon-edit"></i>
                                             </a>
                                         </td>
@@ -120,7 +120,7 @@
             text: "Cambiará el estado del usuario",
             icon: 'info',
             showCancelButton: true,
-            confirmButtonColor: '#00c9a7',
+            confirmButtonColor: '#3f87f5',
             cancelButtonColor: '#de4436',
             confirmButtonText: '<i class="anticon anticon-like"></i> Cambiar',
             cancelButtonText: '<i class="anticon anticon-dislike"></i> Cancelar'

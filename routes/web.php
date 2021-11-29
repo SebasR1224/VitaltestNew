@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Livewire\ListInventory;
+
 use App\Http\Livewire\MedicinesCommerce;
 use App\Http\Livewire\MedicinesCommerceCategory;
-use App\Http\Livewire\ShowMedicines;
-use Illuminate\Auth\Events\Validated;
+
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -13,8 +13,10 @@
     <!-- CSS Files -->
     @livewireStyles
     @livewireScripts
+    @yield('css')
+
     <link href="{{asset('dashboard/css/app.min.css')}}" rel="stylesheet">
-     @yield('css')
+
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 </head>
 <body>
@@ -30,10 +32,12 @@
     @endauth
     <!-- Core Vendors JS -->
       <script src="{{asset('dashboard/js/vendors.min.js')}}"></script>
+      @yield('js')
+
     <!-- Core JS -->
       <script src="{{asset('dashboard/js/app.min.js')}}"></script>
     <!-- Sweet alert -->
     @include('sweetalert::alert')
-    @yield('js')
+
 </body>
 </html>

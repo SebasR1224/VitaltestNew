@@ -60,26 +60,43 @@ inputDescuento.onchange = () => {
     calculateDiscountPrice();
 }
 
-$(document).ready(function(){
-    $('#enviarLaboratory').click(function(e){
-        e.preventDefault();
-        var form = $('#register-laboratory').attr('action');
-        var dataString = $('#register-laboratory').serialize();
-        $.ajax({
-            type:'POST',
-            url:form,
-            data:dataString,
-            success:function(response){
-                var html = '';
-                $(response.listLaboratory).each(function(key, value){
-                    html += `<option value="${value.id}">${value.nombreLaboratorio}</option>`
-                })
-                $('#laboratorio_id').html(html);
-                $('#register-laboratory')[0].reset();
-                $('#laboratory-modal .close').click();
-            }
-        })
+
+$('#enviarLaboratory').click(function(e){
+    e.preventDefault();
+    var form = $('#register-laboratory').attr('action');
+    var dataString = $('#register-laboratory').serialize();
+    $.ajax({
+        type:'POST',
+        url:form,
+        data:dataString,
+        success:function(response){
+            $(response.listLaboratory).each(function(key, value){
+                if(key == 0){
+                    $('#laboratorio_id').append(`<option value="${value.id}">${value.nombreLaboratorio}</option>` );
+                    $('#laboratorio_id').val(value.id).trigger('change.select2');
+                }
+            })
+
+            $('#register-laboratory')[0].reset();
+            $('#laboratory-modal .close').click();
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              Toast.fire({
+                icon: 'success',
+                title: 'Laboratorio creado exitosamente',
+              })
+        }
     })
+})
 
     $('#enviarCategory').click(function(e){
         e.preventDefault();
@@ -90,20 +107,34 @@ $(document).ready(function(){
             url:form,
             data:dataString,
             success:function(response){
-                var html = '';
                 $(response.listCategory).each(function(key, value){
-                    html +=
-                    `
-                    <option value="${value.id}">${value.nombreCategoria}</option>
-                    `
+                    if(key == 0){
+                        $('#categoria_id').append(`<option value="${value.id}">${value.nombreCategoria}</option>` );
+                        $('#categoria_id').val(value.id).trigger('change.select2');
+                    }
                 })
-                $('#categoria_id').html(html);
+
                 $('#register-category')[0].reset();
                 $('#category-modal .close').click();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Categoria creada exitosamente',
+                  })
             }
         })
     })
-})
+
 
 $( "#register-category" ).validate({
     ignore: ':hidden:not(:checkbox)',

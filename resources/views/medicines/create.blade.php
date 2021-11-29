@@ -1,6 +1,6 @@
 @extends('layouts.main', ['activePage' =>'newProduct'])
 @section('css')
-
+<link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
 @endsection
 @section('content')
 <div class="page-container">
@@ -8,12 +8,12 @@
         <div class="page-header no-gutters">
             <div class="row justify-content-between align-items-md-center">
                 <div class="col-md-6">
-                    <h2 class="header-title">Nuevo producto</h2>
+                    <h2 class="header-title">Nuevo Producto</h2>
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
-                            <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                            <a class="breadcrumb-item" href="/medicines"><i class="anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
-                            <span class="breadcrumb-item active">Agregar producto</span>
+                            <a href="/home" class="breadcrumb-item"><i class="text-success  anticon anticon-home m-r-5"></i>Inicio</a>
+                            <a class="breadcrumb-item" href="/medicines"><i class="text-success anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
+                            <span class="breadcrumb-item active">Nuevo Producto</span>
                         </nav>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title text-primary">
-                            Agregar nuevo producto
+                            Registrar Producto
                         </div>
                     </div>
                     <div class="card-body">
@@ -41,34 +41,24 @@
                                     @error('nombreMedicamento')<span class="text-danger">{{$message}}</span>@enderror
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="formGroupExampleInput"><span class="h6">Categoria:</span></label>
-                                    <div class="input-group mb-3">
-                                        <select name="categoria_id" id="categoria_id" class="custom-select">
-                                            <option value="">Seleccione...</option>
+                                    <label for="categoria_id"><span class="h6">Categoria:</span></label>
+                                        <select name="categoria_id" id="categoria_id" class="select2">
+                                            <option></option>
                                             @foreach ($categories as $id => $category)
                                                 <option value="{{$id}}">{{$category}}</option>
                                             @endforeach
                                         </select>
                                         @error('categoria_id')<span class="text-danger">{{$message}}</span>@enderror
-                                        <div class="input-group-append ">
-                                            <button type="button" data-toggle="modal" data-target="#category-modal" class="input-group-text btn btn-primary">Otro</button>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="formGroupExampleInput"><span class="h6">Laboratorio:</span></label>
-                                    <div class="input-group mb-3">
-                                        <select name="laboratorio_id" id="laboratorio_id" class="custom-select">
-                                            <option class="text-muted" value="">Seleccione...</option>
+                                    <label for="laboratorio_id"><span class="h6">Laboratorio:</span></label>
+                                        <select name="laboratorio_id" id="laboratorio_id" class="select2">
+                                            <option></option>
                                             @foreach ($laboratories as $id => $laboratory)
                                                 <option value="{{$id}}">{{$laboratory}}</option>
                                             @endforeach
                                         </select>
                                         @error('laboratorio_id')<span class="text-danger">{{$message}}</span>@enderror
-                                        <div class="input-group-append">
-                                            <button type="button" data-toggle="modal" data-target="#laboratory-modal" class="input-group-text btn btn-primary">Otro</button>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -220,4 +210,30 @@
 <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
 <script src="{{asset('js/validation/createMedicinesValidation.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $('#categoria_id').select2({
+        placeholder: "Seleccione...",
+        formatNoMatches: function () {
+        return "Sin resultado <a href='#' onclick='alertCategory()'>Click</a> para agregar categoria";
+        }
+    });
+
+    $('#laboratorio_id').select2({
+        placeholder: "Seleccione...",
+        formatNoMatches: function () {
+        return "Sin resultado  <a href='#' onclick='alertLaboratory()'>Click</a> para agregar laboratorio";
+        }
+    });
+
+    function alertLaboratory(){
+        $("#laboratory-modal").modal("show");
+    }
+
+    function alertCategory(){
+        $("#category-modal").modal("show");
+    }
+</script>
 @endsection

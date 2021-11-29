@@ -20,8 +20,7 @@ class CreateRecomendacionsTable extends Migration
             $table->string('dosis');
             $table->string('frecuencia');
             $table->string('tiempo');
-            $table->integer('intensidadMin');
-            $table->integer('intensidadMax');
+            $table->integer('intensidad');
             $table->integer('edadMin');
             $table->integer('edadMax');
             $table->unsignedBigInteger('imc_id')->nullable();

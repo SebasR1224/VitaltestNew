@@ -10,7 +10,7 @@
             <h2 class="header-title">Perfil de usuario</h2>
             <div class="header-sub-title">
                 <nav class="breadcrumb breadcrumb-dash">
-                    <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                    <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
                     <span class="breadcrumb-item active">Mi perfil</span>
                 </nav>
             </div>
@@ -477,7 +477,7 @@
                                                 <label class="font-weight-semibold" for="tipoDocumento">Tipo de documento:</label>
                                                 <select name="tipoDocumento" id="tipoDocumento" class="form-control">
                                                     <option value="" selected>Tipo de documento</option>
-                                                    <option value="TI">Targeta de identidad</option>
+                                                    <option value="TI">Tarjeta de identidad</option>
                                                     <option value="CC">Cedula de ciudadania</option>
                                                     <option value="PS">Pasaporte</option>
                                                 </select>
@@ -562,7 +562,7 @@
                                                     <label class="font-weight-semibold" for="EtipoDocumento">Tipo de documento:</label>
                                                     <select name="tipoDocumento" id="EtipoDocumento" class="form-control">
                                                         <option value="">Tipo de documento</option>
-                                                        <option value="TI" {{$datos->tipoDocumento == 'TI' ? 'selected' : ''}}>Targeta de identidad</option>
+                                                        <option value="TI" {{$datos->tipoDocumento == 'TI' ? 'selected' : ''}}>Tarjeta de identidad</option>
                                                         <option value="CC" {{$datos->tipoDocumento == 'CC' ? 'selected' : ''}}>Cedula de ciudadania</option>
                                                         <option value="PS" {{$datos->tipoDocumento == 'PS' ? 'selected' : ''}}>Pasaporte</option>
                                                     </select>

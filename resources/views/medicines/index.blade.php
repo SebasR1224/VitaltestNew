@@ -9,7 +9,7 @@
             <h2 class="header-title">Lista de Inventario</h2>
             <div class="header-sub-title">
                 <nav class="breadcrumb breadcrumb-dash">
-                    <a href="/home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
+                    <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
                     <span class="breadcrumb-item active">Inventario</span>
                 </nav>
             </div>
@@ -17,8 +17,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-lg-8 p-10">
-                        <h3 class="h3 text-primary font-weight-light">Inventario de Productos</h3>
+                    <div class="col-lg-8 m-t-15">
+                        <h3 class="h3 text-success font-weight-semibold">Inventario de productos</h3>
                     </div>
                     <div class="col-lg-4 p-5 text-right">
                         <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
@@ -185,14 +185,14 @@
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{route('medicines.show', $medicine->id) }}" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa del producto">
+                                        <a style="font-size: 17px" href="{{route('medicines.show', $medicine->id) }}" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa del producto">
                                             <i class="anticon anticon-info-circle"></i>
                                         </a>
-                                        <a href="{{route('medicines.edit', $medicine->id )}}"  class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar este producto">
+                                        <a style="font-size: 17px" href="{{route('medicines.edit', $medicine->id )}}"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar este producto">
                                             <i class="anticon anticon-edit"></i>
                                         </a>
                                         <span class="d-inline-block" data-placement="left" data-toggle="tooltip" title="Editar el precio del producto">
-                                            <a type="button" class="btn btn-icon btn-hover btn-sm btn-rounded pull-right" data-toggle="modal" data-id="{{$medicine->id}}" data-precio="{{$medicine->precioNormal}}" data-descuento="{{$medicine->descuento}}" data-oferta="{{$medicine->precioDescuento}}" data-target="#modalPrice">
+                                            <a style="font-size: 17px" type="button" class="btn btn-icon btn-hover text-success btn-sm btn-rounded pull-right" data-toggle="modal" data-id="{{$medicine->id}}" data-precio="{{$medicine->precioNormal}}" data-descuento="{{$medicine->descuento}}" data-oferta="{{$medicine->precioDescuento}}" data-target="#modalPrice">
                                                 <i class="anticon anticon-dollar"></i>
                                             </a>
                                         </span>
@@ -248,7 +248,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-success">Guardar cambios</button>
                 </div>
             </form>

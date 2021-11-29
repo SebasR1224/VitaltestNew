@@ -24,17 +24,15 @@ class CreateRecomendacionRequest extends FormRequest
     public function rules()
     {
         return [
-         'nombreRecomendacion' =>['required', 'min:6', 'max:255', 'unique:recomendacions'],
+         'nombreRecomendacion' =>['required', 'max:255'],
           'parte_id' =>'required',
-          'sintoma_id' =>'required',
           'dosis' => ['required', 'min:6', 'max:255'],
           'frecuencia' => ['required', 'min:6', 'max:255'],
           'tiempo' => ['required', 'min:6', 'max:255'],
-          'intensidadMin' => ['required', 'max:2'],
-          'intensidadMax' => 'required', 'max:2',
-          'edadMin' => ['required', 'max:2'],
-          'edadMax' => ['required', 'max:2'],
-          'informacionAdicional'=> 'max:255'
+          'intensidad' => ['required'],
+          'edadMin' => ['required'],
+          'edadMax' => ['required'],
+          'informacionAdicional'=> 'max:60000'
         ];
     }
 }

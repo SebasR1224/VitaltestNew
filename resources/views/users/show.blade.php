@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'users'])
+@extends('layouts.main', ['activePage' =>'usersShow'])
 
 @section('content')
 <div class="page-container">
@@ -6,12 +6,12 @@
         <div class="page-header no-gutters">
             <div class="row justify-content-between align-items-md-center">
                 <div class="col-md-6">
-                    <h2 class="header-title">Detalles</h2>
+                    <h2 class="header-title">Detalles de Usuario</h2>
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
-                            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Inicio</a>
-                            <a class="breadcrumb-item" href="#">Usuarios</a>
-                            <span class="breadcrumb-item active">Vista previa</span>
+                            <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
+                            <a class="breadcrumb-item" href="/users"><i class="text-success anticon anticon-usergroup-add m-r-5"></i>Usuarios</a>
+                            <span class="breadcrumb-item active">Detalles de Usuario</span>
                         </nav>
                     </div>
                 </div>
@@ -20,12 +20,12 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="tab-content m-t-15">
                 <div class="tab-pane fade show active" id="tab-account" >
                     <div class="card">
                         <div class="card-header ">
-                            <h4 class="card-title ">Informacion general
+                            <h4 class="card-title text-success">Informacion General
                                 <small class="text-muted">
                                     <i class="anticon anticon-user "></i>
                                     {{$user->username}}

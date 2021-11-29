@@ -11,9 +11,6 @@ class Recomendacion extends Model
         return $this->belongsTo(ParteCuerpo::class);
     }
 
-    public function sintoma(){
-        return $this->belongsTo(Sintoma::class);
-    }
     public function imc(){
         return $this->belongsTo(Imc::class);
     }
@@ -22,6 +19,10 @@ class Recomendacion extends Model
 
     public function enfermedades(){
         return $this->belongsToMany(Enfermedad::class);
+    }
+
+    public function sintomas(){
+        return $this->belongsToMany(Sintoma::class);
     }
 
     //relacion muchos a muchos medicamentos
