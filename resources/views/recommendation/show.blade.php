@@ -18,6 +18,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-right">
+                    <a href="{{route('recomendacion.edit', $recommendation->id)}}" class="btn btn-success m-r-5"><i class="anticon anticon-edit m-r-5"></i>Editar</a>
                     <a href="{{route('recomendacion.index')}}" class="btn btn-default m-r-5" id="btnEnviar"><i class="fas fa-door-open m-r-5"></i>Volver</a>
                 </div>
             </div>

@@ -15,8 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(10);
-        return view('roles.index', compact('roles'));
+
     }
 
     /**
@@ -76,7 +75,7 @@ class RoleController extends Controller
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions' , []));
 
-        return redirect()->route('roles.index');
+        return redirect()->route('users.index');
     }
 
     /**

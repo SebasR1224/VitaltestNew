@@ -63,7 +63,12 @@ class RecomendacionController extends Controller
 
         $medicamentos = $request->input('medicamentos', []);
         $recomendacion->medicamentos()->sync($medicamentos);
-        return redirect()->route('recomendacion.index', $recomendacion->id )->with('messageRecomendacion_add', 'Informacion ingresada con exito');
+
+        alert()->success('Aviso','<p class="font-weight-light text-dark"><span class="font-weight-semibold">Recomendación registrada</span>, de ser el caso se mostrará en el test.</p>')
+        ->toHtml()
+        ->showConfirmButton('<i class="anticon anticon-like text-white"></i> Aceptar', '#00c9a7')
+        ->autoClose(9000);
+        return redirect()->route('recomendacion.show', $recomendacion->id );
     }
 
 
@@ -100,6 +105,12 @@ class RecomendacionController extends Controller
 
         $medicamentos = $request->input('medicamentos', []);
         $recomendacion->medicamentos()->sync($medicamentos);
-        return redirect()->route('recomendacion.index');
+
+        alert()->success('¡Genial!','<p class="font-weight-light text-dark">Recomendación actualizada con exito.</p>')
+        ->toHtml()
+        ->showConfirmButton('<i class="anticon anticon-like text-white"></i> Aceptar', '#00c9a7')
+        ->autoClose(9000);
+
+        return redirect()->route('recomendacion.show', $id);
     }
 }

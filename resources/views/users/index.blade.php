@@ -22,6 +22,18 @@
                             <h3 class="h3 text-success font-weight-semibold">Comunidad Vitaltest</h3>
                         </div>
                         <div class="col-lg-4 p-5 text-right">
+                            <span data-toggle="tooltip" data-placement="top" title="Configurar permisos para usuarios teniendo en cuenta el rol">
+                                <div class="btn-group dropleft">
+                                    <button type="button" class="btn btn-defauld btn-lg dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="anticon anticon-setting"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @foreach ($roles as $role)
+                                            <a href="{{route('roles.edit', $role->id)}}" class="dropdown-item">{{$role->name}}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </span>
                             <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
                                 <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
                                     <i class="anticon anticon-file-excel m-r-5"></i> Excel
@@ -173,7 +185,9 @@
                                                         @if ($role->id == 1)
                                                             <div class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}" disabled>{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</div>
                                                         @else
+                                                       <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado del usuario.">
                                                             <button class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}"  type="submit">{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</button>
+                                                       </span>
                                                         @endif
                                                     @empty
                                                     <button class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}" type="submit">{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</button>
@@ -182,10 +196,10 @@
                                             </form>
                                         </td>
                                         <td class="text-center">
-                                            <a style="font-size: 17px" href="{{route('users.show', ['id'=> $user->id]) }}" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" >
+                                            <a style="font-size: 17px" href="{{route('users.show', ['id'=> $user->id]) }}" data-toggle="tooltip" data-placement="top" title="Ver detalles de usuario" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" >
                                                 <i class="anticon anticon-eye"></i>
                                             </a>
-                                            <a style="font-size: 17px" href="{{route('users.edit', ['id'=>$user->id])}}" class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right">
+                                            <a style="font-size: 17px" href="{{route('users.edit', ['id'=>$user->id])}}" data-toggle="tooltip" data-placement="top" title="Editar usuario" class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right">
                                                 <i class="anticon anticon-edit"></i>
                                             </a>
                                         </td>

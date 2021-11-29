@@ -37,6 +37,11 @@
                         <a href="">Detalles Usuario</a>
                     </li>
                     @endif
+                    @if ($activePage == 'roles')
+                    <li class="{{$activePage == 'roles' ? 'active' : ''}}">
+                        <a href="">Especificar Permisos</a>
+                    </li>
+                    @endif
                 </ul>
             </li>
             <li class="nav-item dropdown">
