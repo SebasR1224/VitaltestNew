@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -58,6 +59,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        abort_if(Gate::denies('product_config'), 403);
         $permissions = Permission::all()->pluck('name' , 'id');
         $role->load('permissions');
         return view('roles.edit', compact('role', 'permissions'));

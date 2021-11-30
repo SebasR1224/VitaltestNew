@@ -10,6 +10,7 @@ use App\Models\Medicamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -22,6 +23,7 @@ class MedicamentoController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('product_index'), 403);
         $medicines = Medicamento::all();
         return view('medicines.index', compact('medicines'));
     }
@@ -35,6 +37,7 @@ class MedicamentoController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('product_create'), 403);
         $medicamento = new Medicamento();
         $laboratories = Laboratorio::orderBy('id', 'DESC')->pluck('nombreLaboratorio' , 'id');
         $categories = Categoria::orderBy('id', 'DESC')->pluck('nombreCategoria' , 'id');
@@ -82,6 +85,7 @@ class MedicamentoController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('product_show'), 403);
         $medicamento = Medicamento::findOrfail($id);
 
         return view('medicines.show', compact('medicamento'));
@@ -95,6 +99,7 @@ class MedicamentoController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('product_edit'), 403);
         $medicamento = Medicamento::findOrfail($id);
         $laboratories = Laboratorio::orderBy('id', 'DESC')->pluck('nombreLaboratorio' , 'id');
         $categories = Categoria::orderBy('id', 'DESC')->pluck('nombreCategoria' , 'id');
@@ -152,6 +157,7 @@ class MedicamentoController extends Controller
 
 
     public function updatePrice(Request $request, Medicamento $medicamento){
+        abort_if(Gate::denies('product_price'), 403);
         $medicines = $request->only('precioNormal', 'descuento', 'precioDescuento');
         Medicamento::where('id', $medicamento->id)->update($medicines);
         toast('<p class="font-weight-light text-dark">Precio actualizado de manera correcta.</p>','success')
@@ -161,6 +167,7 @@ class MedicamentoController extends Controller
     }
 
     public function updateStatus(Medicamento $medicamento){
+        abort_if(Gate::denies('product_status'), 403);
         if($medicamento->status == 1 ){
             $status = 0;
         }else{
@@ -183,6 +190,7 @@ class MedicamentoController extends Controller
     }
 
     public function exportpdf(Request $request){
+        abort_if(Gate::denies('product_U_export_pdf'), 403);
         $status = $request->input('status');
         $oferta = $request->input('oferta');
         $medicines = Medicamento::where('status', '=', $status)->$oferta('descuento')->get();
@@ -196,11 +204,14 @@ class MedicamentoController extends Controller
     }
 
     public function exportExcel(){
+        abort_if(Gate::denies('product_U_export_excel'), 403);
+
         return Excel::download(new MedicinesExport, 'medicines-list.xlsx');
     }
 
 
     public function importExcel(Request $request){
+        abort_if(Gate::denies('product_U_import_excel'), 403);
         $file = $request->file('file');
         Excel::import(new MedicinesImport, $file);
         return redirect()->back();
