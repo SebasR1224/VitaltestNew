@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -23,12 +24,14 @@ class UserController extends Controller
     //user management
 
     public function index(){
+        abort_if(Gate::denies('user_index'), 403);
         $users = User::all();
         $roles = Role::all();
         return view('users.index' , compact('users', 'roles'));
     }
 
     public function create(){
+        abort_if(Gate::denies('user_create'), 403);
         $roles = Role::all()->pluck('name', 'id');
         return view('users.create' , compact('roles'));
     }
@@ -62,8 +65,8 @@ class UserController extends Controller
 
     public function edit(Request $request, $id)
     {
+        abort_if(Gate::denies('user_edit'), 403);
         $user=User::findOrfail($id);
-
         $roles = Role::all()->pluck('name' , 'id');
         $user->load('roles');
         return view('users.edit', compact('user', 'roles'));
@@ -95,6 +98,7 @@ class UserController extends Controller
 
     //detalles de usuarios
     public function show($id){
+        abort_if(Gate::denies('user_show'), 403);
         $user = User::find($id);
         $datos=$user->profile ? $user->profile : new Profile();
         $user->load('roles');
@@ -110,6 +114,7 @@ class UserController extends Controller
 
     //estatus del usuario
     public function statusUser($id){
+        abort_if(Gate::denies('user_status'), 403);
         $user = User::find($id);
 
         if($user->status == 1 ){
@@ -138,6 +143,7 @@ class UserController extends Controller
     }
 
     public function exportUsersPdf(Request $request){
+        abort_if(Gate::denies('user_export_pdf'), 403);
         $status = $request->input('status');
         $roles = $request->input('roles');
         $users = User::whereHas("roles", function($q) use($roles){$q->where("id", $roles);})->where('status', $status)->get();
@@ -151,10 +157,12 @@ class UserController extends Controller
         }
     }
     public function exportUsersExcel(){
+        abort_if(Gate::denies('user_export_excel'), 403);
         return Excel::download(new UsersExport, 'user-list.xlsx');
     }
 
     public function importUsersExcel(Request $request){
+        abort_if(Gate::denies('user_import_excel'), 403);
         $file = $request->file('file');
         $import = new UsersImport;
         $import->import($file);
