@@ -39,10 +39,10 @@
                     <div class="p-v-15 p-h-25 border-bottom d-flex justify-content-between align-items-center">
                         <p class="text-dark font-weight-semibold m-b-0">
                             <i class="anticon anticon-bell"></i>
-                            <span class="m-l-10">Notification</span>
+                            <span class="m-l-10">Notificaciones</span>
                         </p>
                         <a class="btn-sm btn-default btn" href="javascript:void(0);">
-                            <small>View All</small>
+                            <small>Ver todas</small>
                         </a>
                     </div>
                     <div class="relative">
@@ -53,8 +53,8 @@
                                         <i class="anticon anticon-mail"></i>
                                     </div>
                                     <div class="m-l-15">
-                                        <p class="m-b-0 text-dark">You received a new message</p>
-                                        <p class="m-b-0"><small>8 min ago</small></p>
+                                        <p class="m-b-0 text-dark">Has recibido un nuevo mensaje</p>
+                                        <p class="m-b-0"><small>8 min atrás</small></p>
                                     </div>
                                 </div>
                             </a>
@@ -64,8 +64,8 @@
                                         <i class="anticon anticon-user-add"></i>
                                     </div>
                                     <div class="m-l-15">
-                                        <p class="m-b-0 text-dark">New user registered</p>
-                                        <p class="m-b-0"><small>7 hours ago</small></p>
+                                        <p class="m-b-0 text-dark">Nuevo usuario registrado</p>
+                                        <p class="m-b-0"><small>7 horas atrás</small></p>
                                     </div>
                                 </div>
                             </a>
@@ -109,17 +109,17 @@
                     <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <i class="anticon opacity-04 font-size-16 anticon-lock"></i>
-                                <span class="m-l-10">Configurar cuenta</span>
+                                <i class="anticon opacity-04 font-size-16 anticon-project"></i>
+                                <span class="m-l-10">Reportes</span>
                             </div>
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
                     </a>
-                    <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
+                    <a href="/" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <i class="anticon opacity-04 font-size-16 anticon-project"></i>
-                                <span class="m-l-10">Projects</span>
+                                <i class="anticon opacity-04 font-size-16 anticon-tag"></i>
+                                <span class="m-l-10">Página de destino</span>
                             </div>
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>

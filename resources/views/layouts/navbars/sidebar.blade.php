@@ -10,6 +10,14 @@
                     <span class="title">Inicio</span>
                 </a>
             </li>
+            <li class="nav-item dropdown {{ $activePage == 'dashboard' ? ' active' : '' }}" >
+                <a class="dropdown" href="{{ route('dashboard') }}">
+                    <span class="icon-holder">
+                        <i class="text-success anticon anticon-bar-chart"></i>
+                    </span>
+                    <span class="title">Tablero</span>
+                </a>
+            </li>
             @can('user_index')
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">

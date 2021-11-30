@@ -22,6 +22,8 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard/home', [App\Http\Controllers\DashBoardController::class, 'index'])->name('dashboard');
+
 
 
 // llamamos al controlador de usuarios para crear uno nuevo
