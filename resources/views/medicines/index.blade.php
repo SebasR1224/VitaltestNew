@@ -21,100 +21,113 @@
                         <h3 class="h3 text-success font-weight-semibold">Inventario de productos</h3>
                     </div>
                     <div class="col-lg-4 p-5 text-right">
-                        <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
-                            <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
-                                <i class="anticon anticon-file-excel m-r-5"></i> Excel
-                            </button>
-                        </span>
-                        <a href="{{route('medicines.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar nuevo producto">
-                            <i class="anticon anticon-plus-circle m-r-5"></i>
-                            <span>Agregar Producto</span>
-                        </a>
+                        @can('product_U_import_excel')
+                            <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
+                                <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
+                                    <i class="anticon anticon-file-excel m-r-5"></i> Excel
+                                </button>
+                            </span>
+                        @endcan
+                        @can('product_create')
+                            <a href="{{route('medicines.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Registrar nuevo producto">
+                                <i class="anticon anticon-plus-circle m-r-5"></i>
+                                <span>Agregar Producto</span>
+                            </a>
+                        @endcan
                     </div>
                 </div>
             </div>
+
             <!-- Modal -->
-            <div class="modal fade" id="modalPdf">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <i class="anticon anticon-close"></i>
-                            </button>
-                        </div>
-                        <form action="{{route('export-pdf')}}" method="get">
-                            <div class="modal-body">
-                                <p class="p-15 h5 font-italic font-weight-light text-dark">Generar reporte cuando los productos esten:</p>
-                                <div class="row container-fluid">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="radio">
-                                                <input id="activo" name="status" value="1" type="radio" checked="">
-                                                <label for="activo">En stock</label>
-                                            </div>
-                                            <div class="radio">
-                                                <input id="agotado" name="status" value="0" type="radio">
-                                                <label for="agotado">Agotado</label>
+            @can('product_U_export_pdf')
+                <div class="modal fade" id="modalPdf">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="anticon anticon-close"></i>
+                                </button>
+                            </div>
+                            <form action="{{route('export-pdf')}}" method="get">
+                                <div class="modal-body">
+                                    <p class="p-15 h5 font-italic font-weight-light text-dark">Generar reporte cuando los productos esten:</p>
+                                    <div class="row container-fluid">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="radio">
+                                                    <input id="activo" name="status" value="1" type="radio" checked="">
+                                                    <label for="activo">En stock</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <input id="agotado" name="status" value="0" type="radio">
+                                                    <label for="agotado">Agotado</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group float-right">
-                                            <div class="radio">
-                                                <input id="oferta" name="oferta" value="whereNotNull" type="radio" checked="">
-                                                <label for="oferta">Con descuento</label>
-                                            </div>
-                                            <div class="radio">
-                                                <input id="sinOferta" name="oferta" value="whereNull" type="radio">
-                                                <label for="sinOferta">Sin Descuento</label>
+                                        <div class="col-md-6">
+                                            <div class="form-group float-right">
+                                                <div class="radio">
+                                                    <input id="oferta" name="oferta" value="whereNotNull" type="radio" checked="">
+                                                    <label for="oferta">Con descuento</label>
+                                                </div>
+                                                <div class="radio">
+                                                    <input id="sinOferta" name="oferta" value="whereNull" type="radio">
+                                                    <label for="sinOferta">Sin Descuento</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary"> <i class="anticon anticon-download m-r-5"></i> Descargar PDF</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary"> <i class="anticon anticon-download m-r-5"></i> Descargar PDF</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal fade" id="modalExcel">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">
-                                <i class="anticon anticon-close"></i>
-                            </button>
-                        </div>
-                        <form action="{{route('import-excel')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <p class="container-fluid h5 font-weight-light text-dark">Seleccionar un archivo:</p>
-                                <div class="container-fluid">
-                                    <div class="custom-file">
-                                        <input type="file" name="file" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label text-success" for="customFile">Archivo excel « .xlsx »</label>
+            @endcan
+            @can('product_U_import_excel')
+                <div class="modal fade" id="modalExcel">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="anticon anticon-close"></i>
+                                </button>
+                            </div>
+                            <form action="{{route('import-excel')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="modal-body">
+                                    <p class="container-fluid h5 font-weight-light text-dark">Seleccionar un archivo:</p>
+                                    <div class="container-fluid">
+                                        <div class="custom-file">
+                                            <input type="file" name="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label text-success" for="customFile">Archivo excel « .xlsx »</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-success"> <i class="anticon anticon-download m-r-5"></i>Importar</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-success"> <i class="anticon anticon-download m-r-5"></i>Importar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endcan
             <div class="card-body">
                     <div class="text-center mb-3">
+                        @can('product_U_export_excel')
                             <a href="{{route('export-excel')}}" class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Imprimir inventario en Excel"><i class="anticon anticon-file-excel m-r-5"></i>Imprimir Excel</a>
+                        @endcan
+                        @can('product_U_export_pdf')
                             <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Imprimir inventario en PDF">
                                 <button type="button" class="btn btn-tone btn-primary" data-toggle="modal" data-target="#modalPdf">
                                     <i class="anticon anticon-file-pdf m-r-5"></i>Imprimir PDF
                                 </button>
                             </span>
+                        @endcan
                     </div>
 
                 <div class="table-responsive">
@@ -127,7 +140,9 @@
                                 <th>Precio</th>
                                 <th>Descuento</th>
                                 <th>Oferta</th>
-                                <th>Estado</th>
+                                @can('product_status')
+                                    <th>Estado</th>
+                                @endcan
                                 <th></th>
                             </tr>
                         </thead>
@@ -161,6 +176,7 @@
                                             {{number_format($medicine->precioDescuento, 2)}}
                                         @endif
                                     </td>
+                                    @can('product_status')
                                     <td>
                                         <form class="form-update-status" action="{{route('price.status', $medicine->id)}}" method="post">
                                             @csrf
@@ -184,18 +200,25 @@
                                             </div>
                                         </form>
                                     </td>
+                                    @endcan
                                     <td class="text-center">
-                                        <a style="font-size: 17px" href="{{route('medicines.show', $medicine->id) }}" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa del producto">
-                                            <i class="anticon anticon-info-circle"></i>
-                                        </a>
-                                        <a style="font-size: 17px" href="{{route('medicines.edit', $medicine->id )}}"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar este producto">
-                                            <i class="anticon anticon-edit"></i>
-                                        </a>
-                                        <span class="d-inline-block" data-placement="left" data-toggle="tooltip" title="Editar el precio del producto">
-                                            <a style="font-size: 17px" type="button" class="btn btn-icon btn-hover text-success btn-sm btn-rounded pull-right" data-toggle="modal" data-id="{{$medicine->id}}" data-precio="{{$medicine->precioNormal}}" data-descuento="{{$medicine->descuento}}" data-oferta="{{$medicine->precioDescuento}}" data-target="#modalPrice">
-                                                <i class="anticon anticon-dollar"></i>
+                                        @can('product_show')
+                                            <a style="font-size: 17px" href="{{route('medicines.show', $medicine->id) }}" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa del producto">
+                                                <i class="anticon anticon-info-circle"></i>
                                             </a>
-                                        </span>
+                                        @endcan
+                                        @can('product_edit')
+                                            <a style="font-size: 17px" href="{{route('medicines.edit', $medicine->id )}}"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar este producto">
+                                                <i class="anticon anticon-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('product_price')
+                                            <span class="d-inline-block" data-placement="left" data-toggle="tooltip" title="Editar el precio del producto">
+                                                <a style="font-size: 17px" type="button" class="btn btn-icon btn-hover text-success btn-sm btn-rounded pull-right" data-toggle="modal" data-id="{{$medicine->id}}" data-precio="{{$medicine->precioNormal}}" data-descuento="{{$medicine->descuento}}" data-oferta="{{$medicine->precioDescuento}}" data-target="#modalPrice">
+                                                    <i class="anticon anticon-dollar"></i>
+                                                </a>
+                                            </span>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
@@ -218,6 +241,7 @@
         </div>
     </div>
 </div>
+@can('product_price')
 <div class="modal fade" id="modalPrice">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -255,6 +279,7 @@
         </div>
     </div>
 </div>
+@endcan
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -283,5 +308,4 @@
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
     <script src="{{asset('js/validation/indexMedicinesValidation.js')}}"></script>
-
 @endsection

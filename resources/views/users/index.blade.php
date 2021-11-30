@@ -105,7 +105,7 @@
                         </div>
                     </div>
                 @endcan
-                @can('user_export_excel')
+                @can('user_import_excel')
                     <div class="modal fade" id="modalExcel">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
