@@ -22,124 +22,139 @@
                             <h3 class="h3 text-success font-weight-semibold">Comunidad Vitaltest</h3>
                         </div>
                         <div class="col-lg-4 p-5 text-right">
-                            <span data-toggle="tooltip" data-placement="top" title="Configurar permisos para usuarios teniendo en cuenta el rol">
-                                <div class="btn-group dropleft">
-                                    <button type="button" class="btn btn-defauld btn-lg dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="anticon anticon-setting"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        @foreach ($roles as $role)
-                                            <a href="{{route('roles.edit', $role->id)}}" class="dropdown-item">{{$role->name}}</a>
-                                        @endforeach
+                            @can('user_permission')
+                                <span data-toggle="tooltip" data-placement="top" title="Configurar permisos para usuarios teniendo en cuenta el rol">
+                                    <div class="btn-group dropleft">
+                                        <button type="button" class="btn btn-defauld btn-lg dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="anticon anticon-setting"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            @foreach ($roles as $role)
+                                                <a href="{{route('roles.edit', $role->id)}}" class="dropdown-item">{{$role->name}}</a>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
-                            </span>
-                            <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
-                                <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
-                                    <i class="anticon anticon-file-excel m-r-5"></i> Excel
-                                </button>
-                            </span>
-                            <a href="{{route('users.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Agregar usuario">
-                                <i class="anticon anticon-user-add m-r-5"></i>
-                                <span>Nuevo usuario</span>
-                            </a>
+                                </span>
+                            @endcan
+                            @can('user_import_excel')
+                                <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
+                                    <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
+                                        <i class="anticon anticon-file-excel m-r-5"></i> Excel
+                                    </button>
+                                </span>
+                            @endcan
+                            @can('user_create')
+                                <a href="{{route('users.create')}}" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Agregar usuario">
+                                    <i class="anticon anticon-user-add m-r-5"></i>
+                                    <span>Nuevo usuario</span>
+                                </a>
+                            @endcan
                         </div>
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="modalPdf">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <i class="anticon anticon-close"></i>
-                                </button>
-                            </div>
-                            <form action="{{route('export-users-pdf')}}" method="get">
-                                <div class="modal-body">
-                                    <p class="p-15 h5 font-italic font-weight-light text-dark">Generar reporte cuando los usuarios esten:</p>
-                                    <div class="row container-fluid">
-                                        <div class="col-md-6">
-                                            <div class="form-group m-t-20">
-                                                <div class="radio">
-                                                    <input id="activo" name="status" value="1" type="radio" checked="">
-                                                    <label for="activo">Activos</label>
-                                                </div>
-                                                <div class="radio">
-                                                    <input id="agotado" name="status" value="0" type="radio">
-                                                    <label for="agotado">Inactivos</label>
+                @can('user_export_pdf')
+                    <div class="modal fade" id="modalPdf">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <i class="anticon anticon-close"></i>
+                                    </button>
+                                </div>
+                                <form action="{{route('export-users-pdf')}}" method="get">
+                                    <div class="modal-body">
+                                        <p class="p-15 h5 font-italic font-weight-light text-dark">Generar reporte cuando los usuarios esten:</p>
+                                        <div class="row container-fluid">
+                                            <div class="col-md-6">
+                                                <div class="form-group m-t-20">
+                                                    <div class="radio">
+                                                        <input id="activo" name="status" value="1" type="radio" checked="">
+                                                        <label for="activo">Activos</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <input id="agotado" name="status" value="0" type="radio">
+                                                        <label for="agotado">Inactivos</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group float-right">
-                                                <div class="radio">
-                                                    <input id="cliente" name="roles" value="3" type="radio" checked="">
-                                                    <label for="cliente">Cliente</label>
-                                                </div>
-                                                <div class="radio">
-                                                    <input id="farmaceutico" name="roles" value="2" type="radio">
-                                                    <label for="farmaceutico">Farmacéutico</label>
-                                                </div>
-                                                <div class="radio">
-                                                    <input id="gerente" name="roles" value="1" type="radio">
-                                                    <label for="gerente">Gerente</label>
+                                            <div class="col-md-6">
+                                                <div class="form-group float-right">
+                                                    <div class="radio">
+                                                        <input id="cliente" name="roles" value="3" type="radio" checked="">
+                                                        <label for="cliente">Cliente</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <input id="farmaceutico" name="roles" value="2" type="radio">
+                                                        <label for="farmaceutico">Farmacéutico</label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <input id="gerente" name="roles" value="1" type="radio">
+                                                        <label for="gerente">Gerente</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary"> <i class="anticon anticon-download m-r-5"></i> Descargar PDF</button>
-                                </div>
-                            </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary"> <i class="anticon anticon-download m-r-5"></i> Descargar PDF</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" id="modalExcel">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <i class="anticon anticon-close"></i>
-                                </button>
-                            </div>
-                            <form action="{{route('import-users-excel')}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal-body">
-                                    <p class="container-fluid h5 font-weight-light text-dark">Seleccionar un archivo:</p>
-                                    <div class="container-fluid">
-                                        <div class="custom-file">
-                                            <input type="file" name="file" class="custom-file-input" id="customFile">
-                                            <label class="custom-file-label text-success" for="customFile">Archivo excel « .xlsx »</label>
+                @endcan
+                @can('user_export_excel')
+                    <div class="modal fade" id="modalExcel">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <i class="anticon anticon-close"></i>
+                                    </button>
+                                </div>
+                                <form action="{{route('import-users-excel')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <p class="container-fluid h5 font-weight-light text-dark">Seleccionar un archivo:</p>
+                                        <div class="container-fluid">
+                                            <div class="custom-file">
+                                                <input type="file" name="file" class="custom-file-input" id="customFile">
+                                                <label class="custom-file-label text-success" for="customFile">Archivo excel « .xlsx »</label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-success"> <i class="anticon anticon-download m-r-5"></i>Importar</button>
-                                </div>
-                            </form>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-success"> <i class="anticon anticon-download m-r-5"></i>Importar</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endcan
                 <div class="card-body">
-                    @if (isset($errors) && $errors->any())
-                        <div class="alert alert-danger">
-                            @foreach ($errors->all() as $error )
-                                {{$error}}
-                            @endforeach
-                        </div>
-                    @endif
-
+                    @can('user_import_excel')
+                        @if (isset($errors) && $errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error )
+                                    {{$error}}
+                                @endforeach
+                            </div>
+                        @endif
+                    @endcan
                     <div class="text-center mb-3">
-                        <a href="{{route('export-users-excel')}}" class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Imprimir lista de usuarios en Excel"><i class="anticon anticon-file-excel m-r-5"></i>Imprimir Excel</a>
-                        <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Imprimir lista de usuarios en PDF">
-                            <button type="button" class="btn btn-tone btn-primary" data-toggle="modal" data-target="#modalPdf">
-                                <i class="anticon anticon-file-pdf m-r-5"></i>Imprimir PDF
-                            </button>
-                        </span>
+                        @can('user_export_excel')
+                            <a href="{{route('export-users-excel')}}" class="btn btn-tone btn-success m-r-10" data-toggle="tooltip" data-placement="top" title="Imprimir lista de usuarios en Excel"><i class="anticon anticon-file-excel m-r-5"></i>Imprimir Excel</a>
+                        @endcan
+                        @can('user_export_pdf')
+                            <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Imprimir lista de usuarios en PDF">
+                                <button type="button" class="btn btn-tone btn-primary" data-toggle="modal" data-target="#modalPdf">
+                                    <i class="anticon anticon-file-pdf m-r-5"></i>Imprimir PDF
+                                </button>
+                            </span>
+                        @endcan
                 </div>
                     <div class="table-responsive">
                         <table id="data-table" class="table table-hover e-commerce-table">
@@ -150,7 +165,9 @@
                                     <th>Correo</th>
                                     <th>Rol</th>
                                     <th>Fecha de creación</th>
-                                    <th>Estado</th>
+                                    @can('user_status')
+                                        <th>Estado</th>
+                                    @endcan
                                     <th></th>
                                 </tr>
                             </thead>
@@ -175,33 +192,38 @@
                                             @endforelse
                                         </td>
                                         <td>{{$user->created_at}}</td>
-                                        <td>
-                                            <form action="{{route('update.status', $user->id)}}" method="POST" class="d-inline form-update">
-                                                @csrf
-                                                <div class="d-flex align-items-center">
-                                                    <div class="badge badge-{{$user->status == 1 ? 'success' : 'danger'}} badge-dot m-r-10"></div>
-
-                                                    @forelse ($user->roles as $role)
-                                                        @if ($role->id == 1)
-                                                            <div class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}" disabled>{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</div>
-                                                        @else
-                                                       <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado del usuario.">
-                                                            <button class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}"  type="submit">{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</button>
-                                                       </span>
-                                                        @endif
-                                                    @empty
-                                                    <button class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}" type="submit">{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</button>
-                                                    @endforelse
-                                                </div>
-                                            </form>
-                                        </td>
+                                        @can('users_status')
+                                            <td>
+                                                <form action="{{route('update.status', $user->id)}}" method="POST" class="d-inline form-update">
+                                                    @csrf
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="badge badge-{{$user->status == 1 ? 'success' : 'danger'}} badge-dot m-r-10"></div>
+                                                        @forelse ($user->roles as $role)
+                                                            @if ($role->id == 1)
+                                                                <div class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}" disabled>{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</div>
+                                                            @else
+                                                        <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado del usuario.">
+                                                                <button class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}"  type="submit">{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</button>
+                                                        </span>
+                                                            @endif
+                                                        @empty
+                                                        <button class="btn btn-sm text-{{$user->status == 1 ? 'success' : 'danger'}}" type="submit">{{$user->status == 1 ? 'Activo' : 'Inactivo'}}</button>
+                                                        @endforelse
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        @endcan
                                         <td class="text-center">
+                                            @can('user_show')
                                             <a style="font-size: 17px" href="{{route('users.show', ['id'=> $user->id]) }}" data-toggle="tooltip" data-placement="top" title="Ver detalles de usuario" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" >
                                                 <i class="anticon anticon-eye"></i>
                                             </a>
+                                            @endcan
+                                            @can('user_edit')
                                             <a style="font-size: 17px" href="{{route('users.edit', ['id'=>$user->id])}}" data-toggle="tooltip" data-placement="top" title="Editar usuario" class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right">
                                                 <i class="anticon anticon-edit"></i>
                                             </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
@@ -213,7 +235,9 @@
                                     <th>Correo</th>
                                     <th>Rol</th>
                                     <th>Fecha de creacion</th>
-                                    <th>Estado</th>
+                                    @can('user_status')
+                                        <th>Estado</th>
+                                    @endcan
                                     <th></th>
                                 </tr>
                             </tfoot>
@@ -223,47 +247,48 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bd-example-modal-lg" id="modalErrors">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title h4">Error al cargar estos datos:</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <i class="anticon anticon-close"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @if (session()->has('failures'))
-                      <table class="table table-danger">
-                            <tr>
-                                <th>Fila</th>
-                                <th>Atributo</th>
-                                <th>Errors</th>
-                                <th>Valor</th>
-                            </tr>
-                            @foreach (session()->get('failures') as $validation)
+    @can('user_import_excel')
+        <div class="modal fade bd-example-modal-lg" id="modalErrors">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title h4">Error al cargar estos datos:</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="anticon anticon-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @if (session()->has('failures'))
+                        <table class="table table-danger">
                                 <tr>
-                                    <td>{{$validation->row()}}</td>
-                                    <td>{{$validation->attribute()}}</td>
-                                    <td>
-                                        <ul>
-                                            @foreach ($validation->errors() as $e)
-                                                <li>{{$e}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
-                                    <td>
-                                       {{$validation->values()[$validation->attribute()]}}
-                                    </td>
+                                    <th>Fila</th>
+                                    <th>Atributo</th>
+                                    <th>Errors</th>
+                                    <th>Valor</th>
                                 </tr>
-                            @endforeach
-                      </table>
-                    @endif
+                                @foreach (session()->get('failures') as $validation)
+                                    <tr>
+                                        <td>{{$validation->row()}}</td>
+                                        <td>{{$validation->attribute()}}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach ($validation->errors() as $e)
+                                                    <li>{{$e}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
+                                        <td>
+                                        {{$validation->values()[$validation->attribute()]}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                        </table>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    @endcan
 @endsection
 @section('js')
 
@@ -293,9 +318,11 @@
      <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
 
-    @if (session()->has('failures'))
-     <script>
-          $("#modalErrors").modal("show");
-     </script>
-    @endif
+    @can('user_import_excel')
+        @if (session()->has('failures'))
+        <script>
+            $("#modalErrors").modal("show");
+        </script>
+        @endif
+    @endcan
 @endsection
