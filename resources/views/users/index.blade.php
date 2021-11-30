@@ -192,7 +192,7 @@
                                             @endforelse
                                         </td>
                                         <td>{{$user->created_at}}</td>
-                                        @can('users_status')
+                                        @can('user_status')
                                             <td>
                                                 <form action="{{route('update.status', $user->id)}}" method="POST" class="d-inline form-update">
                                                     @csrf

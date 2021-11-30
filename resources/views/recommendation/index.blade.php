@@ -19,10 +19,12 @@
                 <div class="row m-b-30">
                     <h3 class=" col-lg-6 text-success">Recomendaciones</h3>
                     <div class="col-lg-6 text-right">
-                        <a href="{{route('recomendacion.create')}}" class="btn btn-primary">
-                            <i class="anticon anticon-file-add m-r-5"></i>
-                            <span>Nueva recomendación</span>
-                        </a>
+                        @can('recomen_create')
+                            <a href="{{route('recomendacion.create')}}" class="btn btn-primary">
+                                <i class="anticon anticon-file-add m-r-5"></i>
+                                <span>Nueva recomendación</span>
+                            </a>
+                        @endcan
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -73,12 +75,16 @@
                                     <td>{{$recommendation->frecuencia}}</td>
                                     <td>{{$recommendation->tiempo}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('recomendacion.show', $recommendation->id)}}" style="font-size: 17px" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa de la recomendación">
-                                            <i class="anticon anticon-file-search"></i>
-                                        </a>
-                                        <a href="{{route('recomendacion.edit', $recommendation->id)}}" style="font-size: 17px"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar recomendación">
-                                            <i class="anticon anticon-edit"></i>
-                                        </a>
+                                        @can('recomen_show')
+                                            <a href="{{route('recomendacion.show', $recommendation->id)}}" style="font-size: 17px" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa de la recomendación">
+                                                <i class="anticon anticon-file-search"></i>
+                                            </a>
+                                        @endcan
+                                        @can('recomen_edit')
+                                            <a href="{{route('recomendacion.edit', $recommendation->id)}}" style="font-size: 17px"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Editar recomendación">
+                                                <i class="anticon anticon-edit"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 <div class="modal fade bd-example-modal-lg" id="listMedicine{{$recommendation->id}}">
