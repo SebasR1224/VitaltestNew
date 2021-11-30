@@ -64,6 +64,8 @@ class PermissionSeeder extends Seeder
             'oferta_category',
             'oferta_sales',
 
+            'dashboard',
+
             'chat',
 
             'test'

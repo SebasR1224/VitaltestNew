@@ -38,6 +38,7 @@ class RoleHasPermissionSeeder extends Seeder
                    substr($permission->name, 0, 9) != 'category_' &&
                    substr($permission->name, 0, 8) != 'recomen_' &&
                    substr($permission->name, 0, 8) != 'sintoma_' &&
+                   substr($permission->name, 0, 9) != 'dashboard' &&
                    substr($permission->name, 0, 9) != 'contrain_' ;
         });
 

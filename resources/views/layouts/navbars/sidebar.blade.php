@@ -10,6 +10,7 @@
                     <span class="title">Inicio</span>
                 </a>
             </li>
+            @can('user_index')
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -44,6 +45,8 @@
                     @endif
                 </ul>
             </li>
+            @endcan
+            @can('product_index')
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -73,6 +76,8 @@
                     @endif
                 </ul>
             </li>
+            @endcan
+            @can('recomen_index')
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
@@ -103,6 +108,8 @@
 
                 </ul>
             </li>
+            @endcan
+            @can('oferta_index')
             <li class="nav-item dropdown {{ $activePage == 'commerce' ? ' active' : '' }}" >
                 <a class="dropdown" href="{{ route('medicines.commerce') }}">
                     <span class="icon-holder">
@@ -111,6 +118,8 @@
                     <span class="title">Tienda</span>
                 </a>
             </li>
+            @endcan
+            @can('chat')
             <li class="nav-item dropdown {{ $activePage == 'chat' ? ' active' : '' }}" >
                 <a class="dropdown" href="{{ route('chat.index') }}">
                     <span class="icon-holder">
@@ -119,6 +128,7 @@
                     <span class="title">Chat</span>
                 </a>
             </li>
+            @endcan
         </ul>
     </div>
 </div>
