@@ -21,10 +21,12 @@
                         <h3 class="h3 text-success font-weight-semibold">Inventario de productos</h3>
                     </div>
                     <div class="col-lg-4 p-5 text-right">
-                        <a class="btn btn-defauld" href="{{route('config.medicines')}}">
+                        @can('product_config')
+                        <a class="btn btn-defauld" href="{{route('config.medicines')}}" data-toggle="tooltip" data-placement="top" title="Ver categorias y laboratorios">
                             <i class="anticon anticon-appstore m-r-5"></i>
                             <i class="anticon anticon-experiment"></i>
                         </a>
+                        @endcan
                         @can('product_U_import_excel')
                             <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Carga masiva desde un archivo Excel">
                                 <button type="button" class="btn  btn-success" data-toggle="modal" data-target="#modalExcel">
