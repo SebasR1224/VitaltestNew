@@ -69,7 +69,7 @@
                                                                             <i class="anticon anticon-close"></i>
                                                                         </button>
                                                                     </div>
-                                                                    <form action="{{route('category.update', $category->id)}}" method="post">
+                                                                    <form action="{{route('category.update', $category->id)}}" method="post" id="edit-category">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="form-group">
@@ -87,7 +87,7 @@
                                                         </div>
                                                     @endcan
                                                     @can('category_U_delete')
-                                                        <form action="{{route('category.delete', $category->id)}}" class="d-inline" method="post">
+                                                        <form action="{{route('category.delete', $category->id)}}" class="d-inline delete-category" method="post">
                                                         @csrf
                                                         <button type="submit" style="font-size: 17px"  class="btn btn-icon btn-hover text-danger btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Eliminar categoria">
                                                             <i class="anticon anticon-delete"></i>
@@ -154,7 +154,7 @@
                                                                             <i class="anticon anticon-close"></i>
                                                                         </button>
                                                                     </div>
-                                                                    <form action="{{route('laboratory.update', $laboratory->id)}}" method="post">
+                                                                    <form action="{{route('laboratory.update', $laboratory->id)}}" method="post" id="edit-laboratory">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="form-group">
@@ -172,7 +172,7 @@
                                                         </div>
                                                     @endcan
                                                     @can('laboratory_U_delete')
-                                                    <form action="{{route('laboratory.delete', $laboratory->id)}}" class="d-inline" method="post">
+                                                    <form action="{{route('laboratory.delete', $laboratory->id)}}" class="d-inline delete-laboratory" method="post">
                                                        @csrf
                                                         <button type="submit" style="font-size: 17px"  class="btn btn-icon btn-hover text-danger btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Eliminar categoria">
                                                             <i class="anticon anticon-delete"></i>
@@ -209,7 +209,7 @@
                         <i class="anticon anticon-close"></i>
                     </button>
                 </div>
-                <form action="{{route('category.storeAdd')}}" method="post" id="createCategory">
+                <form action="{{route('category.storeAdd')}}" method="post" id="create_category">
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
@@ -236,7 +236,7 @@
                         <i class="anticon anticon-close"></i>
                     </button>
                 </div>
-                <form action="{{route('laboratory.storeAdd')}}" method="POST" id="createLaboratory">
+                <form action="{{route('laboratory.storeAdd')}}" method="POST" id="create_Laboratory">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -260,4 +260,47 @@
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
     <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
     <script src="{{asset('js/validation/configMedicines.js')}}"></script>
+
+
+    {{-- Alertas de confirmacion estado --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $('.delete-category').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Está seguro?',
+            text: "Eliminará esta categoria",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3f87f5',
+            cancelButtonColor: '#de4436',
+            confirmButtonText: '<i class="anticon anticon-like"></i> Eliminar',
+            cancelButtonText: '<i class="anticon anticon-dislike"></i> Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+               this.submit();
+            }
+            })
+        });
+    </script>
+
+<script>
+    $('.delete-laboratory').submit(function(e){
+        e.preventDefault();
+        Swal.fire({
+        title: '¿Está seguro?',
+        text: "Eliminará este laboratorio",
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3f87f5',
+        cancelButtonColor: '#de4436',
+        confirmButtonText: '<i class="anticon anticon-like"></i> Eliminar',
+        cancelButtonText: '<i class="anticon anticon-dislike"></i> Cancelar'
+        }).then((result) => {
+        if (result.isConfirmed) {
+           this.submit();
+        }
+        })
+    });
+</script>
 @endsection

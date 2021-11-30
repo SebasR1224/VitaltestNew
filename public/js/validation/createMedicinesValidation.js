@@ -149,7 +149,6 @@ $( "#register-category" ).validate({
     {
         nombreCategoria: {
             required:   '<p class="text-danger">El campo es obligatorio.</p>',
-
         }
     }
 });
@@ -164,19 +163,6 @@ $( "#register-laboratory" ).validate({
     messages:
     {
         nombreLaboratorio: {required:   '<p class="text-danger">El campo es obligatorio.</p>'}
-    }
-});
-
-$( "#register-category" ).validate({
-    ignore: ':hidden:not(:checkbox)',
-    errorElement: 'label',
-    errorClass: 'is-invalid',
-    rules: {
-        nombreCategoria: {required: true}
-    },
-    messages:
-    {
-        nombreCategoria: {required:'<p class="text-danger">El campo es obligatorio.</p>'}
     }
 });
 
