@@ -10,16 +10,19 @@ use App\Models\ParteCuerpo;
 use App\Models\Recomendacion;
 use App\Models\Sintoma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RecomendacionController extends Controller
 {
     public function index(){
+        abort_if(Gate::denies('recomen_index'), 403);
         $recommendations = Recomendacion::all();
         return view('recommendation.index', compact('recommendations'));
     }
 
     //detalles de recomendacion
     public function show($id){
+        abort_if(Gate::denies('recomen_show'), 403);
         $recommendation = Recomendacion::find($id);
         return view('recommendation.show' , compact('recommendation'));
     }
@@ -27,6 +30,7 @@ class RecomendacionController extends Controller
     //CRUD recomendacion
 
     function create(){
+        abort_if(Gate::denies('recomen_create'), 403);
         $recommendation = new Recomendacion();
         $parts = ParteCuerpo::orderBy('id', 'DESC')->pluck('nombreParte', 'id');
         $symptoms = Sintoma::orderBy('id', 'DESC')->pluck('nombreSintoma', 'id');
@@ -38,6 +42,7 @@ class RecomendacionController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        abort_if(Gate::denies('recomen_edit'), 403);
         $parts = ParteCuerpo::orderBy('id', 'DESC')->pluck('nombreParte', 'id');
         $symptoms = Sintoma::orderBy('id', 'DESC')->pluck('nombreSintoma', 'id');
         $imcs = Imc::orderBy('id', 'DESC')->pluck('nombreImc', 'id');

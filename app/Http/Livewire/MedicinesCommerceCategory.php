@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Categoria;
 use App\Models\Laboratorio;
 use App\Models\Medicamento;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 
 class MedicinesCommerceCategory extends Component
@@ -21,6 +22,7 @@ class MedicinesCommerceCategory extends Component
 
     public function render()
     {
+        abort_if(Gate::denies('oferta_category'), 403);
         return view('livewire.medicines-commerce-category', [
             'laboratories' => Laboratorio::all()->sortByDesc("id"),
             'categories' => Categoria::all()->sortByDesc("id"),

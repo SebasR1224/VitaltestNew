@@ -5,16 +5,18 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-5">
-                            <div class="btn-group m-r-10 dropright">
-                                <button  type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="anticon anticon-appstore"></i> Categorias
-                                </button>
-                                <div class="dropdown-menu">
-                                    @foreach ($categories as $category)
-                                        <a class="dropdown-item text-success" href="{{route('commerce.category', $category->id)}}">{{$category->nombreCategoria}}</a>
-                                    @endforeach
+                            @can('oferta_category')
+                                <div class="btn-group m-r-10 dropright">
+                                    <button  type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="anticon anticon-appstore"></i> Categorias
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @foreach ($categories as $category)
+                                            <a class="dropdown-item text-success" href="{{route('commerce.category', $category->id)}}">{{$category->nombreCategoria}}</a>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -58,9 +60,11 @@
                                 </div>
                             </div>
                             <div class="card-footer">
+                                @can('oferta_sales')
                                     <div>
                                         <a href="{{route('commerce-show', $medicamento->id)}}" class="btn btn-block btn-success"><i class="far fa-check-circle"></i> VER DETALLES</a>
                                     </div>
+                                @endcan
                             </div>
                         </div>
                     </div>

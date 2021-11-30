@@ -183,6 +183,7 @@ class MedicamentoController extends Controller
 
     public function showCommerce(Medicamento $medicamento)
     {
+        abort_if(Gate::denies('oferta_sales'), 403);
         $medicamento = Medicamento::where('status', '!=', '0')->findOrfail($medicamento->id);
         $categories = Medicamento::all()->where('status', '!=', '0')->where('categoria_id', $medicamento->categoria_id)
         ->where('id', '!=', $medicamento->id);
