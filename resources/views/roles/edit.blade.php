@@ -28,15 +28,33 @@
                    <h4 class="card-title"> Conceder permisos</h4>
                 </div>
                 <div class="card-body">
-                    @if ($role->id == 1)
-                    <h4>Rol: <span class="font-weight-light">{{$role->name}}<i class="text-warning anticon anticon-crown m-l-5"></i></span></h4>
-                    @endif
-                    @if ($role->id == 2)
-                    <h4>Rol: <span class="font-weight-light">{{$role->name}}<i class="text-primary anticon anticon-branches m-l-5"></i> </span></h4>
-                    @endif
-                    @if ($role->id == 3)
-                    <h4>Rol: <span class="font-weight-light">{{$role->name}}<i class="text-success anticon anticon-star m-l-5"></i></span></h4>
-                    @endif
+                    <div class="d-flex justify-content-between ">
+
+                        @if ($role->id == 1)
+                        <h4>Rol: <span class="font-weight-light">{{$role->name}}<i class="text-warning anticon anticon-crown m-l-5"></i></span></h4>
+                        @endif
+                        @if ($role->id == 2)
+                        <h4>Rol: <span class="font-weight-light">{{$role->name}}<i class="text-primary anticon anticon-branches m-l-5"></i> </span></h4>
+                        @endif
+                        @if ($role->id == 3)
+                        <h4>Rol: <span class="font-weight-light">{{$role->name}}<i class="text-success anticon anticon-star m-l-5"></i></span></h4>
+                        @endif
+
+                        @can('user_permission')
+                            <span data-toggle="tooltip" data-placement="top" title="Configurar permisos para usuarios teniendo en cuenta el rol">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-defauld dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="anticon anticon-setting m-r-5"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @foreach ($roles as $role)
+                                            <a href="{{route('roles.edit', $role->id)}}" class="dropdown-item">{{$role->name}}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </span>
+                        @endcan
+                    </div>
                     <hr>
                     <h5>Permisos asignados</h5>
                     <h5 class="m-t-20">

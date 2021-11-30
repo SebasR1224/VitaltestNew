@@ -18,27 +18,32 @@ class LaboratorioController extends Controller
         return view('laboratorio.index', compact('lists'));
     }
 
-    public function save(Request $request){
-
-        $request->validate([
-            'nombreLaboratorio' => ['required','min:5','max:50', 'unique:laboratorios,nombreLaboratorio,'.$request->id]
-        ]);
-
-        $laboratorio = new Laboratorio();
-        $messageLaboratorio_add = "Laboratorio creado con exito";
-        if(intval($request->id)>0){
-            $laboratorio = Laboratorio::findOrFail($request->id);
-            $messageLaboratorio_add = "Campo editado con exito";
-        }
-
-
-
-        $laboratorio->nombreLaboratorio = $request->nombreLaboratorio;
-
-        $laboratorio->save();
-        return redirect()->back()->with('messageLaboratorio_add' , $messageLaboratorio_add);
-
+    public function storeAdd(Request $request){
+        Laboratorio::create(['nombreLaboratorio' => $request->nombreLaboratorio]);
+        toast('<p class="font-weight-light text-dark">Laboratorio agregado correctamente.</p>','success')
+        ->toHtml()
+        ->autoClose(5000);
+        return redirect()->back();
     }
+
+    public function update(Request $request, $id){
+        $laboratory = Laboratorio::findOrfail($id);
+        $laboratory->update(['nombreLaboratorio' => $request->nombreLaboratorio]);
+        toast('<p class="font-weight-light text-dark">Laboratorio actualizado correctamente.</p>','success')
+        ->toHtml()
+        ->autoClose(5000);
+        return redirect()->back();
+    }
+
+    public function delete($id){
+        $laboratory = Laboratorio::findOrfail($id);
+        $laboratory->delete();
+        toast('<p class="font-weight-light text-dark">Laboratorio eliminado</p>','success')
+        ->toHtml()
+        ->autoClose(5000);
+        return redirect()->back();
+    }
+
 
     public function store(Request $request){
 

@@ -3,36 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Laboratorio;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
     public function index()
     {
-        $lists = Categoria::paginate(8);
-        return view('categoria.index', compact('lists'));
+        $categories = Categoria::all();
+        $laboratories = Laboratorio::all();
+        return view('config.medicines.index', compact('categories', 'laboratories'));
     }
 
-    public function save(Request $request){
+    public function storeAdd(Request $request){
+        Categoria::create(['nombreCategoria' => $request->nombreCategoria]);
+        toast('<p class="font-weight-light text-dark">Categoria agregada correctamente.</p>','success')
+        ->toHtml()
+        ->autoClose(5000)
+        ->position('top-start');
+        return redirect()->back();
+    }
 
-        $request->validate([
-            'nombreCategoria' => ['required','min:5','max:50', 'unique:categorias,nombreCategoria,'.$request->id]
-        ]);
+    public function update(Request $request, $id){
+        $category = Categoria::findOrfail($id);
+        $category->update(['nombreCategoria' => $request->nombreCategoria]);
+        toast('<p class="font-weight-light text-dark">Categoria actualizada correctamente.</p>','success')
+        ->toHtml()
+        ->autoClose(5000)
+        ->position('top-start');
+        return redirect()->back();
+    }
 
-        $categoria = new Categoria();
-        $messageCategoria_add = "Categoria creada con exito";
-        if(intval($request->id)>0){
-            $categoria = Categoria::findOrFail($request->id);
-            $messageCategoria_add = "Campo editado con exito";
-        }
-
-
-
-        $categoria->nombreCategoria = $request->nombreCategoria;
-
-        $categoria->save();
-        return redirect()->back()->with('messageCategoria_add' , $messageCategoria_add);
-
+    public function delete($id){
+        $category = Categoria::findOrfail($id);
+        $category->delete();
+        toast('<p class="font-weight-light text-dark">Categoria eliminada.</p>','success')
+        ->toHtml()
+        ->autoClose(5000)
+        ->position('top-start');
+        return redirect()->back();
     }
 
     public function store(Request $request){

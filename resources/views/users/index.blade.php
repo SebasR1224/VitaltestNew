@@ -24,9 +24,9 @@
                         <div class="col-lg-4 p-5 text-right">
                             @can('user_permission')
                                 <span data-toggle="tooltip" data-placement="top" title="Configurar permisos para usuarios teniendo en cuenta el rol">
-                                    <div class="btn-group dropleft">
-                                        <button type="button" class="btn btn-defauld btn-lg dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="anticon anticon-setting"></i>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-defauld dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="anticon anticon-setting m-r-5"></i>
                                         </button>
                                         <div class="dropdown-menu">
                                             @foreach ($roles as $role)

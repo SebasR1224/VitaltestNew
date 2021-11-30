@@ -10,6 +10,7 @@
                     <span class="title">Inicio</span>
                 </a>
             </li>
+            @can('dashboard')
             <li class="nav-item dropdown {{ $activePage == 'dashboard' ? ' active' : '' }}" >
                 <a class="dropdown" href="{{ route('dashboard') }}">
                     <span class="icon-holder">
@@ -18,6 +19,7 @@
                     <span class="title">Tablero</span>
                 </a>
             </li>
+            @endcan
             @can('user_index')
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
@@ -81,6 +83,13 @@
                     <li class="{{$activePage == 'showMedicines' ? 'active' : ''}}">
                         <a href="">Detalles del Producto</a>
                     </li>
+                    @endif
+                    @if ($activePage == 'configMedicines')
+                        <li class="{{$activePage == 'configMedicines' ? 'active' : ''}}">
+                            <a href="">Categorias | Laboratorios</a>
+                        </li>
+                    @else
+
                     @endif
                 </ul>
             </li>

@@ -21,6 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'auth'], function(){
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard/home', [App\Http\Controllers\DashBoardController::class, 'index'])->name('dashboard');
 
@@ -67,12 +69,22 @@ Route::put('/recomendaciones/{id}' , [App\Http\Controllers\RecomendacionControll
 
 
 //laboratorio
-Route::get('/laboratorios', [App\Http\Controllers\LaboratorioController::class, 'index'])->name('laboratorios.index');
 Route::post('/laboratorios', [App\Http\Controllers\LaboratorioController::class, 'store'])->name('laboratory.create');
 
 //categoria
-Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categorias.index');
 Route::post('/categorias', [App\Http\Controllers\CategoriaController::class, 'store'])->name('category.create');
+
+
+
+Route::get('/category/laboratory', [App\Http\Controllers\CategoriaController::class, 'index'])->name('config.medicines');
+
+Route::post('/categorias/create', [App\Http\Controllers\CategoriaController::class, 'storeAdd'])->name('category.storeAdd');
+Route::post('/laboratorios/create', [App\Http\Controllers\LaboratorioController::class, 'storeAdd'])->name('laboratory.storeAdd');
+Route::post('/laboratorios/{id}/delete', [App\Http\Controllers\LaboratorioController::class, 'delete'])->name('laboratory.delete');
+
+Route::post('/categorias/{id}/update', [App\Http\Controllers\CategoriaController::class, 'update'])->name('category.update');
+Route::post('/laboratorios/{id}/update', [App\Http\Controllers\LaboratorioController::class, 'update'])->name('laboratory.update');
+Route::post('/categorias/{id}/delete', [App\Http\Controllers\CategoriaController::class, 'delete'])->name('category.delete');
 
 //Permisos
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
@@ -109,6 +121,6 @@ route::get('search/emailEdit/{id}', [App\Http\Controllers\ValidateUniqueData::cl
 //chat
 route::get('chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
 
-
+});
 
 

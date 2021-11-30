@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Medicamento;
 use App\Models\Report;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Gate;
 
 class DashBoardController extends Controller
 {
 
     public function index(){
+        abort_if(Gate::denies('dashboard'), 403);
         $users = User::all()->count();
         $clientes = User::whereHas("roles", function($q){$q->where("name", 'Cliente');})->count();
         $gerentes = User::whereHas("roles", function($q){$q->where("name", 'Gerente');})->count();

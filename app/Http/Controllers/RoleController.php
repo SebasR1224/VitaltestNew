@@ -62,7 +62,8 @@ class RoleController extends Controller
         abort_if(Gate::denies('product_config'), 403);
         $permissions = Permission::all()->pluck('name' , 'id');
         $role->load('permissions');
-        return view('roles.edit', compact('role', 'permissions'));
+        $roles = Role::all();
+        return view('roles.edit', compact('role', 'permissions', 'roles'));
     }
 
     /**
