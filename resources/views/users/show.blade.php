@@ -127,6 +127,10 @@
                 </div>
             </div>
         </div>
+        <a href="javascript:void(0);" class="btn-list" data-toggle="modal" data-target="#list-users">
+            <i class="anticon anticon-ordered-list"></i>
+        </a>
+        @livewire('show-users')
     </div>
 </div>
 @endsection
