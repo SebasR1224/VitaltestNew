@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'configMedicines'])
+@extends('layouts.main', ['activePage' =>'configRecomen'])
 @section('css')
     <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection
@@ -8,17 +8,17 @@
         <div class="page-header">
             <div class="row justify-content-between align-items-md-center">
                 <div class="col-md-6">
-                    <h2 class="header-title">Campos adicionales productos</h2>
+                    <h2 class="header-title">Otros campos recomendación</h2>
                     <div class="header-sub-title">
                         <nav class="breadcrumb breadcrumb-dash">
                             <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
-                            <a class="breadcrumb-item" href="/medicines"><i class="text-success anticon anticon-medicine-box  m-r-5"></i></i>Inventario</a>
-                            <span class="breadcrumb-item active">Campos adicionales productos</span>
+                            <a class="breadcrumb-item" href="/recomendaciones"><i class="text-success anticon anticon-file-protect  m-r-5"></i></i>Recomendaciones</a>
+                            <span class="breadcrumb-item active">Otros campos recomendación</span>
                         </nav>
                     </div>
                 </div>
                 <div class="col-md-6 text-right">
-                    <a href="{{route('medicines.index')}}" class="btn btn-default m-r-5" id="btnEnviar" data-toggle="tooltip" data-placement="left" title="Volver a inventario" ><i class="fas fa-door-open m-r-5"></i>Volver</a>
+                    <a href="{{route('recomendacion.index')}}" class="btn btn-default m-r-5" id="btnEnviar" data-toggle="tooltip" data-placement="left" title="Volver a recomendaciones" ><i class="fas fa-door-open m-r-5"></i>Volver</a>
                 </div>
             </div>
         </div>
@@ -28,14 +28,13 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row m-b-30">
-                                <h3 class=" col-lg-6 text-success">Lista de Categorias</h3>
+                                <h3 class=" col-lg-6 text-success">Lista de Sintomas</h3>
                                 <div class="col-lg-6 text-right">
-                                    @can('category_create')
-                                        <button type="button" data-toggle="modal" data-target="#createCategory" class="btn btn-primary">
-                                            <i class="anticon anticon-appstore m-r-5"></i>
-                                            <span>Nueva categoria</span>
+                                    @can('sintoma_create')
+                                        <button type="button" data-toggle="modal" data-target="#createSintoma" class="btn btn-primary">
+                                            <i class="fas fa-burn m-r-5"></i>
+                                            <span>Nuevo sintoma</span>
                                         </button>
-
                                     @endcan
                                 </div>
                             </div>
@@ -44,54 +43,54 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombre categoria</th>
+                                            <th>Nombre sintoma</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
+                                        @foreach ($sintomas as $sintoma)
                                             <tr>
                                                 <td>
-                                                    #{{$category->id}}
+                                                    #{{$sintoma->id}}
                                                 </td>
-                                                <td><h6 class="m-b-0 m-l-10">{{$category->nombreCategoria}}</h6></td>
+                                                <td><h6 class="m-b-0 m-l-10">{{$sintoma->nombreSintoma}}</h6></td>
                                                 <td class="text-center">
-                                                    @can('category_edit')
-                                                    <span data-toggle="tooltip" data-placement="left" title="Editar categoria">
-                                                        <button type="button"  data-toggle="modal" data-target="#editCategory{{$category->id}}" style="font-size: 17px"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right">
+                                                    @can('sintoma_edit')
+                                                    <span data-toggle="tooltip" data-placement="left" title="Editar sintoma">
+                                                        <button type="button"  data-toggle="modal" data-target="#editSintoma{{$sintoma->id}}" style="font-size: 17px"  class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" >
                                                             <i class="anticon anticon-edit"></i>
                                                         </button>
                                                     </span>
-                                                        <div class="modal fade" id="editCategory{{$category->id}}">
+                                                        <div class="modal fade" id="editSintoma{{$sintoma->id}}">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title text-success" id="exampleModalCenterTitle">Editar Categoria</h5>
+                                                                        <h5 class="modal-title text-success" id="exampleModalCenterTitle">Editar Sintoma</h5>
                                                                         <button type="button" class="close" data-dismiss="modal">
                                                                             <i class="anticon anticon-close"></i>
                                                                         </button>
                                                                     </div>
-                                                                    <form action="{{route('category.update', $category->id)}}" method="post" id="edit-category">
+                                                                    <form action="{{route('sintoma.update', $sintoma->id)}}" method="post" id="edit-sintoma">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="form-group">
-                                                                                <label for="nombreCategoria">Nombre de la categoria:</label>
-                                                                                <input type="text" name="nombreCategoria" id="nombreCategoria" class="form-control" value="{{$category->nombreCategoria}}" placeholder="Nombre categoria" autocomplete="off">
+                                                                                <label for="nombreSintoma">Nombre del sintoma:</label>
+                                                                                <input type="text" name="nombreSintoma" id="nombreSintoma" class="form-control" value="{{$sintoma->nombreSintoma}}" placeholder="Nombre sintoma" autocomplete="off">
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                                            <button type="submit" class="btn btn-success">Editar categoria</button>
+                                                                            <button type="submit" class="btn btn-success">Editar sintoma</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @endcan
-                                                    @can('category_U_delete')
-                                                        <form action="{{route('category.delete', $category->id)}}" class="d-inline delete-category" method="post">
+                                                    @can('sintoma_U_delete')
+                                                        <form action="{{route('sintoma.delete', $sintoma->id)}}" class="d-inline delete-sintoma" method="post">
                                                         @csrf
-                                                        <button type="submit" style="font-size: 17px"  class="btn btn-icon btn-hover text-danger btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Eliminar categoria">
+                                                        <button type="submit" style="font-size: 17px"  class="btn btn-icon btn-hover text-danger btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Eliminar sintoma">
                                                             <i class="anticon anticon-delete"></i>
                                                         </button>
                                                         </form>
@@ -103,7 +102,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombre categoria</th>
+                                            <th>Nombre sintoma</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -116,12 +115,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row m-b-30">
-                                <h3 class=" col-lg-6 text-success">Lista de Laboratorios</h3>
+                                <h3 class=" col-lg-6 text-success">Lista de Contraindicaciones</h3>
                                 <div class="col-lg-6 text-right">
-                                    @can('laboratory_create')
-                                        <button type="button" data-toggle="modal" data-target="#createLaboratory" class="btn btn-primary">
-                                            <i class="anticon anticon-experiment m-r-5"></i>
-                                            <span>Nuevo laboratorio</span>
+                                    @can('contrain_create')
+                                        <button type="button" data-toggle="modal" data-target="#createContrain" class="btn btn-primary">
+                                            <i class="fab fa-envira m-r-5"></i>
+                                            <span>Nueva contraindicación</span>
                                         </button>
                                     @endcan
                                 </div>
@@ -131,54 +130,54 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombre laboratorio</th>
+                                            <th>Nombre contraindicación</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($laboratories as $laboratory)
+                                        @foreach ($contrain as $contrai)
                                             <tr>
                                                 <td>
-                                                    #{{$laboratory->id}}
+                                                    #{{$contrai->id}}
                                                 </td>
-                                                <td><h6 class="m-b-0 m-l-10">{{$laboratory->nombreLaboratorio}}</h6></td>
+                                                <td><h6 class="m-b-0 m-l-10">{{$contrai->nombreEnfermedad}}</h6></td>
                                                 <td class="text-center">
-                                                    @can('laboratory_edit')
-                                                    <span data-toggle="tooltip" data-placement="left" title="Editar laboratorio">
-                                                        <button type="button"  style="font-size: 17px" data-toggle="modal" data-target="#editLaboratory{{$laboratory->id}}" class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right" >
+                                                    @can('contrain_edit')
+                                                    <span data-toggle="tooltip" data-placement="left" title="Editar contraindicación">
+                                                        <button type="button"  style="font-size: 17px" data-toggle="modal" data-target="#editContrain{{$contrai->id}}" class="btn btn-icon btn-hover text-warning btn-sm btn-rounded pull-right">
                                                             <i class="anticon anticon-edit"></i>
                                                         </button>
                                                     </span>
-                                                        <div class="modal fade" id="editLaboratory{{$laboratory->id}}">
+                                                        <div class="modal fade" id="editContrain{{$contrai->id}}">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title text-success" id="exampleModalCenterTitle">Editar Laboratorio</h5>
+                                                                        <h5 class="modal-title text-success" id="exampleModalCenterTitle">Editar Contraindicaión</h5>
                                                                         <button type="button" class="close" data-dismiss="modal">
                                                                             <i class="anticon anticon-close"></i>
                                                                         </button>
                                                                     </div>
-                                                                    <form action="{{route('laboratory.update', $laboratory->id)}}" method="post" id="edit-laboratory">
+                                                                    <form action="{{route('contrain.update', $contrai->id)}}" method="post" id="edit-contrain">
                                                                         @csrf
                                                                         <div class="modal-body">
                                                                             <div class="form-group">
-                                                                                <label for="nombreLaboratorio">Nombre del laboratorio:</label>
-                                                                                <input type="text" class="form-control" name="nombreLaboratorio" id="nombreLaboratorio" placeholder="Nombre laboratorio" value="{{$laboratory->nombreLaboratorio}}" autocomplete="off">
+                                                                                <label for="nombreEnfermedad">Nombre de la contraindicación:</label>
+                                                                                <input type="text" class="form-control" name="nombreEnfermedad" id="nombreEnfermedad" placeholder="Nombre contraindicación" value="{{$contrai->nombreEnfermedad}}" autocomplete="off">
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                                            <button type="submit" class="btn btn-success">Editar laboratorio</button>
+                                                                            <button type="submit" class="btn btn-success">Editar Contraindicación</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @endcan
-                                                    @can('laboratory_U_delete')
-                                                    <form action="{{route('laboratory.delete', $laboratory->id)}}" class="d-inline delete-laboratory" method="post">
+                                                    @can('contrain_U_delete')
+                                                    <form action="{{route('contrain.delete', $contrai->id)}}" class="d-inline delete-contrain" method="post">
                                                        @csrf
-                                                        <button type="submit" style="font-size: 17px"  class="btn btn-icon btn-hover text-danger btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Eliminar categoria">
+                                                        <button type="submit" style="font-size: 17px"  class="btn btn-icon btn-hover text-danger btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Eliminar contraindicación">
                                                             <i class="anticon anticon-delete"></i>
                                                         </button>
                                                         </form>
@@ -190,7 +189,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nombre laboratorio</th>
+                                            <th>Nombre contraindicación</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
@@ -203,54 +202,54 @@
         </div>
     </div>
 </div>
-@can('category_create')
-    <div class="modal fade" id="createCategory">
+@can('sintoma_create')
+    <div class="modal fade" id="createSintoma">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-primary" id="exampleModalCenterTitle">Agregar Categoria</h5>
+                    <h5 class="modal-title text-primary" id="exampleModalCenterTitle">Agregar Sintoma</h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <i class="anticon anticon-close"></i>
                     </button>
                 </div>
-                <form action="{{route('category.storeAdd')}}" method="post" id="create_category">
+                <form action="{{route('sintoma.storeAdd')}}" method="post" id="create_sintoma">
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label for="nombreCategoria">Nombre de la categoria:</label>
-                            <input type="text" class="form-control" name="nombreCategoria" id="nombreCategoria" autocomplete="off" placeholder="Nombre categoria">
+                            <label for="nombreSintoma">Nombre del sintoma:</label>
+                            <input type="text" class="form-control" name="nombreSintoma" id="nombreSintoma" autocomplete="off" placeholder="Nombre sintoma">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Agregar categoria</button>
+                        <button type="submit" class="btn btn-primary">Agregar sintoma</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @endcan
-@can('laboratory_create')
-    <div class="modal fade" id="createLaboratory">
+@can('contrain_create')
+    <div class="modal fade" id="createContrain">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title  text-primary" id="exampleModalCenterTitle">Agregar Laboratorio</h5>
+                    <h5 class="modal-title  text-primary" id="exampleModalCenterTitle">Agregar Contraindicación</h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <i class="anticon anticon-close"></i>
                     </button>
                 </div>
-                <form action="{{route('laboratory.storeAdd')}}" method="POST" id="create_Laboratory">
+                <form action="{{route('contrain.storeAdd')}}" method="POST" id="create_Contrain">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nombreLaboratorio">Nombre del laboratorio:</label>
-                            <input type="text" class="form-control" name="nombreLaboratorio" id="nombreLaboratorio" placeholder="Nombre laboratorio">
+                            <label for="nombreEnfermedad">Nombre del Contraindicación:</label>
+                            <input type="text" class="form-control" name="nombreEnfermedad" id="nombreEnfermedad" placeholder="Nombre contraindicación">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerar</button>
-                        <button type="submit" class="btn btn-primary">Agregar laboratorio</button>
+                        <button type="submit" class="btn btn-primary">Agregar contraindicación</button>
                     </div>
                 </form>
             </div>
@@ -263,17 +262,17 @@
     <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
     <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('js/validation/configMedicines.js')}}"></script>
+    <script src="{{asset('js/validation/configRecomen.js')}}"></script>
 
 
     {{-- Alertas de confirmacion estado --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('.delete-category').submit(function(e){
+        $('.delete-sintoma').submit(function(e){
             e.preventDefault();
             Swal.fire({
             title: '¿Está seguro?',
-            text: "Eliminará esta categoria",
+            text: "Eliminará este sintoma",
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3f87f5',
@@ -289,11 +288,11 @@
     </script>
 
 <script>
-    $('.delete-laboratory').submit(function(e){
+    $('.delete-contrain').submit(function(e){
         e.preventDefault();
         Swal.fire({
         title: '¿Está seguro?',
-        text: "Eliminará este laboratorio",
+        text: "Eliminará esta contraindicación",
         icon: 'info',
         showCancelButton: true,
         confirmButtonColor: '#3f87f5',

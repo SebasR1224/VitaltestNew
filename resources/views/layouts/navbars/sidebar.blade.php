@@ -85,11 +85,9 @@
                     </li>
                     @endif
                     @if ($activePage == 'configMedicines')
-                        <li class="{{$activePage == 'configMedicines' ? 'active' : ''}}">
-                            <a href="">Categorias | Laboratorios</a>
-                        </li>
-                    @else
-
+                    <li class="{{$activePage == 'configMedicines' ? 'active' : ''}}">
+                        <a href="">Categorias | Laboratorios</a>
+                    </li>
                     @endif
                 </ul>
             </li>
@@ -122,7 +120,11 @@
                         <a href="">Detalles Recomendación</a>
                     </li>
                     @endif
-
+                    @if ($activePage == 'configRecomen')
+                    <li class="{{$activePage == 'configRecomen' ? 'active' : ''}}">
+                        <a href="">Sintomas | Contraindicaciones</a>
+                    </li>
+                    @endif
                 </ul>
             </li>
             @endcan

@@ -74,17 +74,33 @@ Route::post('/laboratorios', [App\Http\Controllers\LaboratorioController::class,
 //categoria
 Route::post('/categorias', [App\Http\Controllers\CategoriaController::class, 'store'])->name('category.create');
 
+//Sintoma
+Route::post('/sintomas', [App\Http\Controllers\SintomaController::class, 'store'])->name('sintoma.create');
+
+//Contraindicaciones
+Route::post('/contraindicaciones', [App\Http\Controllers\EnfermedadController::class, 'store'])->name('contrain.create');
+
 
 
 Route::get('/category/laboratory', [App\Http\Controllers\CategoriaController::class, 'index'])->name('config.medicines');
+Route::get('/sintomas/contraindicaciones', [App\Http\Controllers\SintomaController::class, 'index'])->name('config.recomen');
+
 
 Route::post('/categorias/create', [App\Http\Controllers\CategoriaController::class, 'storeAdd'])->name('category.storeAdd');
 Route::post('/laboratorios/create', [App\Http\Controllers\LaboratorioController::class, 'storeAdd'])->name('laboratory.storeAdd');
 Route::post('/laboratorios/{id}/delete', [App\Http\Controllers\LaboratorioController::class, 'delete'])->name('laboratory.delete');
-
 Route::post('/categorias/{id}/update', [App\Http\Controllers\CategoriaController::class, 'update'])->name('category.update');
 Route::post('/laboratorios/{id}/update', [App\Http\Controllers\LaboratorioController::class, 'update'])->name('laboratory.update');
 Route::post('/categorias/{id}/delete', [App\Http\Controllers\CategoriaController::class, 'delete'])->name('category.delete');
+
+
+
+Route::post('/sintomas/create', [App\Http\Controllers\SintomaController::class, 'storeAdd'])->name('sintoma.storeAdd');
+Route::post('/contraindicaciones/create', [App\Http\Controllers\EnfermedadController::class, 'storeAdd'])->name('contrain.storeAdd');
+Route::post('/contraindicaciones/{id}/delete', [App\Http\Controllers\EnfermedadController::class, 'delete'])->name('contrain.delete');
+Route::post('/sintomas/{id}/update', [App\Http\Controllers\SintomaController::class, 'update'])->name('sintoma.update');
+Route::post('/contraindicaciones/{id}/update', [App\Http\Controllers\EnfermedadController::class, 'update'])->name('contrain.update');
+Route::post('/sintomas/{id}/delete', [App\Http\Controllers\SintomaController::class, 'delete'])->name('sintoma.delete');
 
 //Permisos
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);

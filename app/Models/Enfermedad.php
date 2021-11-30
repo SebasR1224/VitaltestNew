@@ -13,4 +13,6 @@ class Enfermedad extends Model
     public function recomendaciones(){
         return $this->belongsToMany(Recomendacion::class);
     }
+
+    protected $guarded = [];
 }

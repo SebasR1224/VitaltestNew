@@ -19,6 +19,12 @@
                 <div class="row m-b-30">
                     <h3 class=" col-lg-6 text-success">Recomendaciones</h3>
                     <div class="col-lg-6 text-right">
+                        @can('recomen_config')
+                        <a class="btn btn-defauld" href="{{route('config.recomen')}}" data-toggle="tooltip" data-placement="top" title="Ver sintomas y contraindicaciones">
+                            <i class="anticon anticon-appstore m-r-5"></i>
+                            <i class="anticon anticon-experiment"></i>
+                        </a>
+                        @endcan
                         @can('recomen_create')
                             <a href="{{route('recomendacion.create')}}" class="btn btn-primary">
                                 <i class="anticon anticon-file-add m-r-5"></i>
