@@ -244,7 +244,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nombreEnfermedad">Nombre del Contraindicación:</label>
-                            <input type="text" class="form-control" name="nombreEnfermedad" id="nombreEnfermedad" placeholder="Nombre contraindicación">
+                            <input type="text" class="form-control" name="nombreEnfermedad" id="nombreEnfermedad" placeholder="Nombre contraindicación" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">

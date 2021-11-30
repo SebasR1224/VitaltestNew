@@ -165,7 +165,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="nombreCategoria">Nombre Categoria</label>
-                        <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria" placeholder="Nombre categoria">
+                        <input type="text" class="form-control" id="nombreCategoria" name="nombreCategoria" placeholder="Nombre categoria" autocomplete="off">
                     </div>
                     <div class="row">
                         <div class="col-md 12 text-right">
@@ -192,7 +192,7 @@
                     @csrf
                     <div class="form-group">
                      <label for="nombreLaboratorio">Nombre laboratorio</label>
-                        <input type="text" class="form-control" id="nombreLaboratorio" name="nombreLaboratorio" placeholder="Nombre laboratorio">
+                        <input type="text" class="form-control" id="nombreLaboratorio" name="nombreLaboratorio" placeholder="Nombre laboratorio" autocomplete="off">
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right">

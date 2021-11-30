@@ -24,8 +24,8 @@ class CreateRecomendacionsTable extends Migration
             $table->integer('edadMin');
             $table->integer('edadMax');
             $table->unsignedBigInteger('imc_id')->nullable();
-            $table->string('informacionAdicional');
-            $table->string('estado', 30);
+            $table->string('informacionAdicional')->nullable();
+            $table->string('status')->default(1);
             $table->timestamps();
 
             $table->foreign('parte_id')->references('id')->on('parte_cuerpos')

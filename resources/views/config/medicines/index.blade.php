@@ -245,7 +245,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nombreLaboratorio">Nombre del laboratorio:</label>
-                            <input type="text" class="form-control" name="nombreLaboratorio" id="nombreLaboratorio" placeholder="Nombre laboratorio">
+                            <input type="text" class="form-control" name="nombreLaboratorio" id="nombreLaboratorio" placeholder="Nombre laboratorio" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">

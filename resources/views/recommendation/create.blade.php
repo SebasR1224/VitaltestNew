@@ -153,7 +153,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="nombreSintoma">Nombre Sintoma</label>
-                        <input type="text" class="form-control" id="nombreSintoma" name="nombreSintoma" placeholder="Nombre sintoma">
+                        <input type="text" class="form-control" id="nombreSintoma" name="nombreSintoma" placeholder="Nombre sintoma" autocomplete="off">
                     </div>
                     <div class="row">
                         <div class="col-md 12 text-right">
@@ -180,7 +180,7 @@
                     @csrf
                     <div class="form-group">
                      <label for="nombreEnfermedad">Nombre contraindicación</label>
-                        <input type="text" class="form-control" id="nombreEnfermedad" name="nombreEnfermedad" placeholder="Nombre contraindicación">
+                        <input type="text" class="form-control" id="nombreEnfermedad" name="nombreEnfermedad" placeholder="Nombre contraindicación" autocomplete="off">
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right">
