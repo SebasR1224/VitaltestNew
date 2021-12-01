@@ -16,6 +16,8 @@ class CreateImcsTable extends Migration
         Schema::create('imcs', function (Blueprint $table) {
             $table->id();
             $table->String('nombreImc', 30);
+            $table->bigInteger('imcMin');
+            $table->bigInteger('imcMax');
             $table->timestamps();
         });
     }

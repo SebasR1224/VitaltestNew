@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RoleHasPermissionSeeder::class,
             UserAdminSeeder::class,
             PartesCuerpoSeeder::class,
+            ImcSeeder::class,
         ]);
     }
 }
