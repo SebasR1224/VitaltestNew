@@ -27,14 +27,14 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="">
-                    <h3 class="text-center mb-0"><img src="{{asset('login-assets/img/logo.png')}}" alt=""></h3>
-                    <h3 class="mt-4 font-weight-light">Iniciar sesión</h3>
-                  <p class="mb-4">Le damos la bienvenida, esperamos disfrute de nuestros beneficios.</p>
                     @if (session('error'))
-                        <div class="text-red">
+                        <div class="alert alert-success" role="alert">
                             {{ session('error')}}
                         </div>
                     @endif
+                    <h3 class="text-center mb-0"><img src="{{asset('login-assets/img/logo.png')}}" alt=""></h3>
+                    <h3 class="mt-4 font-weight-light">Iniciar sesión</h3>
+                  <p class="mb-4">Le damos la bienvenida, esperamos disfrute de nuestros beneficios.</p>
                 </div>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
@@ -58,9 +58,16 @@
                 </div>
                   <input type="submit" value="Iniciar sesión" class="btn btn-pill text-white btn-block btn-vital">
 
-                  <div class="mt-4">
-                    <a href="{{ route('register') }}" class="">Crear cuenta</a>
+                  <div class="d-flex justify-content-between ">
+                    <div class="mt-4">
+                        <a href="{{ route('password.request') }}" class="">¿Olvidó su contraseña?</a>
+                      </div>
+                      <div class="mt-4">
+                        <a href="{{ route('register') }}" class="">Crear cuenta</a>
+                      </div>
                   </div>
+
+
                   <span class="d-block text-center my-2 text-muted"> o inicia sesión con</span>
 
 
