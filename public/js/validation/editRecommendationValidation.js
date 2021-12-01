@@ -1,15 +1,20 @@
 $('#parte_id').select2({
     placeholder: "Seleccione...",
     formatNoMatches: function () {
-    return "No se encontraron resultados <a href='#' >Click</a> para agregar parte del cuerpo";
+    return "No se encontraron resultados";
     }
 });
 $('#sintomas').select2({
     placeholder: "Seleccione...",
     formatNoMatches: function () {
-    return "No se encontraron resultados";
+    return "No se encontraron resultados  <a href='#' onclick='alertSintoma()'>Click</a> para agregar sintoma";
     }
 });
+
+function alertSintoma(){
+    $("#sintoma-modal").modal("show");
+}
+
 $('#medicamentos').select2({
     placeholder: "Seleccione...",
     formatNoMatches: function () {
@@ -20,17 +25,20 @@ $('#medicamentos').select2({
 $('#enfermedades').select2({
     placeholder: "Seleccione...",
     formatNoMatches: function () {
-    return "No se encontraron resultados";
+    return "No se encontraron resultados <a href='#' onclick='alertContrain()'>Click</a> para agregar contraindicación";
     }
 });
 
+function alertContrain(){
+    $("#contrain-modal").modal("show");
+}
 
 var stepsSlider = document.getElementById('steps-slider-intensidad');
 var input0 = document.getElementById('input-with-keypress-0');
 var inputs = [input0];
 
 noUiSlider.create(stepsSlider, {
-    start: [input0.value],
+    start: [3],
     connect: 'lower',
     snap: true,
     tooltips: true,
@@ -122,7 +130,7 @@ var inputEdad1 = document.getElementById('input-edad-keypress-1');
 var inputsEdad = [inputEdad0, inputEdad1];
 
 noUiSlider.create(stepsSliderEdad, {
-    start: [inputEdad0.value, inputEdad1.value],
+    start: [1, 5],
     connect: true,
     tooltips: true,
     range: {
@@ -279,3 +287,77 @@ $('#recomendacion').validate({
     }
 })
 
+$('#enviarSintoma').click(function(e){
+    e.preventDefault();
+    var form = $('#register-sintoma').attr('action');
+    var dataString = $('#register-sintoma').serialize();
+    $.ajax({
+        type:'POST',
+        url:form,
+        data:dataString,
+        success:function(response){
+            $(response.listSintoma).each(function(key, value){
+                if(key == 0){
+                    $('#sintomas').append(`<option value="${value.id}">${value.nombreSintoma}</option>` );
+                    $('#sintomas').val(value.id).trigger('change.select2');
+                }
+            })
+
+            $('#register-sintoma')[0].reset();
+            $('#sintoma-modal .close').click();
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              Toast.fire({
+                icon: 'success',
+                title: 'Sintoma creado exitosamente',
+              })
+        }
+    })
+})
+
+
+$('#enviarContrain').click(function(e){
+    e.preventDefault();
+    var form = $('#register-contrain').attr('action');
+    var dataString = $('#register-contrain').serialize();
+    $.ajax({
+        type:'POST',
+        url:form,
+        data:dataString,
+        success:function(response){
+            $(response.listContrain).each(function(key, value){
+                if(key == 0){
+                    $('#enfermedades').append(`<option value="${value.id}">${value.nombreEnfermedad}</option>` );
+                    $('#enfermedades').val(value.id).trigger('change.select2');
+                }
+            })
+
+            $('#register-contrain')[0].reset();
+            $('#contrain-modal .close').click();
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              Toast.fire({
+                icon: 'success',
+                title: 'Contraindicación creada exitosamente',
+              })
+        }
+    })
+})

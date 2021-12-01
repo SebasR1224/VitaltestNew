@@ -140,7 +140,60 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade bd-example-modal-sm" id="sintoma-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h5 text-primary">Sintomas</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+               <form id="register-sintoma" action="{{route('sintoma.create')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="nombreSintoma">Nombre Sintoma</label>
+                        <input type="text" class="form-control" id="nombreSintoma" name="nombreSintoma" placeholder="Nombre sintoma" autocomplete="off">
+                    </div>
+                    <div class="row">
+                        <div class="col-md 12 text-right">
+                            <button type="button" id="close" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="enviarSintoma">Agregar</button>
+                        </div>
+                    </div>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-sm" id="contrain-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h5 text-primary">Contraindicación</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="register-contrain" method="POST" action="{{route('contrain.create')}}">
+                    @csrf
+                    <div class="form-group">
+                     <label for="nombreEnfermedad">Nombre contraindicación</label>
+                        <input type="text" class="form-control" id="nombreEnfermedad" name="nombreEnfermedad" placeholder="Nombre contraindicación" autocomplete="off">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" id="close" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                            <button class="btn btn-primary btn-sm" id="enviarContrain">Agregar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
 <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
@@ -149,6 +202,8 @@
 <script src="{{asset('dashboard/vendors/nouislider/nouislider.min.js')}}"></script>
 <script src="{{asset('dashboard/vendors/wnumb-1.2.0/wNumb.min.js')}}"></script>
 <script src="{{asset('js/validation/editRecommendationValidation.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 @endsection
 
