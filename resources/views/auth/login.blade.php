@@ -10,6 +10,9 @@
     <script src="https://kit.fontawesome.com/18d9640215.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('login-assets/css/owl.carousel.min.css')}}">
 
+    <link rel="shortcut icon" href="{{asset('dashboard/images/logo/favicon.png')}}">
+
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('login-assets/css/bootstrap.min.css')}}">
 
@@ -28,8 +31,8 @@
               <div class="form-block">
                   <div class="">
                     @if (session('error'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('error')}}
+                        <div class="alert alert-danger text-center" role="alert">
+                            {{ session('error')}}.
                         </div>
                     @endif
                     <h3 class="text-center mb-0"><img src="{{asset('login-assets/img/logo.png')}}" alt=""></h3>

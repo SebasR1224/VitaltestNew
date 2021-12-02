@@ -10,6 +10,9 @@
     <script src="https://kit.fontawesome.com/18d9640215.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('login-assets/css/owl.carousel.min.css')}}">
 
+    <link rel="shortcut icon" href="{{asset('dashboard/images/logo/favicon.png')}}">
+
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('login-assets/css/bootstrap.min.css')}}">
 
