@@ -1,4 +1,4 @@
-@extends('layouts.main' , ['activePage' => 'dashboard'])
+@extends('layouts.main' , ['activePage' => 'dashboard'], ['tittle' => 'Inicio'])
 
 @section('content')
 <div class="page-container">

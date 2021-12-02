@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'chat'])
+@extends('layouts.main', ['activePage' =>'chat'], ['tittle' =>'Chat'])
 @section('content')
 <div class="page-container">
     <div class="main-content">

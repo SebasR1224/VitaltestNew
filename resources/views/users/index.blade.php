@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'users'])
+@extends('layouts.main', ['activePage' =>'users'], ['tittle' => 'Lista de Usuarios'])
 @section('css')
     {{-- Datatable css --}}
     <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">

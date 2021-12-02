@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'usersShow'])
+@extends('layouts.main', ['activePage' =>'usersShow'], ['tittle' => 'Detalles de Usuario | ' . $user->username])
 
 @section('content')
 <div class="page-container">

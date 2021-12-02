@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'profile'])
+@extends('layouts.main', ['activePage' =>'profile'], ['tittle' => 'Mi Perfil | ' . $user->username])
 @section('css')
 <!-- Input fecha -->
 <link href="{{asset('dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet">

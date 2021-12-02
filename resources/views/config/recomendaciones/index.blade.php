@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'configRecomen'])
+@extends('layouts.main', ['activePage' =>'configRecomen'], ['tittle' => 'Sintomas | Contraindicaciones'])
 @section('css')
     <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection

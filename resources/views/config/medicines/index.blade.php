@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'configMedicines'])
+@extends('layouts.main', ['activePage' =>'configMedicines'], ['tittle' => 'Categorias | Labotatorios'])
 @section('css')
     <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'showMedicines'])
+@extends('layouts.main', ['activePage' =>'showMedicines'], ['tittle' => 'Detalles del Producto | '. $medicamento->nombreMedicamento])
 @section('content')
 <div class="page-container">
         <div class="main-content">

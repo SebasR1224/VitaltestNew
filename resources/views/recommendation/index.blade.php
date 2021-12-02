@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'recommendation'])
+@extends('layouts.main', ['activePage' =>'recommendation'], ['tittle' => 'Lista de Recomendaciones'])
 @section('css')
     <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection

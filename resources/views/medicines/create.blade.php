@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'newProduct'])
+@extends('layouts.main', ['activePage' =>'newProduct'], ['tittle' => 'Nuevo Producto'])
 @section('css')
 <link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'showRecommendation'])
+@extends('layouts.main', ['activePage' =>'showRecommendation'], ['tittle' => 'Destalles Recomendación | ' . $recommendation->nombreRecomendacion])
 @section('css')
 
 @endsection

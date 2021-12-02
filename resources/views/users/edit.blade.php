@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'editUsers'])
+@extends('layouts.main', ['activePage' =>'editUsers'], ['tittle' => 'Editar Usuario | '. $user->username])
 @section('content')
 <div class="page-container">
     <div class="main-content">

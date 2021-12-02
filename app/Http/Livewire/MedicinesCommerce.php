@@ -22,7 +22,7 @@ class MedicinesCommerce extends Component
             ->where('nombreMedicamento', 'LIKE', "%{$this->search}%")
             ->orderBy('descuento', 'desc')
             ->paginate(50)
-        ])->extends('layouts.main', ['activePage' =>'commerce'])
+        ])->extends('layouts.main', ['activePage' =>'commerce', 'tittle'=> 'Tienda Ofertas'])
         ->section('content');
     }
 }

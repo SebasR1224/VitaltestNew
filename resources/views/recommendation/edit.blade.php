@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'editRecommendation'])
+@extends('layouts.main', ['activePage' =>'editRecommendation'], ['tittle' => 'Editar Recomendación | ' .$recommendation->nombreRecomendacion])
 @section('css')
 <link rel="stylesheet" href="{{asset('dashboard/vendors/nouislider/nouislider.min.css')}}" >
 

@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'inventory'])
+@extends('layouts.main', ['activePage' =>'inventory'], ['tittle' => 'Lista de Inventario'])
 @section('css')
     <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection

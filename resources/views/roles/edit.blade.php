@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'roles'])
+@extends('layouts.main', ['activePage' =>'roles'], ['tittle' => 'Asignar Permisos'])
 @section('css')
 <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection

@@ -6,10 +6,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{$tittle}}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png">
+    <link rel="shortcut icon" href="{{asset('dashboard/images/logo/favicon.png')}}">
     <!-- CSS Files -->
     @livewireStyles
     @livewireScripts

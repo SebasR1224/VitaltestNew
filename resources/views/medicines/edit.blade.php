@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'editMedicines'])
+@extends('layouts.main', ['activePage' =>'editMedicines'], ['tittle' => 'Editar Producto | ' . $medicamento->nombreMedicamento])
 <link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
 @section('content')
 <div class="page-container">

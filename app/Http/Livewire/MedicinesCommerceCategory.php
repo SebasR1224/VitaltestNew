@@ -14,10 +14,12 @@ class MedicinesCommerceCategory extends Component
 
 
     public $category;
+    public $categorys;
 
     public function mount(Categoria $category)
     {
         $this->category = $category->id;
+        $this->categorys = $category->nombreCategoria;
     }
 
     public function render()
@@ -30,6 +32,6 @@ class MedicinesCommerceCategory extends Component
             ->Where('nombreMedicamento', 'LIKE', "%{$this->search}%")
             ->orderBy('descuento', 'desc')
             ->paginate(4)
-        ])->extends('layouts.main', ['activePage' =>'commerce'])->section('content');
+        ])->extends('layouts.main', ['activePage' =>'commerce', 'tittle'=> 'Categorias | '. $this->categorys])->section('content');
     }
 }
