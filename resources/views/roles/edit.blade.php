@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'roles'], ['tittle' => 'Asignar Permisos'])
+@extends('layouts.main', ['activePage' =>'roles'], ['tittle' => 'Asignar Permisos | '. $role->name])
 @section('css')
 <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection
@@ -47,9 +47,9 @@
                                         <i class="anticon anticon-setting m-r-5"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        @foreach ($roles as $role)
-                                            <a href="{{route('roles.edit', $role->id)}}" class="dropdown-item">{{$role->name}}</a>
-                                        @endforeach
+                                            <a href="{{route('roles.edit', 1)}}" class="dropdown-item">Gerente</a>
+                                            <a href="{{route('roles.edit', 2)}}" class="dropdown-item">Farmacéutico</a>
+                                            <a href="{{route('roles.edit', 3)}}" class="dropdown-item">Cliente</a>
                                     </div>
                                 </div>
                             </span>
@@ -59,7 +59,7 @@
                     <h5>Permisos asignados</h5>
                     <h5 class="m-t-20">
                         @foreach ($permissions as $id=> $permission)
-                            <span class="badge badge-pill badge-default font-weight-normal m-r-10 m-b-10">{{$permission}}</span>
+                            <span class="badge badge-pill {{$role->permissions->contains($id) ? 'badge-success' : 'badge-dafauld'}} font-weight-normal m-r-10 m-b-10">{{$permission}}</span>
                         @endforeach
                     </h5>
                     <hr>
