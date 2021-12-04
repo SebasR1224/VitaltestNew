@@ -137,6 +137,10 @@ route::get('search/emailEdit/{id}', [App\Http\Controllers\ValidateUniqueData::cl
 //chat
 route::get('chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
 
+
+//test
+Route::get('/tests', [App\Http\Controllers\testController::class, 'index'])->name('testm.indextest');
+Route::post('/testm', [App\Http\Controllers\testController::class, 'store'])->name('testm');
 });
 
 

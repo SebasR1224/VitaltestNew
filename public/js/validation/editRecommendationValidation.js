@@ -38,7 +38,7 @@ var input0 = document.getElementById('input-with-keypress-0');
 var inputs = [input0];
 
 noUiSlider.create(stepsSlider, {
-    start: [3],
+    start: [input0.value],
     connect: 'lower',
     snap: true,
     tooltips: true,
@@ -130,7 +130,7 @@ var inputEdad1 = document.getElementById('input-edad-keypress-1');
 var inputsEdad = [inputEdad0, inputEdad1];
 
 noUiSlider.create(stepsSliderEdad, {
-    start: [1, 5],
+    start: [inputEdad0.value, inputEdad1.value],
     connect: true,
     tooltips: true,
     range: {

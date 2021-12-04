@@ -134,7 +134,7 @@
                             @error('informacionAdicional')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Agregar recomendación</button>
+                    <button type="submit" class="btn btn-success float-right">Editar recomendación</button>
                 </form>
             </div>
         </div>
