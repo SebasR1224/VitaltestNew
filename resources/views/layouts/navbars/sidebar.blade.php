@@ -148,6 +148,16 @@
                 </a>
             </li>
             @endcan
+            @can('test')
+            <li class="nav-item dropdown {{ $activePage == 'chat' ? ' active' : '' }}" >
+                <a class="dropdown" href="{{ route('testm.indextest') }}">
+                    <span class="icon-holder">
+                        <i class="text-success anticon anticon-heart"></i>
+                    </span>
+                    <span class="title">Tes Médico Online</span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </div>
 </div>
