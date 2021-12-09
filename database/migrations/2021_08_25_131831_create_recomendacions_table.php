@@ -21,6 +21,7 @@ class CreateRecomendacionsTable extends Migration
             $table->string('frecuencia');
             $table->string('tiempo');
             $table->integer('intensidad');
+            $table->string('sexo');
             $table->integer('edadMin');
             $table->integer('edadMax');
             $table->unsignedBigInteger('imc_id')->nullable();

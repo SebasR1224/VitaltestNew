@@ -146,7 +146,19 @@
                                 </div>
                             </div>
                             <div class="m-t-25">
-                            <p class="text-black-50 content mb-5">Señ@r farmaceutico, en este apartado podrá encontrar en una lista las contraindicaciones que la recomendación <span class="font-weight-bold">{{$recommendation->nombreRecomendacion}}</span> presenta.</p>
+                                <label class="m-r-10">Imc:</label>
+                                <span>{{$recommendation->imc->nombreImc}}</span>
+                            </div>
+                            <div class="m-t-10">
+                                <label class="m-r-10">Sexo:</label>
+                                @if ($recommendation->sexo == 1)
+                                    <span>Mujer</span>
+                                @else
+                                    <span>Hombre</span>
+                                @endif
+                            </div>
+                            <div class="m-t-10">
+                            <p class="text-black-50 content m-b-15">Señ@r farmaceutico, en este apartado podrá encontrar en una lista las contraindicaciones que la recomendación <span class="font-weight-bold">{{$recommendation->nombreRecomendacion}}</span> presenta.</p>
                                 <label>Contraindicaciones:</label>
                                 @forelse ($recommendation->enfermedades as $enfermedades)
                                 <div>
@@ -154,14 +166,11 @@
                                 </div>
                                 @empty
                                 <div>
-                                    <span>Sin contraindicaciones</span>
+                                    <span class="badge badge-pill badge-blue">Sin contraindicaciones</span>
                                 </div>
                                 @endforelse
                             </div>
-                            <div class="m-t-25">
-                                <label class="m-r-10">Imc:</label>
-                                    <span>{{$recommendation->imc->nombreImc}}</span>
-                            </div>
+
                         </div>
                     </div>
                 </div>

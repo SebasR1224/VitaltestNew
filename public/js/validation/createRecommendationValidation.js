@@ -238,6 +238,9 @@ $('#recomendacion').validate({
             maxlength: 200,
             minlength: 6,
         },
+        sexo: {
+            required:true,
+        },
         frecuencia: {
             required:true,
             maxlength: 200,
@@ -270,6 +273,9 @@ $('#recomendacion').validate({
             required:'<p class="text-danger">El campo es obligatorio.</p>',
             minlength:  '<p class="text-danger">Asegurese de escribir de manera detallada la dosis.</p>',
             maxlength:  '<p class="text-danger">No ingrese más de 200 caracteres.</p>',
+        },
+        sexo: {
+            required:'<p class="text-danger">El campo es obligatorio.</p>',
         },
         frecuencia:{
             required:'<p class="text-danger">El campo es obligatorio.</p>',

@@ -139,8 +139,10 @@ route::get('chat', [App\Http\Controllers\ChatController::class, 'index'])->name(
 
 
 //test
-Route::get('/tests', [App\Http\Controllers\testController::class, 'index'])->name('testm.indextest');
-Route::post('/testm', [App\Http\Controllers\testController::class, 'store'])->name('testm');
+
+Route::get('/test-medico', [App\Http\Controllers\TestController::class, 'index'])->name('index');
+Route::post('/resultados/test-medico', [App\Http\Controllers\TestController::class, 'resultados'])->name('result-test');
+
 });
 
 

@@ -57,7 +57,7 @@ class RecomendacionController extends Controller
     public function store(CreateRecomendacionRequest $request){
         $recomendacion = Recomendacion::create($request->only('nombreRecomendacion', 'parte_id',
                                                               'dosis', 'frecuencia', 'tiempo', 'intensidad',
-                                                               'edadMin', 'edadMax', 'imc_id',
+                                                              'sexo','edadMin', 'edadMax', 'imc_id',
                                                               'informacionAdicional'));
         $sintomas = $request->input('sintomas', []);
         $recomendacion->sintomas()->sync($sintomas);
@@ -96,7 +96,7 @@ class RecomendacionController extends Controller
         );
         $recomendacion=Recomendacion::findOrfail($id);
         $dataRecome = $request->only('nombreRecomendacion', 'parte_id',
-                                     'dosis', 'frecuencia', 'tiempo',
+                                     'dosis', 'frecuencia', 'tiempo', 'sexo',
                                      'intensidad','edadMin', 'edadMax', 'imc_id',
                                      'informacionAdicional');
 

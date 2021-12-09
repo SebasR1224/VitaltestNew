@@ -109,7 +109,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <label for="sexo"><span class="h6" data-toggle="tooltip" data-placement="top" title="Según los sintomas y la solución con medicamentos, clasifique esta recomendación segun el sexo.">Sexo:</span></label>
+                            <select name="sexo" id="sexo" class="custom-select">
+                                <option value="">Seleccione...</option>
+                                <option value="1"  {{$recommendation->sexo == '1' ? 'selected' : ''}}>Mujer</option>
+                                <option value="2"  {{$recommendation->sexo == '2' ? 'selected' : ''}}>Hombre</option>
+                            </select>
+                            @error('sexo')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-3">
                             <label for="enfermedades"><span class="h6" data-toggle="tooltip" data-placement="top" title="Se refiere a evitar esta recomendacion cuando el cliente tenda las siguientes enfermedades.">Contraindicaciones:</span></label>
                             <select name="enfermedades[]" id="enfermedades" multiple="multiple" class="select2">
                                 <option></option>
@@ -118,7 +127,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="imc_id"><span class="h6" data-toggle="tooltip" data-placement="top" title="Clasifique esta recomendación  respecto al Indice de Masa Corporal de cada persona.">Imc:</span></label>
                             <select name="imc_id" id="imc_id"  class="custom-select">
                                 <option class="text-muted" value="">Seleccione...</option>
@@ -128,7 +137,7 @@
                             </select>
                             @error('imc_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="enfermedades"><span class="h6" data-toggle="tooltip" data-placement="top" title="Comentarios adicionales a tener en cuenta.">Información adicional:</span></label>
                             <textarea name="informacionAdicional" id="informacionAdicional" class="form-control" style="height: 40px" >{{$recommendation->informacionAdicional}}</textarea>
                             @error('informacionAdicional')<span class="text-danger">{{$message}}</span>@enderror

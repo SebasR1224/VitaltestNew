@@ -150,7 +150,7 @@
             @endcan
             @can('test')
             <li class="nav-item dropdown {{ $activePage == 'chat' ? ' active' : '' }}" >
-                <a class="dropdown" href="{{ route('testm.indextest') }}">
+                <a class="dropdown" href="{{ route('index') }}">
                     <span class="icon-holder">
                         <i class="text-success anticon anticon-heart"></i>
                     </span>
