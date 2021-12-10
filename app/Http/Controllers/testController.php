@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enfermedad;
+use App\Models\Imc;
 use App\Models\ParteCuerpo;
 use App\Models\Recomendacion;
 use App\Models\Sintoma;
@@ -24,13 +25,13 @@ class TestController extends Controller
     $imc = $request->input('imc');
     $contraindicaiones = $request->input('contraindicaiones');
     $parte = $request->input('parte');
-    $sintomas = $request->input('sintomas');
+    $symptoms = $request->input('sintomas');
 
     $intensidad = $request->input('intensidad');
 
     // return dd($sexo, $edad, $imc, $contraindicaiones, $parte, $sintomas, $intensidad) ;
 
-    foreach ($sintomas as $sintoma){
+    foreach ($symptoms as $sintoma){
         $results = Recomendacion::where('status', '1')
         ->where('parte_id', $parte)
         ->where('imc_id', '!=', $imc)
@@ -49,9 +50,19 @@ class TestController extends Controller
             }
         })
 
-        ->get();
+        ->first('recomendacions.id');
     };
-    return view('tests.results', compact('results'));
+
+    $count = $results->count();
+    $num = Recomendacion::all()->count();
+    $nombreImc = Imc::find($imc);
+    if($count>0){
+        $recomendacion = Recomendacion::find($results->id);
+        return view('tests.results', compact('recomendacion','num','nombreImc', 'sexo', 'edad', 'imc', 'contraindicaiones', 'parte', 'symptoms', 'intensidad'));
+    }else{
+        alert('paila');
+        return view('tests.results', compact('results','num', 'sexo', 'edad', 'imc', 'contraindicaiones', 'parte', 'symptoms', 'intensidad'));
+    }
 
     }
 }

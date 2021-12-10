@@ -140,7 +140,7 @@ route::get('chat', [App\Http\Controllers\ChatController::class, 'index'])->name(
 
 //test
 
-Route::get('/test-medico', [App\Http\Controllers\TestController::class, 'index'])->name('index');
+Route::get('/test-medico', [App\Http\Controllers\TestController::class, 'index'])->name('test.index');
 Route::post('/resultados/test-medico', [App\Http\Controllers\TestController::class, 'resultados'])->name('result-test');
 
 });

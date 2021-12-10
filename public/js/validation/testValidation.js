@@ -241,6 +241,7 @@ $( "#atrasContrain" ).on( "click", function() {
     $('.imc').click();
 });
 $( "#atrasImc" ).on( "click", function() {
+
     $('.edad').click();
 });
 
@@ -255,3 +256,133 @@ $( "#atrasSexo" ).on( "click", function() {
 $( "#atrasTerminos" ).on( "click", function() {
     $('.hello').click();
 });
+
+window.addEventListener('load', () =>{
+    const contenedor_loader = document.querySelector('.contenedor_loader')
+    contenedor_loader.style.opacity = 0
+    contenedor_loader.style.visibility = 'hidden'
+})
+
+
+$("#estatura").mask(
+    'PN',
+    {translation:
+        {
+            P: {pattern: /[1-9]/},
+            N: {pattern: /\d*/, recursive: true}
+        }
+    }
+);
+
+$("#peso").mask(
+    'PN',
+    {translation:
+        {
+            P: {pattern: /[1-9]/},
+            N: {pattern: /\d*/, recursive: true}
+        }
+    }
+);
+
+jQuery.validator.addMethod("doubletwo",
+function(value, element) {
+    var pattern = /^\d*(\.\d{1})?\d{0,1}$/
+     return this.optional(element) || pattern.test(value);
+},
+);
+
+$('.formTest').validate({
+    ignore: [],
+    errorElement: 'label',
+    errorClass: 'is-invalid',
+    rules:
+    {
+        estatura: {
+            required: true,
+            doubletwo:true
+        },
+        peso: {
+            required: true,
+            doubletwo:true
+        },
+        parte: {
+            required:true
+        },
+        'sintomas[]':{
+            required:true
+        }
+    },
+    messages:
+    {
+        estatura: {
+            required:'<p class="text-danger">El campo es obligatorio.</p>',
+            number:'<p class="text-danger">Por favor ingrese un número valido.</p>',
+            doubletwo:'<p class="text-danger">Redondeé la cifra a dos decimales.</p>',
+        },
+        peso: {
+            required:'<p class="text-danger">El campo es obligatorio.</p>',
+            number:'<p class="text-danger">Por favor ingrese un número valido.</p>',
+            doubletwo:'<p class="text-danger">Redondeé la cifra a dos decimales.</p>',
+        },
+        parte: {
+            required:'<p class="text-danger">El campo es obligatorio.</p>',
+        },
+        'sintomas[]':{
+            required:'<p class="text-danger">El campo es obligatorio.</p>',
+        }
+    }
+})
+
+
+
+const inputEstatura = document.getElementById("estatura")
+const inputPeso = document.getElementById("peso")
+const inputImc = document.getElementById("imc")
+const div =  document.getElementById("div")
+
+
+
+const calculateImc = () => {
+    const estatura = +inputEstatura.value;
+    const peso = +inputPeso.value;
+    const op1 = estatura * estatura;
+    const total = peso / op1;
+
+    if(total<=18.4){
+        $("#div").html("Bajo peso");
+        inputImc.value = 1
+    }else if(total>= 19 && total<=25){
+        $("#div").html("Peso normal");
+        inputImc.value = 2
+    }else if(total>=26 && total<=30){
+        $("#div").html("Sobrepeso");
+        inputImc.value = 3
+    }
+    else if(total>=30){
+        $("#div").html("Obeso");
+        inputImc.value = 4
+    }
+
+
+}
+
+inputPeso.addEventListener('input',function(){
+    if (this.value.length > 2)
+    this.value = this.value.slice(0,3);
+})
+
+
+inputEstatura.onkeyup = () => {
+    calculateImc();
+}
+inputEstatura.onchange = () => {
+    calculateImc();
+}
+
+inputPeso.onkeyup = () => {
+    calculateImc();
+
+}
+inputPeso.onchange = () => {
+    calculateImc();
+}

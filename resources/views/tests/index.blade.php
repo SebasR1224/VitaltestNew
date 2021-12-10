@@ -4,8 +4,27 @@
 <link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
 @endsection
 @section('content')
+<div class="contenedor_loader">
+    <div class="loader"></div>
+</div>
 <div class="page-container">
     <div class="main-content">
+        <div class="page-header no-gutters">
+            <div class="row justify-content-between align-items-md-center">
+                <div class="col-md-6">
+                    <h2 class="header-title">Test Médico Online</h2>
+                    <div class="header-sub-title">
+                        <nav class="breadcrumb breadcrumb-dash">
+                            <a href="/home" class="breadcrumb-item"><i class="text-success anticon anticon-home m-r-5"></i>Inicio</a>
+                            <span class="breadcrumb-item active">Test Médico Online</span>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="/home" class="btn btn-default m-r-5" id="btnEnviar"><i class="fas fa-door-open m-r-5"></i>Volver</a>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-2">
@@ -39,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-md-10">
-                    <form action="{{route('result-test')}}" method="POST" class="tab-content m-l-15" id="myTabContentVertical">
+                    <form action="{{route('result-test')}}" method="POST" class="tab-content m-l-15 formTest" id="myTabContentVertical">
                         @csrf
                         <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-tab-vertical">
                             <div class="card">
@@ -73,7 +92,7 @@
 
                                         <div class="checkbox m-t-50 col-md-6">
                                             <input id="checkbox1" class="form-check-input" type="checkbox">
-                                            <label for="checkbox1">Leí y acepto los <a href="terminos.com">Términos de servicio</a>  y <a href="politicas.com">la Política de privacidad </a> .</label>
+                                            <label for="checkbox1">Leí y acepto los <span class="text-primary">Términos de servicio</span>  y <span class="text-primary">la Política de privacidad </span> .</label>
                                         </div>
                                         <div class="checkbox col-md-6">
                                             <input id="checkbox2" class="form-check-input" type="checkbox">
@@ -94,7 +113,7 @@
                                     <label for="mujer">
                                         <div class="card">
                                             <div class="card-body">
-                                                <input type="radio" name="sexo" id="mujer" value="1">
+                                                <input type="radio" name="sexo" id="mujer" value="1" class="form-check-sexo" checked>
                                             <span>
                                                 <i class="anticon anticon-woman m-r-5 m-l-5"></i>
                                             </span>
@@ -107,7 +126,7 @@
                                     <label for="hombre">
                                         <div class="card">
                                             <div class="card-body">
-                                                <input type="radio" name="sexo" id="hombre" value="2">
+                                                <input type="radio" name="sexo" id="hombre" value="2" class="form-check-sexo">
                                                 <span>
                                                     <i class="anticon anticon-man"></i>
                                                 </span>
@@ -120,7 +139,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button type="button" id="atrasSexo" class="btn btn-default ">Atrás</button>
-                                    <button type="button" id="sexo" class="btn btn-success float-right" >Siguiente</button>
+                                    <button type="button" id="sexo" class="btn btn-success float-right">Siguiente</button>
                                 </div>
                             </div>
                         </div>
@@ -146,14 +165,20 @@
                                 <p class="mb-5 text-center font-weight-light" style="font-size: 16px" >Introduzca el valor de su estatura y peso, para suministrar una solución mas precisa.</p>
                                    <div class="container">
                                        <div class="row mb-5">
-                                           <div class="col-md-6">
-                                            <input type="number" id="estatura" class="form-control" placeholder="Estatura">
+                                           <div class="col-md-4">
+                                               <label for="estatura">Estatura: Metros</label>
+                                            <input type="number" id="estatura" name="estatura" class="form-control" placeholder="Estatura">
                                            </div>
-                                           <div class="col-md-6">
-                                            <input type="number" id="peso" class="form-control" placeholder="Peso">
+                                           <div class="col-md-4">
+                                            <label for="estatura">Peso: Kilogramos</label>
+                                            <input type="number" id="peso" name="peso" class="form-control" placeholder="Peso">
                                            </div>
+                                           <div class="col-md-4">
+                                            <label for="estatura">Imc:</label>
+                                            <div class="form-control" id="div">...</div>
+                                        </div>
                                        </div>
-                                        <input type="hidden" name="imc" id="imc" value="3">
+                                        <input type="hidden" name="imc" id="imc">
                                    </div>
                                </div>
                                <div class="card-footer">
@@ -246,6 +271,8 @@
 </div>
 @endsection
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
+    <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/nouislider/nouislider.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/wnumb-1.2.0/wNumb.min.js')}}"></script>
