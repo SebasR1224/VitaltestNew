@@ -1,6 +1,6 @@
 @extends('layouts.main', ['activePage' =>'newProduct'], ['tittle' => 'Nuevo Producto'])
 @section('css')
-<link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
+<link rel="stylesheet" href="{{secure_asset('dashboard/vendors/select2/select2.css')}}">
 @endsection
 @section('content')
 <div class="page-container">
@@ -207,11 +207,11 @@
 </div>
 @endsection
 @section('js')
-<script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
-<script src="{{asset('js/validation/createMedicinesValidation.js')}}"></script>
+<script src="{{secure_asset('js/validation/createMedicinesValidation.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/select2/select2.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $('#categoria_id').select2({

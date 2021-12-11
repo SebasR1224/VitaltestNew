@@ -1,6 +1,6 @@
 @extends('layouts.main', ['activePage' =>'configRecomen'], ['tittle' => 'Sintomas | Contraindicaciones'])
 @section('css')
-    <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="page-container">
@@ -258,11 +258,11 @@
 @endcan
 @endsection
 @section('js')
-    <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('js/validation/configRecomen.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{secure_asset('js/validation/configRecomen.js')}}"></script>
 
 
     {{-- Alertas de confirmacion estado --}}

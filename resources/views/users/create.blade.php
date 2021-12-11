@@ -75,7 +75,7 @@
                         <div class="m-t-30">
                             <div class="d-flex">
                                 <div class="text-center">
-                                    <img src="{{asset('dashboard/images/others/createUser.svg')}}" alt="" class="d-block w-75">
+                                    <img src="{{secure_asset('dashboard/images/others/createUser.svg')}}" alt="" class="d-block w-75">
                                 </div>
                             </div>
                         </div>
@@ -88,8 +88,8 @@
 @endsection
 @section('js')
     {{-- Validacion --}}
-    <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('js/validation/createUserValidation.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{secure_asset('js/validation/createUserValidation.js')}}"></script>
 <script>
     $("#username").on("keyup", function(){
         $.ajax({

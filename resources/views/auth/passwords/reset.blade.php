@@ -8,20 +8,20 @@
 
     <!-- icons -->
     <script src="https://kit.fontawesome.com/18d9640215.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{asset('login-assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{secure_asset('login-assets/css/owl.carousel.min.css')}}">
 
-    <link rel="shortcut icon" href="{{asset('dashboard/images/logo/favicon.png')}}">
+    <link rel="shortcut icon" href="{{secure_asset('dashboard/images/logo/favicon.png')}}">
 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('login-assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{secure_asset('login-assets/css/bootstrap.min.css')}}">
 
     <!-- Style -->
-    <link rel="stylesheet" href="{{asset('login-assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{secure_asset('login-assets/css/style.css')}}">
 
     <title>Recuperar Contraseña</title>
   </head>
-  <body style="background-image: url({{asset('login-assets/img/resetContraseña.jpg')}});">
+  <body style="background-image: url({{secure_asset('login-assets/img/resetContraseña.jpg')}});">
   <div class="content">
     <div class="container">
       <div class="row justify-content-center">
@@ -30,7 +30,7 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="">
-                    <h3 class="text-center mb-0"><img src="{{asset('login-assets/img/logo.png')}}" alt=""></h3>
+                    <h3 class="text-center mb-0"><img src="{{secure_asset('login-assets/img/logo.png')}}" alt=""></h3>
                     <h3 class="mt-4 font-weight-light">Reestablecer contraseña</h3>
                   <p class="mb-4">Complete los campos e ingrese una nueva contraseña.</p>
                 </div>
@@ -73,10 +73,10 @@
       </div>
     </div>
   </div>
-    <script src="{{asset('login-assets/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{asset('login-assets/js/popper.min.js')}}"></script>
-    <script src="{{asset('login-assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('login-assets/js/main.js')}}"></script>
+    <script src="{{secure_asset('login-assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{secure_asset('login-assets/js/popper.min.js')}}"></script>
+    <script src="{{secure_asset('login-assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{secure_asset('login-assets/js/main.js')}}"></script>
   </body>
 </html>
 

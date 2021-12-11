@@ -40,5 +40,5 @@
 </div>
 @endsection
 @section('js')
-    <script src="{{asset('dashboard/js/pages/chat.js')}}"></script>
+    <script src="{{secure_asset('dashboard/js/pages/chat.js')}}"></script>
 @endsection

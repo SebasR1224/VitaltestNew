@@ -1,7 +1,7 @@
 @extends('layouts.main', ['activePage' =>'results'], ['tittle' => 'Test médico online'])
 @section('css')
-<link rel="stylesheet" href="{{asset('dashboard/vendors/nouislider/nouislider.min.css')}}" >
-<link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
+<link rel="stylesheet" href="{{secure_asset('dashboard/vendors/nouislider/nouislider.min.css')}}" >
+<link rel="stylesheet" href="{{secure_asset('dashboard/vendors/select2/select2.css')}}">
 @endsection
 @section('content')
 <div class="contenedor_loader">
@@ -65,7 +65,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-5 offset-6">
-                                            <img class="w-100 m-t-10 float-right" src="{{asset('dashboard/images/others/doctor.svg')}}" alt="">
+                                            <img class="w-100 m-t-10 float-right" src="{{secure_asset('dashboard/images/others/doctor.svg')}}" alt="">
                                         </div>
                                     </div>
                                     <div class="m-t-50 m-b-70">
@@ -83,7 +83,7 @@
                         <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-tab-vertical">
                             <div class="card">
                                 <div class="card-body">
-                                    <img class="w-40 m-t-20 float-right" src="{{asset('dashboard/images/others/terms.svg')}}" alt="">
+                                    <img class="w-40 m-t-20 float-right" src="{{secure_asset('dashboard/images/others/terms.svg')}}" alt="">
                                     <h4 class="m-t-50 m-l-20 font-italic text-success">Términos de servicio</h4>
                                     <ul class="m-l-20 m-t-20 font-weight-light" style="font-size: 16px">
                                         <li><strong class="font-weight-semibold">Test de caracter informativo.</strong> El chequeo tiene finalidad informativa y no sustituye la opinión de un médico.</li>
@@ -219,7 +219,7 @@
                         <div class="tab-pane fade" id="contact-vertical4" role="tabpanel" aria-labelledby="contact-tab-vertical4">
                             <div class="card">
                                <div class="card-body">
-                                    <img src="{{asset('dashboard/images/others/cuerpo.jpeg')}}" class="float-right w-40"  alt="">
+                                    <img src="{{secure_asset('dashboard/images/others/cuerpo.jpeg')}}" class="float-right w-40"  alt="">
                                     <h3 class="text-center m-t-50">Seleccione la parte del cuerpo</h3>
                                     <p class="mb-5 text-center container font-weight-light" style="font-size: 15px" >
                                         Utilice el buscador para seleccionar la zona afectada donde presenta el malestar.
@@ -272,9 +272,9 @@
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
-    <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/nouislider/nouislider.min.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/wnumb-1.2.0/wNumb.min.js')}}"></script>
-    <script src="{{asset('js/validation/testValidation.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/select2/select2.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/nouislider/nouislider.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/wnumb-1.2.0/wNumb.min.js')}}"></script>
+    <script src="{{secure_asset('js/validation/testValidation.js')}}"></script>
 @endsection

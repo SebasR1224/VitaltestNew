@@ -1,8 +1,8 @@
 @extends('layouts.main', ['activePage' =>'createRecommendation'], ['tittle' => 'Nueva Recomendación'])
 @section('css')
-<link rel="stylesheet" href="{{asset('dashboard/vendors/nouislider/nouislider.min.css')}}" >
+<link rel="stylesheet" href="{{secure_asset('dashboard/vendors/nouislider/nouislider.min.css')}}" >
 
-<link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
+<link rel="stylesheet" href="{{secure_asset('dashboard/vendors/select2/select2.css')}}">
 @endsection
 @section('content')
 <div class="page-container">
@@ -204,12 +204,12 @@
 </div>
 @endsection
 @section('js')
-<script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
-<script src="{{asset('js/validation/createRecommendationValidation.js')}}"></script>
-<script src="{{asset('dashboard/vendors/nouislider/nouislider.min.js')}}"></script>
-<script src="{{asset('dashboard/vendors/wnumb-1.2.0/wNumb.min.js')}}"></script>
-<script src="{{asset('js/validation/createRecommendationValidation.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/select2/select2.min.js')}}"></script>
+<script src="{{secure_asset('js/validation/createRecommendationValidation.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/nouislider/nouislider.min.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/wnumb-1.2.0/wNumb.min.js')}}"></script>
+<script src="{{secure_asset('js/validation/createRecommendationValidation.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endsection

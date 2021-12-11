@@ -1,5 +1,5 @@
 @extends('layouts.main', ['activePage' =>'editMedicines'], ['tittle' => 'Editar Producto | ' . $medicamento->nombreMedicamento])
-<link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">
+<link rel="stylesheet" href="{{secure_asset('dashboard/vendors/select2/select2.css')}}">
 @section('content')
 <div class="page-container">
     <div class="main-content">
@@ -206,10 +206,10 @@
 </div>
 @endsection
 @section('js')
-<script src="{{asset('dashboard/vendors/select2/select2.min.js')}}"></script>
-<script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/select2/select2.min.js')}}"></script>
+<script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
-<script src="{{asset('js/validation/editMedicinesValidation.js')}}"></script>
+<script src="{{secure_asset('js/validation/editMedicinesValidation.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 

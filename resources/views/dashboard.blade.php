@@ -354,7 +354,7 @@
 </div>
 @endsection
 @section('js')
-    <script src="{{asset('dashboard/vendors/chartjs/Chart.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/chartjs/Chart.min.js')}}"></script>
 
-    <script src="{{asset('dashboard/js/pages/dashboard-default.js')}}"></script>
+    <script src="{{secure_asset('dashboard/js/pages/dashboard-default.js')}}"></script>
 @endsection

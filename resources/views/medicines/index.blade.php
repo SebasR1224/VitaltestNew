@@ -1,6 +1,6 @@
 @extends('layouts.main', ['activePage' =>'inventory'], ['tittle' => 'Lista de Inventario'])
 @section('css')
-    <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="page-container">
@@ -308,10 +308,10 @@
             })
         });
     </script>
-    <script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{secure_asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js"></script>
-    <script src="{{asset('js/validation/indexMedicinesValidation.js')}}"></script>
+    <script src="{{secure_asset('js/validation/indexMedicinesValidation.js')}}"></script>
 @endsection
