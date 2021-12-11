@@ -122,8 +122,8 @@
                             <label for="enfermedades"><span class="h6" data-toggle="tooltip" data-placement="top" title="Se refiere a evitar esta recomendacion cuando el cliente tenda las siguientes enfermedades.">Contraindicaciones:</span></label>
                             <select name="enfermedades[]" id="enfermedades" multiple="multiple" class="select2">
                                 <option></option>
-                                @foreach ($diseases as $disease)
-                                <option value="{{$disease->id}}" {{$recommendation->enfermedades->contains($id) ? 'selected' : ''}} >{{$disease->nombreEnfermedad}}</option>
+                                @foreach ($diseases as $id => $disease)
+                                <option value="{{$id}}" {{$recommendation->enfermedades->contains($id) ? 'selected' : ''}} >{{$disease}}</option>
                                 @endforeach
                             </select>
                         </div>

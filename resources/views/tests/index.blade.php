@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'roles'], ['tittle' => 'Test médico online'])
+@extends('layouts.main', ['activePage' =>'results'], ['tittle' => 'Test médico online'])
 @section('css')
 <link rel="stylesheet" href="{{asset('dashboard/vendors/nouislider/nouislider.min.css')}}" >
 <link rel="stylesheet" href="{{asset('dashboard/vendors/select2/select2.css')}}">

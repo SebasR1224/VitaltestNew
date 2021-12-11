@@ -47,7 +47,7 @@ class RecomendacionController extends Controller
         $symptoms = Sintoma::orderBy('id', 'DESC')->pluck('nombreSintoma', 'id');
         $imcs = Imc::orderBy('id', 'DESC')->pluck('nombreImc', 'id');
 
-        $diseases = Enfermedad::orderBy('id', 'DESC')->get();
+        $diseases = Enfermedad::orderBy('id', 'DESC')->pluck('nombreEnfermedad', 'id');
         $medicines = Medicamento::orderBy('id', 'DESC')->get();
         $recommendation = Recomendacion::findOrFail($id);
         return view('recommendation.edit',  compact('recommendation', 'parts', 'symptoms', 'imcs', 'diseases', 'medicines'));

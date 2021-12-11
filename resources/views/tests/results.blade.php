@@ -1,4 +1,4 @@
-@extends('layouts.main', ['activePage' =>'roles'], ['tittle' => 'Resultados del test'])
+@extends('layouts.main', ['activePage' =>'results'], ['tittle' => 'Resultados del test'])
 @section('content')
 <div class="contenedor_loader">
     <div class="loader"></div>
