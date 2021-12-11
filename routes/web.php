@@ -65,6 +65,7 @@ Route::get('/recomendaciones', [App\Http\Controllers\RecomendacionController::cl
 Route::get('/recomendaciones/detalles/{id}', [App\Http\Controllers\RecomendacionController::class, 'show'])->name('recomendacion.show');
 Route::get('/recomendaciones/{id}/edit', [App\Http\Controllers\RecomendacionController::class, 'edit'])->name('recomendacion.edit');
 Route::put('/recomendaciones/{id}' , [App\Http\Controllers\RecomendacionController::class, 'update'])->name('recomendacion.update');
+Route::put('recomendacion-status/{recomendacion}', [App\Http\Controllers\RecomendacionController::class, 'updateStatus']) ->name('recomen.status');
 
 
 

@@ -118,4 +118,19 @@ class RecomendacionController extends Controller
 
         return redirect()->route('recomendacion.show', $id);
     }
+
+    public function updateStatus(Recomendacion $recomendacion){
+        abort_if(Gate::denies('recomen_status'), 403);
+        if($recomendacion->status == 1 ){
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        $values = array('status' => $status);
+        Recomendacion::where('id', $recomendacion->id)->update($values);
+        toast()->success('<p class="font-weight-bold">Estado actualizado</p>', '<p class="font-weight-light">Esta recomendación cambio su vigencia.</p>')
+        ->toHtml()
+        ->autoClose(5000);
+        return redirect()->route('recomendacion.index');
+    }
 }

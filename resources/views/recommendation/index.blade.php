@@ -45,6 +45,7 @@
                                 <th>Dosis</th>
                                 <th>Frecuencia</th>
                                 <th>Tiempo</th>
+                                <th>Vigencia</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -80,6 +81,29 @@
                                     <td>{{$recommendation->dosis}}</td>
                                     <td>{{$recommendation->frecuencia}}</td>
                                     <td>{{$recommendation->tiempo}}</td>
+                                    @can('recomen_status')
+                                    <td>
+                                        <form class="form-update-status" action="{{route('recomen.status', $recommendation->id)}}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="d-flex align-items-center">
+                                                @if ($recommendation->status == 1)
+                                                <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado de la recomendación.">
+                                                    <button  class="btn btn-sm btn-default text-success">
+                                                        <div>Vigente</div>
+                                                    </button>
+                                                </span>
+                                                @else
+                                                <span class="d-inline-block"  data-toggle="tooltip" data-placement="top" title="Click para cambiar el estado de la recomendación.">
+                                                    <button   class="btn btn-sm btn-default text-danger ">
+                                                        <div>No vigente</div>
+                                                    </button>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </form>
+                                    </td>
+                                    @endcan
                                     <td class="text-center">
                                         @can('recomen_show')
                                             <a href="{{route('recomendacion.show', $recommendation->id)}}" style="font-size: 17px" class="btn btn-icon btn-hover text-primary btn-sm btn-rounded pull-right" data-toggle="tooltip" data-placement="left" title="Información completa de la recomendación">
@@ -143,6 +167,7 @@
                                 <th>Dosis</th>
                                 <th>Frcuencia</th>
                                 <th>Tiempo</th>
+                                <th>Vigencia</th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -154,6 +179,26 @@
 </div>
 @endsection
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('.form-update-status').submit(function(e){
+            e.preventDefault();
+            Swal.fire({
+            title: '¿Está seguro?',
+            text: 'Esta recomendación cambiará de estado',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3f87f5',
+            cancelButtonColor: '#de4436',
+            confirmButtonText: '<i class="anticon anticon-like"></i> Cambiar',
+            cancelButtonText: '<i class="anticon anticon-dislike"></i> Cancelar'
+            }).then((result) => {
+            if (result.isConfirmed) {
+               this.submit();
+            }
+            })
+        });
+    </script>
     <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>

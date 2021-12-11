@@ -175,7 +175,7 @@ class MedicamentoController extends Controller
         }
         $values = array('status' => $status);
         Medicamento::where('id', $medicamento->id)->update($values);
-        toast()->success('<p class="font-weight-bold">Estado actualizado</p>', '<p class="font-weight-light">Este producto no estará visible en la tienda.</p>')
+        toast()->success('<p class="font-weight-bold">Estado actualizado</p>', '<p class="font-weight-light">Este producto cambio su visibilidad en la tienda.</p>')
         ->toHtml()
         ->autoClose(5000);
         return redirect()->route('medicines.index');
