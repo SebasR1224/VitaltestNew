@@ -1,6 +1,6 @@
 @extends('layouts.main', ['activePage' =>'recommendation'], ['tittle' => 'Lista de Recomendaciones'])
 @section('css')
-    <link href="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="page-container">
@@ -199,7 +199,7 @@
             })
         });
     </script>
-    <script src="{{secure_asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{secure_asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
+    <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
 @endsection

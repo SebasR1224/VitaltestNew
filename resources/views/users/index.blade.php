@@ -1,7 +1,7 @@
 @extends('layouts.main', ['activePage' =>'users'], ['tittle' => 'Lista de Usuarios'])
 @section('css')
     {{-- Datatable css --}}
-    <link href="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="page-container">
@@ -314,9 +314,9 @@
         });
     </script>
      {{-- Datatabla js --}}
-     <script src="{{secure_asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
-     <script src="{{secure_asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{secure_asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
+     <script src="{{asset('dashboard/vendors/datatables/jquery.dataTables.min.js')}}"></script>
+     <script src="{{asset('dashboard/vendors/datatables/dataTables.bootstrap.min.js')}}"></script>
+    <script src="{{asset('dashboard/es6/pages/e-commerce-order-list.js')}}"></script>
 
     @can('user_import_excel')
         @if (session()->has('failures'))

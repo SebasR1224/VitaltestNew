@@ -8,13 +8,13 @@
 
         <!-- icons -->
         <script src="https://kit.fontawesome.com/18d9640215.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{secure_asset('login-assets/css/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{asset('login-assets/css/owl.carousel.min.css')}}">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{secure_asset('login-assets/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('login-assets/css/bootstrap.min.css')}}">
 
         <!-- Style -->
-        <link rel="stylesheet" href="{{secure_asset('login-assets/css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('login-assets/css/style.css')}}">
 
         <title>Registrarse</title>
       </head>
@@ -27,7 +27,7 @@
             <div class="col-md-12">
               <div class="form-block">
                 <div class="mb-0">
-                  <h3 class="text-center mb-0"><img src="{{secure_asset('login-assets/img/logo.png')}}" alt=""></h3>
+                  <h3 class="text-center mb-0"><img src="{{asset('login-assets/img/logo.png')}}" alt=""></h3>
                   <h3 class="mt-4 font-weight-light">Crear cuenta</h3>
                   <p class="mb-4">Complete las sigientes credenciales para crear su cuenta.</p>
                 </div>
@@ -92,9 +92,9 @@
       </div>
     </div>
   </div>
-    <script src="{{secure_asset('login-assets/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{secure_asset('login-assets/js/popper.min.js')}}"></script>
-    <script src="{{secure_asset('login-assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{secure_asset('login-assets/js/main.js')}}"></script>
+    <script src="{{asset('login-assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('login-assets/js/popper.min.js')}}"></script>
+    <script src="{{asset('login-assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('login-assets/js/main.js')}}"></script>
   </body>
 </html>

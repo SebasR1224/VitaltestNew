@@ -1,7 +1,7 @@
 @extends('layouts.main', ['activePage' =>'profile'], ['tittle' => 'Mi Perfil | ' . $user->username])
 @section('css')
 <!-- Input fecha -->
-<link href="{{secure_asset('dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+<link href="{{asset('dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
 <div class="page-container">
@@ -24,7 +24,7 @@
                                 <div class="text-center text-sm-left ">
                                     <div style="width: 140px; height:140px">
                                         <label class="avatar avatar-image" style="width: 140px; height:140px" for="customFile">
-                                            <img src="{{Auth::user()->image ? Auth::user()->image : secure_asset('dashboard/images/others/img-4.jpg') }}" alt="">
+                                            <img src="{{Auth::user()->image ? Auth::user()->image : asset('dashboard/images/others/img-4.jpg') }}" alt="">
                                         </label>
                                         <form action="{{route('new.image', Auth::user()->id )}}" id="photoForm" method="POST" enctype="multipart/form-data">
                                             @csrf
@@ -618,7 +618,7 @@
 @section('js')
 
 <!-- Input fecha -->
-<script src="{{secure_asset('dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+<script src="{{asset('dashboard/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
 
 {{-- Modal for profile null --}}
 @if ($datos->id == null)
@@ -644,8 +644,8 @@ $("#numDocumento").on("keyup", function(){
     });
 });
 </script>
-<script src="{{secure_asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
-<script src="{{secure_asset('js/validation/ProfileValidation.js')}}"></script>
+<script src="{{asset('dashboard/vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('js/validation/ProfileValidation.js')}}"></script>
 
 @endsection
 

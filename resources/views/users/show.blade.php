@@ -37,7 +37,7 @@
                                 <div class="col-md-6">
                                     <div class="media align-items-center">
                                         <div class="avatar avatar-image  m-h-10 m-r-15" style="height: 80px; width: 80px">
-                                            <img src="{{Auth::user()->image ? Auth::user()->image : secure_asset('dashboard/images/others/img-4.jpg') }}" alt="">
+                                            <img src="{{Auth::user()->image ? Auth::user()->image : asset('dashboard/images/others/img-4.jpg') }}" alt="">
                                         </div>
                                         <div class="m-l-20 m-r-20">
                                             <h5 class="m-b-5 font-size-18">{{$user->username}}</h5>

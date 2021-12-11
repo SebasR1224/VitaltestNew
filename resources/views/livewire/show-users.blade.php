@@ -18,7 +18,7 @@
                         <li class="list-group-item">
                             <a href="{{route('users.show', $user->id)}}" class="d-flex align-items-center">
                                 <div >
-                                    <img src="{{$user->image ? $user->image  :  secure_asset('dashboard/images/others/img-4.jpg')}}" style="width: 35px; height: 35px;" alt="">
+                                    <img src="{{$user->image ? $user->image  :  asset('dashboard/images/others/img-4.jpg')}}" style="width: 35px; height: 35px;" alt="">
                                 </div>
                                 <div class="m-l-10">
                                     <div class="m-b-0 text-dark font-weight-semibold short-text">{{$user->username}}</div>

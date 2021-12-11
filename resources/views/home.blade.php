@@ -17,7 +17,7 @@
                     <div class="row justify-content-center">
                        <div class="d-block">
                             <h1 class="h6">Bienvenido a</h1>
-                                <img class="img-fluid"src="{{secure_asset('dashboard/images/logo/logo.png')}}" alt="">
+                                <img class="img-fluid"src="{{asset('dashboard/images/logo/logo.png')}}" alt="">
                         </div>
                     </div>
                 </div>
